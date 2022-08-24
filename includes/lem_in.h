@@ -17,20 +17,22 @@
 
 typedef struct	s_room
 {
-	char	*name;
-	int		x;
-	int		y;
-	struct	s_room	*next;
-	struct	s_room	**tubes;
-	int		t_count;
-}			t_room;
+	char[42]	name; // Ei voi olla pointteri, jos ei allokoida tilaa erikseen.
+	int			x;
+	int			y;
+	struct		s_room	*next;
+	struct		s_room	**tubes;
+	int			t_count;
+}				t_room;
 
 typedef struct	lem_data
 {
 	struct	s_room	*head;
+	struct	s_room	*current; // Added
 	struct	s_room	*start;
 	struct	s_room	*end;
 	int		ants;
+	char	*line;				// Added
 }			lem_data;
 
 
