@@ -39,6 +39,16 @@ typedef struct	lem_data
 // Read input
 void	input(lem_data *d);
 void	read_ants(lem_data *d);
+void	read_rooms(lem_data *d);
+int		skip_comments(lem_data *d);
+
+// Read rooms helpers
+int		check_start_end(lem_data *d);
+int		is_pipe(lem_data *d);
+int		is_room(lem_data *d, char *room);
+//int		is_valid(lem_data *d);
+void	create_room(lem_data *d, char *str);
+
 
 // Helpers
 int		lem_atoi(const char *str);
