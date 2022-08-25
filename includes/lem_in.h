@@ -17,7 +17,7 @@
 
 typedef struct	s_room
 {
-	char[42]	name; // Ei voi olla pointteri, jos ei allokoida tilaa erikseen.
+	char		name[42]; // Ei voi olla pointteri, jos ei allokoida tilaa erikseen.
 	int			x;
 	int			y;
 	struct		s_room	*next;
@@ -46,8 +46,8 @@ int		skip_comments(lem_data *d);
 int		check_start_end(lem_data *d);
 int		is_pipe(lem_data *d);
 int		is_room(lem_data *d, char *room);
-//int		is_valid(lem_data *d);
-void	create_room(lem_data *d, char *str);
+int		is_valid(lem_data *d);
+void	create_room(lem_data *d);
 
 
 // Helpers

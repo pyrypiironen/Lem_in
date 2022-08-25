@@ -14,10 +14,17 @@
 
 void	input(lem_data *d)
 {
+	d->head = NULL;
+	d->current = NULL;
+	d->start = NULL;
+	d->end = NULL;
+	// Check if line start with 'L'
 	read_ants(d);
 	read_rooms(d);
 	// read_pipes(d);
-	
+	// Check duplicates
+	ft_printf("End input\n");
+
 }
 
 void	read_ants(lem_data *d)
@@ -38,15 +45,15 @@ void	read_rooms(lem_data *d)
 	while (1)
 	{
 		get_next_line(0, &d->line);
-		if (check_start_end(d));
+		if (check_start_end(d))
 			continue ;
 		else if (is_pipe(d))
 			break ;
-		else if (is_valid())
+		else if (is_valid(d))
 			create_room(d);
 		else if (skip_comments(d) == 0)
 			exit(0); 			// Add error message here!
-		free(line);
+		free(d->line);
 	}
 	if (d->start == NULL || d->end == NULL)
 		exit(0); 				// Add error message here!
@@ -60,7 +67,7 @@ int		skip_comments(lem_data *d)
 
 	ret = 0;
 	while (ft_strncmp(d->line, "#", 1) == 0 && \
-		ft_strcmp(d->line, "##start") != 0 && ft_strcmp(d->line, "##end") != 0);
+		ft_strcmp(d->line, "##start") != 0 && ft_strcmp(d->line, "##end") != 0)
 	{
 		free(d->line);
 		get_next_line(0, &d->line);
