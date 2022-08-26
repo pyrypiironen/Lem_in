@@ -23,6 +23,7 @@ void	input(lem_data *d)
 	read_rooms(d);
 	// read_pipes(d);
 	// Check duplicates
+
 	ft_printf("End input\n");
 
 }
@@ -52,7 +53,10 @@ void	read_rooms(lem_data *d)
 		else if (is_valid(d))
 			create_room(d);
 		else if (skip_comments(d) == 0)
+		{
+			ft_printf("error\n");
 			exit(0); 			// Add error message here!
+		}
 		free(d->line);
 	}
 	if (d->start == NULL || d->end == NULL)

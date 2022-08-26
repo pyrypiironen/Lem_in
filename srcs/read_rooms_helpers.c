@@ -46,6 +46,7 @@ int		is_pipe(lem_data *d)
 		if (first[i] == ' ' || first[i++] == '\0')
 			return (0);
 	}
+	first[i] = '\0';
 	i++;
 	while (d->line[i])
 	{
@@ -53,8 +54,10 @@ int		is_pipe(lem_data *d)
 		if (second[j++] == ' ')
 			return (0);
 	}
+	second[i] = '\0';
 	if (is_room(d, first) && is_room(d, second))
 		return (1);
+	ft_printf("is pipe return is 0\n");				// HOX!
 	return (0);
 }
 
@@ -63,10 +66,14 @@ int		is_room(lem_data *d, char *room)
 	d->current = d->start;
 	while (d->current)
 	{
+	ft_printf("d->current is %s\n", d->current->name);
+	ft_printf("room is %s\n", room);
 		if (ft_strcmp(d->current->name, room) == 0)
 			return (1);
+		ft_printf("here\n");
 		d->current = d->current->next;
 	}
+	ft_printf("here2\n", room);
 	return (0);
 }
 
@@ -95,12 +102,15 @@ int		is_valid(lem_data *d)
 			return (0);
 		i++;
 	}
+	ft_printf("valid return is 1 here\n");
 	return (1);
 }
 
 void	create_room(lem_data *d)
 {
-	int i;
+	int		i;
+	//t_room	*tmp;
+
 	ft_printf("create_room\n");
 	// d->head yms pitää alustaa nulleiksi, kun lem_data luodaan.
 	i = 0;
@@ -108,8 +118,12 @@ void	create_room(lem_data *d)
 	// to d->current and is the head. Else new room will be created to
 	//	d->current->next. After this function, d->current is last created room.
 	if (d->head != NULL)
+	{
+		d->current->next = (t_room *)malloc(sizeof(t_room));
 		d->current = d->current->next;
-	d->current = (t_room *)malloc(sizeof(t_room));
+	}
+	else
+		d->current = (t_room *)malloc(sizeof(t_room));
 	if (d->head == NULL)
 		d->head = d->current;
 	// Save the name and coordinates to node s_room.
@@ -124,6 +138,7 @@ void	create_room(lem_data *d)
 	while (d->line[i] != ' ')
 		i++;
 	d->current->y = lem_atoi(&d->line[i + 1]);
+	d->current->next = NULL;
 	// Nyt menee läpi myö rivit, jossa on ylimääräistä tavaraa koordinaattien
 	// perässä. Luo error check.
 }
