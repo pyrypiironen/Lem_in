@@ -21,7 +21,7 @@ typedef struct	s_room
 	int			x;
 	int			y;
 	struct		s_room	*next;
-	struct		s_room	**pipes;
+	struct		s_room	*pipes[50];
 	int			pipe_count;
 }				t_room;
 

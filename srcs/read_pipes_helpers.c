@@ -16,22 +16,19 @@ void	create_pipe(lem_data *d, char *first, char *second)
 	while (ft_strcmp(room->name, second) != 0)
 		room = room->next;
 	add_pipe(d, d->current, room);
-	//add_pipe(d, room, d->current);
+	add_pipe(d, room, d->current);
 	ft_printf("create pipe end\n");
 
 
 }
 
 void	add_pipe(lem_data *d, t_room *src, t_room *dst)
-{
-	ft_printf("täs\n");
-	(void)d;
-	dst->pipes[dst->pipe_count] = (t_room *)malloc(sizeof(t_room));
-	ft_printf("täs\n");
+{	
+	(void)d; /////
+	//dst->pipes[dst->pipe_count] = (t_room *)malloc(sizeof(t_room));
 	// add malloc check;
 	dst->pipes[dst->pipe_count] = src;
-	ft_printf("täs\n");
-	//dst->pipe_count++;
+	dst->pipe_count++;
 }
 
 void	create_room(lem_data *d)
@@ -52,7 +49,7 @@ void	create_room(lem_data *d)
 	}
 	else
 		d->current = (t_room *)malloc(sizeof(t_room));
-	d->current->pipes = (t_room **)malloc(sizeof(t_room *));
+	//d->current->pipes = (t_room **)malloc(sizeof(t_room *));
 	// add malloc checks
 	d->current->pipe_count = 0;
 	if (d->head == NULL)

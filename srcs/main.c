@@ -29,9 +29,10 @@ int	main(void)
 		while (i < data->head->pipe_count)
 		{
 			ft_printf("link: %s\n", data->head->pipes[i]->name);
-			data->head = data->head->next;
+			//data->head = data->head->next;
 			i++;
 		}
+		data->head = data->head->next;
 	}
 
 
