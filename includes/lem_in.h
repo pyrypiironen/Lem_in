@@ -21,8 +21,8 @@ typedef struct	s_room
 	int			x;
 	int			y;
 	struct		s_room	*next;
-	struct		s_room	**tubes;
-	int			t_count;
+	struct		s_room	**pipes;
+	int			pipe_count;
 }				t_room;
 
 typedef struct	lem_data
@@ -40,6 +40,7 @@ typedef struct	lem_data
 void	input(lem_data *d);
 void	read_ants(lem_data *d);
 void	read_rooms(lem_data *d);
+void	read_pipes(lem_data *d);
 int		skip_comments(lem_data *d);
 
 // Read rooms helpers
@@ -49,6 +50,9 @@ int		is_room(lem_data *d, char *room);
 int		is_valid(lem_data *d);
 void	create_room(lem_data *d);
 
+// Read pipes helpers
+void	create_pipe(lem_data *d, char *first, char *second);
+void	add_pipe(lem_data *d, t_room *src, t_room *dst);
 
 // Helpers
 int		lem_atoi(const char *str);

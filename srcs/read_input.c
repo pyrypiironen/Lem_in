@@ -21,7 +21,7 @@ void	input(lem_data *d)
 	// Check if line start with 'L'
 	read_ants(d);
 	read_rooms(d);
-	// read_pipes(d);
+	read_pipes(d);
 	// Check duplicates
 
 	ft_printf("End input\n");
@@ -63,7 +63,20 @@ void	read_rooms(lem_data *d)
 		exit(0); 				// Add error message here!
 }
 
-
+void	read_pipes(lem_data *d)
+{
+	while (1)
+	{
+		if (get_next_line(0, &d->line) == 0 || skip_comments(d) == -1)
+			break ;
+		if (!is_pipe(d))
+		{
+			ft_printf("errori\n");
+			exit(1);
+		}
+		free(d->line);
+	}
+}
 
 int		skip_comments(lem_data *d)
 {
@@ -74,9 +87,11 @@ int		skip_comments(lem_data *d)
 		ft_strcmp(d->line, "##start") != 0 && ft_strcmp(d->line, "##end") != 0)
 	{
 		free(d->line);
-		get_next_line(0, &d->line);
+		if (get_next_line(0, &d->line) == 0)
+			return (-1);
 		ret = 1;
 	}
 	return (ret);
 }
+
 

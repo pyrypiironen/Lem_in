@@ -22,7 +22,17 @@ int	main(void)
 	input(data);
 
 
-
+	while (data->head)
+	{
+		int i = 0;
+		ft_printf("{green}room %s:\n", data->head->name);
+		while (i < data->head->pipe_count)
+		{
+			ft_printf("link: %s\n", data->head->pipes[i]->name);
+			data->head = data->head->next;
+			i++;
+		}
+	}
 
 
 
