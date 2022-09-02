@@ -15,7 +15,8 @@
 
 # include "../libft/libft.h"
 
-# define ARRAY_SIZE	1
+# define ARRAY_SIZE	42
+# define PATH_COUNT	1
 
 typedef struct	s_room
 {
@@ -36,7 +37,10 @@ typedef struct	lem_data
 	struct	s_room	*start;
 	struct	s_room	*end;
 	int		ants;
+	int		path_limit;
 	char	*line;				// Added
+	struct	s_room	***paths;
+	int		path_index;
 }			lem_data;
 
 
@@ -63,6 +67,7 @@ void	dynamic_array(t_room *dst);
 int		lem_atoi(const char *str);
 
 // Solving paths
+void	solve_paths(lem_data *d);
 void	get_floors(lem_data *d);
 
 

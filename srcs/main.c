@@ -24,7 +24,8 @@ int	main(void)
 		if (data == NULL)
 			exit(0);
 	input(data);
-	get_floors(data);
+	solve_paths(data);
+	
 
 
 	while (data->head)
