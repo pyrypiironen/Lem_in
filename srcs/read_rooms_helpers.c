@@ -121,6 +121,7 @@ void	create_room(lem_data *d)
 	// add malloc checks
 	d->current->pipe_count = 0;
 	d->current->pipe_mem = ARRAY_SIZE;
+	d->current->floor = -1;
 	if (d->head == NULL)
 		d->head = d->current;
 	// Save the name and coordinates to node s_room.

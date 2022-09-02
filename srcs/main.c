@@ -24,12 +24,13 @@ int	main(void)
 		if (data == NULL)
 			exit(0);
 	input(data);
+	get_floors(data);
 
 
 	while (data->head)
 	{
 		int i = 0;
-		ft_printf("{green}room %s:\n", data->head->name);
+		ft_printf("{green}room %s floor: %d:\n", data->head->name, data->head->floor);
 		while (i < data->head->pipe_count)
 		{
 			ft_printf("link: %s\n", data->head->pipes[i]->name);

@@ -26,6 +26,7 @@ typedef struct	s_room
 	struct		s_room	**pipes;
 	int			pipe_count;
 	int			pipe_mem;
+	int			floor;
 }				t_room;
 
 typedef struct	lem_data
@@ -60,6 +61,9 @@ void	dynamic_array(t_room *dst);
 
 // Helpers
 int		lem_atoi(const char *str);
+
+// Solving paths
+void	get_floors(lem_data *d);
 
 
 
