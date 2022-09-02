@@ -36,8 +36,6 @@ int		is_pipe(lem_data *d)
 	int		i;
 	int		j;
 
-	ft_printf("is_pipe\n");
-	ft_printf("line is: %s\n", d->line);
 	i = 0;
 	j = 0;
 	while (d->line[i] != '-')
@@ -60,10 +58,6 @@ int		is_pipe(lem_data *d)
 		create_pipe(d, first, second);
 		return (1);
 	}
-	ft_printf("d->current is %s\n", d->current->name);
-	ft_printf("first: %s, is_room: %d\n", first, is_room(d, first));
-	ft_printf("second: %s, is_room: %d\n", second, is_room(d, second));
-	ft_printf("is pipe return is 0\n");				// HOX!
 	return (0);
 }
 
@@ -72,11 +66,8 @@ int		is_room(lem_data *d, char *room)
 	d->current = d->head;
 	while (d->current)
 	{
-	//ft_printf("d->current is %s\n", d->current->name);
-	//ft_printf("room is %s\n", room);
 		if (ft_strcmp(d->current->name, room) == 0)
 			return (1);
-		ft_printf("d->current is %s\n", d->current->name);
 		d->current = d->current->next;
 	}
 	return (0);
@@ -86,8 +77,6 @@ int		is_valid(lem_data *d)
 {
 	int	i;
 
-	ft_printf("is_valid\n");
-	//ft_printf("line is: %s\n", d->line);
 	i = 0;
 	skip_comments(d);
 	while (d->line[i++] != ' ')
@@ -116,7 +105,6 @@ void	create_room(lem_data *d)
 	int		i;
 	//t_room	*tmp;
 
-	ft_printf("create_room\n");
 	// d->head yms pitää alustaa nulleiksi, kun lem_data luodaan.
 	i = 0;
 	// If head is null, there is not a single room, and new room will be created

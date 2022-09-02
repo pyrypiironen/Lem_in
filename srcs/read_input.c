@@ -24,7 +24,7 @@ void	input(lem_data *d)
 	read_pipes(d);
 	// Check duplicates
 
-	ft_printf("End input\n");
+
 
 }
 
@@ -38,7 +38,7 @@ void	read_ants(lem_data *d)
 	free(str);
 	if (d->ants < 0 || d->ants > 2147483647)
 		exit(0);			// Add error message here!
-	ft_printf("Ants = %d\n", d->ants);		// Delete!
+
 
 	
 }
