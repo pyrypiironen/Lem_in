@@ -4,9 +4,7 @@
 
 void	create_pipe(lem_data *d, char *first, char *second)
 {
-
 	t_room *room;
-
 
 	room = d->head;
 	d->current = d->head;
@@ -25,48 +23,30 @@ void	create_pipe(lem_data *d, char *first, char *second)
 void	add_pipe(lem_data *d, t_room *src, t_room *dst)
 {	
 	(void)d; /////
-	//dst->pipes[dst->pipe_count] = (t_room *)malloc(sizeof(t_room));
-	// add malloc check;
+	//t_room **tmp;
+
+	if (dst->pipe_count == 0)
+		dst->pipes = (t_room **)malloc(sizeof(t_room *) * dst->pipe_mem);
+	else if (dst->pipe_count == dst->pipe_mem)
+		dynamic_array(dst);
 	dst->pipes[dst->pipe_count] = src;
 	dst->pipe_count++;
 }
 
-void	create_room(lem_data *d)
+void	dynamic_array(t_room *dst)
 {
+	t_room	**tmp;
 	int		i;
-	//t_room	*tmp;
 
-	ft_printf("create_room\n");
-	// d->head yms pitää alustaa nulleiksi, kun lem_data luodaan.
-	i = 0;
-	// If head is null, there is not a single room, and new room will be created
-	// to d->current and is the head. Else new room will be created to
-	//	d->current->next. After this function, d->current is last created room.
-	if (d->head != NULL)
+	i = dst->pipe_mem - 1;
+	tmp = dst->pipes;
+	dst->pipe_mem += ARRAY_SIZE;
+	dst->pipes = (t_room **)malloc(sizeof(t_room *) * dst->pipe_mem);
+	// add malloc check
+	while (i >= 0)
 	{
-		d->current->next = (t_room *)malloc(sizeof(t_room));
-		d->current = d->current->next;
+		dst->pipes[i] = tmp[i];
+		i--;
 	}
-	else
-		d->current = (t_room *)malloc(sizeof(t_room));
-	//d->current->pipes = (t_room **)malloc(sizeof(t_room *));
-	// add malloc checks
-	d->current->pipe_count = 0;
-	if (d->head == NULL)
-		d->head = d->current;
-	// Save the name and coordinates to node s_room.
-	while (d->line[i] != ' ')
-	{
-		d->current->name[i] = d->line[i];
-		i++;
-	}
-	d->current->name[i] = '\0';
-	d->current->x = lem_atoi(&d->line[i + 1]);
-	i++;
-	while (d->line[i] != ' ')
-		i++;
-	d->current->y = lem_atoi(&d->line[i + 1]);
-	d->current->next = NULL;
-	// Nyt menee läpi myö rivit, jossa on ylimääräistä tavaraa koordinaattien
-	// perässä. Luo error check.
+	free(tmp);
 }

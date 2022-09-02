@@ -14,6 +14,10 @@
 
 int	main(void)
 {
+
+
+
+
 	lem_data	*data;
 
 	data = (lem_data *)malloc(sizeof(lem_data));
@@ -34,6 +38,7 @@ int	main(void)
 		}
 		data->head = data->head->next;
 	}
+	exit(0);
 
 
 

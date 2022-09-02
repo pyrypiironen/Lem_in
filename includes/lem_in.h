@@ -15,14 +15,17 @@
 
 # include "../libft/libft.h"
 
+# define ARRAY_SIZE	1
+
 typedef struct	s_room
 {
 	char		name[42]; // Ei voi olla pointteri, jos ei allokoida tilaa erikseen.
 	int			x;
 	int			y;
 	struct		s_room	*next;
-	struct		s_room	*pipes[50];
+	struct		s_room	**pipes;
 	int			pipe_count;
+	int			pipe_mem;
 }				t_room;
 
 typedef struct	lem_data
@@ -53,6 +56,7 @@ void	create_room(lem_data *d);
 // Read pipes helpers
 void	create_pipe(lem_data *d, char *first, char *second);
 void	add_pipe(lem_data *d, t_room *src, t_room *dst);
+void	dynamic_array(t_room *dst);
 
 // Helpers
 int		lem_atoi(const char *str);

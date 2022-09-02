@@ -111,3 +111,43 @@ int		is_valid(lem_data *d)
 	return (1);
 }
 
+void	create_room(lem_data *d)
+{
+	int		i;
+	//t_room	*tmp;
+
+	ft_printf("create_room\n");
+	// d->head yms pitää alustaa nulleiksi, kun lem_data luodaan.
+	i = 0;
+	// If head is null, there is not a single room, and new room will be created
+	// to d->current and is the head. Else new room will be created to
+	//	d->current->next. After this function, d->current is last created room.
+	if (d->head != NULL)
+	{
+		d->current->next = (t_room *)malloc(sizeof(t_room));
+		d->current = d->current->next;
+	}
+	else
+		d->current = (t_room *)malloc(sizeof(t_room));
+	//d->current->pipes = (t_room **)malloc(sizeof(t_room *));
+	// add malloc checks
+	d->current->pipe_count = 0;
+	d->current->pipe_mem = ARRAY_SIZE;
+	if (d->head == NULL)
+		d->head = d->current;
+	// Save the name and coordinates to node s_room.
+	while (d->line[i] != ' ')
+	{
+		d->current->name[i] = d->line[i];
+		i++;
+	}
+	d->current->name[i] = '\0';
+	d->current->x = lem_atoi(&d->line[i + 1]);
+	i++;
+	while (d->line[i] != ' ')
+		i++;
+	d->current->y = lem_atoi(&d->line[i + 1]);
+	d->current->next = NULL;
+	// Nyt menee läpi myö rivit, jossa on ylimääräistä tavaraa koordinaattien
+	// perässä. Luo error check.
+}

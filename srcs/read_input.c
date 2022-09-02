@@ -30,15 +30,17 @@ void	input(lem_data *d)
 
 void	read_ants(lem_data *d)
 {
-	char	*str;
+	char *str;
+
 
 	get_next_line(0, &str);
 	d->ants = lem_atoi(str);
+	free(str);
 	if (d->ants < 0 || d->ants > 2147483647)
 		exit(0);			// Add error message here!
 	ft_printf("Ants = %d\n", d->ants);		// Delete!
 
-	free(str);
+	
 }
 
 void	read_rooms(lem_data *d)
@@ -47,9 +49,13 @@ void	read_rooms(lem_data *d)
 	{
 		get_next_line(0, &d->line);
 		if (check_start_end(d))
-			continue ;
+			;
 		else if (is_pipe(d))
+		{
+			free(d->line);
 			break ;
+		}
+
 		else if (is_valid(d))
 			create_room(d);
 		else if (skip_comments(d) == 0)
