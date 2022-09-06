@@ -29,6 +29,7 @@ void	get_unique(lem_data *d)
 	//while (/*solution_found()*/)
 	//{
 		room = d->end;
+		d->current = d->end;
 		route = (t_room **)malloc(sizeof(t_room) * steps);
 		recursive_finder(d, route, room, steps);
 		steps++;
@@ -50,13 +51,13 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 	while (pipe_index < room->pipe_count)
 	{
 		route[steps] = room;
-		// sleep(1);
-		// ft_printf("{yellow}routes:\n");
-		// ft_printf("steps: %d\n", steps);
-		// ft_printf("route index 0: %s\n", route[0]->name); //tallenna reitti
-		// ft_printf("route index 1: %s\n", route[1]->name); //tallenna reitti
-		// ft_printf("route index 2: %s\n", route[2]->name); //tallenna reitti
-		// ft_printf("route index 3: %s\n", route[3]->name); //tallenna reitti
+		sleep(1);
+		ft_printf("{yellow}routes:\n");
+		ft_printf("steps: %d\n", steps);
+		ft_printf("route index 0: %s\n", route[0]->name); //tallenna reitti
+		ft_printf("route index 1: %s\n", route[1]->name); //tallenna reitti
+		ft_printf("route index 2: %s\n", route[2]->name); //tallenna reitti
+		ft_printf("route index 3: %s\n", route[3]->name); //tallenna reitti
 		if (room == d->start && steps == 0) 
 		{
 			ft_printf("{red}routes:\n");
@@ -66,14 +67,19 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 			ft_printf("route index 3: %s\n", route[3]->name); //tallenna reitti
 			ft_printf("route index 4: %s\n", route[4]->name); //tallenna reitti
 		}
-		if (room->floor >= room->pipes[pipe_index]->floor)
+		if (room->floor >= room->pipes[pipe_index]->floor && (route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
 		{
 			//room = room->pipes[pipe_index];
 			steps--;
 			if (steps >= 0)
+			{
+				//d->current = room;
 				recursive_finder(d, route, room->pipes[pipe_index], steps);
+			}
+				
 			steps++;
 		}
+		//d->current = room;
 		pipe_index++;
 	}
 }
