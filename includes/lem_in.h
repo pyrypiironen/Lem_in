@@ -41,6 +41,7 @@ typedef struct	lem_data
 	char	*line;				// Added
 	struct	s_room	***paths;
 	int		path_index;
+	int		path_depth;
 }			lem_data;
 
 
@@ -71,6 +72,7 @@ void	solve_paths(lem_data *d);
 void	get_floors(lem_data *d);
 void	get_unique(lem_data *d);
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps);
+void	save_path(lem_data *d, t_room **route);
 
 
 

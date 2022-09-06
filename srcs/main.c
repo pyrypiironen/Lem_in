@@ -40,6 +40,14 @@ int	main(void)
 	// 	}
 	// 	data->head = data->head->next;
 	// }
+	for (int i = 0; i < 5; i++)
+	{
+		ft_printf("{red}route %d\n", i);
+		for (int j = 0; j < 5; j++)
+		{
+			ft_printf("%s\n", data->paths[i][j]->name);
+		}
+	}
 	exit(0);
 
 
