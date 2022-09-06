@@ -18,14 +18,64 @@ void	solve_paths(lem_data *d)
 
 void	get_unique(lem_data *d)
 {
-	d->paths = (t_room ***)malloc(sizeof(t_room **) * PATH_COUNT);
+	t_room	**route;
+	t_room	*room;
+	int		steps;
+
+
+	steps = d->end->floor;
+	d->paths = (t_room ***)malloc(sizeof(t_room **) * PATH_COUNT); // make this dynamic
 	d->path_index = 0;
+	//while (/*solution_found()*/)
+	//{
+		room = d->end;
+		route = (t_room **)malloc(sizeof(t_room) * steps);
+		recursive_finder(d, route, room, steps);
+		steps++;
+		free(route);
+	//}
 	// Kaikki pathit per tutkittava steps, eka steps == end->floor
 	// Aloitetaan endistä, tutkitaan sama floor ja sitä pienemmät, pysähdytään jos steps menee yli
 	// Allokoidaan aina step countin kokoinen tuplapointteri, kirjoitetaan reittiä aina indeksiin, ylikirjoitetaan, jos reitti ei valid
 	// Rekursiivinen funktio
 	// Tarkista, onko tarpeeksi uniikkeja
 	// Jos ei, niin seuraava leveli
+}
+
+void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
+{
+	int	pipe_index;
+
+	pipe_index = 0;
+	while (pipe_index < room->pipe_count)
+	{
+		route[steps] = room;
+		// sleep(1);
+		// ft_printf("{yellow}routes:\n");
+		// ft_printf("steps: %d\n", steps);
+		// ft_printf("route index 0: %s\n", route[0]->name); //tallenna reitti
+		// ft_printf("route index 1: %s\n", route[1]->name); //tallenna reitti
+		// ft_printf("route index 2: %s\n", route[2]->name); //tallenna reitti
+		// ft_printf("route index 3: %s\n", route[3]->name); //tallenna reitti
+		if (room == d->start && steps == 0) 
+		{
+			ft_printf("{red}routes:\n");
+			ft_printf("route index 0: %s\n", route[0]->name); //tallenna reitti
+			ft_printf("route index 1: %s\n", route[1]->name); //tallenna reitti
+			ft_printf("route index 2: %s\n", route[2]->name); //tallenna reitti
+			ft_printf("route index 3: %s\n", route[3]->name); //tallenna reitti
+			ft_printf("route index 4: %s\n", route[4]->name); //tallenna reitti
+		}
+		if (room->floor >= room->pipes[pipe_index]->floor)
+		{
+			//room = room->pipes[pipe_index];
+			steps--;
+			if (steps >= 0)
+				recursive_finder(d, route, room->pipes[pipe_index], steps);
+			steps++;
+		}
+		pipe_index++;
+	}
 }
 
 void	get_floors(lem_data *d)

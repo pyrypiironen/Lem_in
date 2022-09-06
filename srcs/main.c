@@ -28,18 +28,18 @@ int	main(void)
 	
 
 
-	while (data->head)
-	{
-		int i = 0;
-		ft_printf("{green}room %s floor: %d:\n", data->head->name, data->head->floor);
-		while (i < data->head->pipe_count)
-		{
-			ft_printf("link: %s\n", data->head->pipes[i]->name);
-			//data->head = data->head->next;
-			i++;
-		}
-		data->head = data->head->next;
-	}
+	// while (data->head)
+	// {
+	// 	int i = 0;
+	// 	ft_printf("{green}room %s floor: %d:\n", data->head->name, data->head->floor);
+	// 	while (i < data->head->pipe_count)
+	// 	{
+	// 		ft_printf("link: %s\n", data->head->pipes[i]->name);
+	// 		//data->head = data->head->next;
+	// 		i++;
+	// 	}
+	// 	data->head = data->head->next;
+	// }
 	exit(0);
 
 

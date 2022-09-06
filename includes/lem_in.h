@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 
 # define ARRAY_SIZE	42
-# define PATH_COUNT	1
+# define PATH_COUNT	42
 
 typedef struct	s_room
 {
@@ -69,6 +69,8 @@ int		lem_atoi(const char *str);
 // Solving paths
 void	solve_paths(lem_data *d);
 void	get_floors(lem_data *d);
+void	get_unique(lem_data *d);
+void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps);
 
 
 
