@@ -51,20 +51,76 @@ int		solution_found(lem_data *d)
 {
 	if (d->path_index < d->path_limit)
 		return (0);
-	return (unicorn_finder(d));
+	return (unicorn_finder(d, 0));
 }
 
-int		unicorn_finder(lem_data *d)
+int		unicorn_finder(lem_data	*d, int	level)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (i < d->path_index)
+	ft_printf("%d\n", level);
+	if (level== 0)
 	{
-		;
+		d->unique_paths[0] = d->paths[0];
+		d->unique_index = 1;
+		if (unicorn_finder(d, 1))
+			return (1);
 	}
-
+	while (i < d->unique_index) //verrataan kasilla olevaa reittia kaikkiin
+								//aikaisempiin
+	{
+		j = level;
+		while (j < d->path_index)
+		{
+			if (is_conflict(d, i, j))
+			{
+				j++;
+				i = 0;
+			}
+			else
+			{
+				if (i + 1 == d->unique_index)
+				{
+					d->unique_paths[d->unique_index] = d->paths[j];
+					if (d->unique_index == d->path_limit)
+						return (1);
+				}
+				else if (unicorn_finder(d, level + 1))
+						return (1);
+				break ;
+			}
+		}
+		i++;
+	}
+	d->unique_index++;
+	return (0);
 }
+
+int		is_conflict(lem_data *d, int i, int j)
+{
+	ft_printf("seg here\n");
+	int	k;
+	int	m;
+
+	k = 1;
+	while (d->unique_paths[i][k] != d->end)
+	{
+		m = 1;
+		while (d->paths[j][m] != d->end)
+		{
+			if (d->unique_paths[i][k] == d->paths[j][m])
+				return (1);
+			m++;
+		}
+		k++;
+	}
+	ft_printf("or seg here\n");
+	return (0);
+}
+
+
 
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 {

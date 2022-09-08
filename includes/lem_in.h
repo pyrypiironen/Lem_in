@@ -42,6 +42,7 @@ typedef struct	lem_data
 	struct	s_room	***paths;
 	struct	s_room	***unique_paths;
 	int		path_index;
+	int		unique_index;
 	int		path_depth;
 }			lem_data;
 
@@ -74,7 +75,9 @@ void	get_floors(lem_data *d);
 void	get_unique(lem_data *d);
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps);
 void	save_path(lem_data *d, t_room **route);
-int		unicorn_finder(lem_data *d);
+int		unicorn_finder(lem_data *d, int level);
+int		is_conflict(lem_data *d, int i, int j);
+int		solution_found(lem_data *d);
 
 
 

@@ -45,7 +45,7 @@ int	main(void)
 		ft_printf("{red}route %d\n", i);
 		for (int j = 0; j < 5; j++)
 		{
-			ft_printf("%s\n", data->paths[i][j]->name);
+			ft_printf("%s\n", data->unique_paths[i][j]->name);
 		}
 	}
 	exit(0);
