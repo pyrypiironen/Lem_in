@@ -9,6 +9,8 @@ void	solve_paths(lem_data *d)
 	d->path_limit = d->start->pipe_count;
 	if (d->end->pipe_count < d->path_limit)
 		d->path_limit = d->end->pipe_count;
+	if (d->path_limit > d->ants)
+		d->path_limit = d->ants;
 	get_floors(d);
 	get_unique(d);
 	// Etsi parhaat reitit
@@ -25,12 +27,15 @@ void	get_unique(lem_data *d)
 	d->path_depth = d->end->floor;
 	d->path_index = 0;
 	d->paths = (t_room ***)malloc(sizeof(t_room **) * PATH_COUNT); // make this dynamic
+	d->unique_paths = (t_room ***)malloc(sizeof(t_room **) * d->path_limit);
+	// check mallocs
 	
-	while (solution_found())
+	while (!solution_found(d))
 	{
 		room = d->end;
 		d->current = d->end;
 		route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
+		// check malloc
 		recursive_finder(d, route, room, d->path_depth);
 		d->path_depth += 1;
 		free(route);
@@ -39,6 +44,26 @@ void	get_unique(lem_data *d)
 
 	// Tarkista, onko tarpeeksi uniikkeja
 	// Jos ei, niin seuraava leveli
+}
+
+
+int		solution_found(lem_data *d)
+{
+	if (d->path_index < d->path_limit)
+		return (0);
+	return (unicorn_finder(d));
+}
+
+int		unicorn_finder(lem_data *d)
+{
+	int	i;
+
+	i = 0;
+	while (i < d->path_index)
+	{
+		;
+	}
+
 }
 
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
@@ -52,27 +77,16 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 		if (room == d->start && steps == 0) 
 		{
 			save_path(d, route);
-			// ft_printf("{red}routes:\n");
-			// ft_printf("route index 0: %s\n", route[0]->name); //tallenna reitti
-			// ft_printf("route index 1: %s\n", route[1]->name); //tallenna reitti
-			// ft_printf("route index 2: %s\n", route[2]->name); //tallenna reitti
-			// ft_printf("route index 3: %s\n", route[3]->name); //tallenna reitti
-			// ft_printf("route index 4: %s\n", route[4]->name); //tallenna reitti
 			return ;
 		}
+		
 		if (room->floor >= room->pipes[pipe_index]->floor && (route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
 		{
-			//room = room->pipes[pipe_index];
 			steps--;
 			if (steps >= 0)
-			{
-				//d->current = room;
 				recursive_finder(d, route, room->pipes[pipe_index], steps);
-			}
-				
 			steps++;
 		}
-		//d->current = room;
 		pipe_index++;
 	}
 }
