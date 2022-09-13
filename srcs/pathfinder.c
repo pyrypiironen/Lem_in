@@ -100,7 +100,6 @@ int		unicorn_finder(lem_data	*d, int	level)
 
 int		is_conflict(lem_data *d, int i, int j)
 {
-	ft_printf("seg here\n");
 	int	k;
 	int	m;
 
@@ -108,6 +107,8 @@ int		is_conflict(lem_data *d, int i, int j)
 	while (d->unique_paths[i][k] != d->end)
 	{
 		m = 1;
+		ft_printf("current %p\n", d->unique_paths[i][k]);
+		ft_printf("end %p\n", d->end);
 		while (d->paths[j][m] != d->end)
 		{
 			if (d->unique_paths[i][k] == d->paths[j][m])
@@ -116,7 +117,6 @@ int		is_conflict(lem_data *d, int i, int j)
 		}
 		k++;
 	}
-	ft_printf("or seg here\n");
 	return (0);
 }
 
