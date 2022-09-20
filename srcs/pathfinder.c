@@ -102,10 +102,9 @@ int		is_conflict(lem_data *d, int i, int j)
 {
 	int	k;
 	int	m;
-
-
+	ft_printf("täs\n");
 	k = 1;
-	while (d->unique_paths[i][k] != d->end)
+	while (d->unique_paths[i] != NULL && d->unique_paths[i][k] != d->end)
 	{
 		m = 1;
 		// ft_printf("current %p %s\n", d->unique_paths[i][k], d->unique_paths[i][k]->name);
@@ -124,7 +123,7 @@ int		is_conflict(lem_data *d, int i, int j)
 		// ft_printf("current %p %s\n", d->unique_paths[i][k], d->unique_paths[i][k]->name);
 		// ft_printf("end %p %s\n", d->end, d->end->name);
 	}
-	// ft_printf("täs\n");
+	//ft_printf("täs\n");
 	return (0);
 }
 
