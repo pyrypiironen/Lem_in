@@ -1,6 +1,14 @@
-
-
-//HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pathfinder.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ppiirone <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/21 19:04:28 by ppiirone          #+#    #+#             */
+/*   Updated: 2022/09/21 19:04:31 by ppiirone         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
@@ -60,8 +68,8 @@ int		unicorn_finder(lem_data	*d, int	level)
 	int	j;
 
 	i = 0;
-	ft_printf("%d\n", level);
-	if (level== 0)
+	ft_printf("level (line 71)		%d\n", level);
+	if (level == 0)
 	{
 		d->unique_paths[0] = d->paths[0];
 		d->unique_index = 1;
@@ -102,7 +110,7 @@ int		is_conflict(lem_data *d, int i, int j)
 {
 	int	k;
 	int	m;
-	ft_printf("täs\n");
+	ft_printf("Is_conflict (line 113 [ennen 'täs']) | i = %d | j = %d\n", i, j);
 	k = 1;
 	while (d->unique_paths[i] != NULL && d->unique_paths[i][k] != d->end)
 	{
