@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "../../includes/lem_in.h"
 
 void	input(lem_data *d)
 {
@@ -23,24 +23,17 @@ void	input(lem_data *d)
 	read_rooms(d);
 	read_pipes(d);
 	// Check duplicates
-
-
-
 }
 
 void	read_ants(lem_data *d)
 {
 	char *str;
 
-
 	get_next_line(0, &str);
 	d->ants = lem_atoi(str);
 	free(str);
 	if (d->ants < 0 || d->ants > 2147483647)
 		exit(0);			// Add error message here!
-
-
-	
 }
 
 void	read_rooms(lem_data *d)
@@ -77,7 +70,7 @@ void	read_pipes(lem_data *d)
 			break ;
 		if (!is_pipe(d))
 		{
-			ft_printf("errori\n");
+			ft_printf("errori\n"); // Clean error message
 			exit(1);
 		}
 		free(d->line);

@@ -26,8 +26,11 @@ typedef struct	s_room
 	struct		s_room	*next;
 	struct		s_room	**pipes;
 	int			pipe_count;
+				// Montako putkea huoneesta lähtee.
 	int			pipe_mem;
+				// Määrä muistia, joka putkia varten allokoidaan. Dynaaminen.
 	int			floor;
+				// Monennessa kerroksessa huone on. Start on floor 0.
 }				t_room;
 
 typedef struct	lem_data

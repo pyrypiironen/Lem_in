@@ -1,7 +1,7 @@
 // Add header
 
 
-#include "../includes/lem_in.h"
+#include "../../includes/lem_in.h"
 
 int		check_start_end(lem_data *d)
 {
@@ -27,38 +27,6 @@ int		check_start_end(lem_data *d)
 		ret = 1;
 	}
 	return (ret);
-}
-
-int		is_pipe(lem_data *d)
-{
-	char	first[42];
-	char	second[42];
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (d->line[i] != '-')
-	{
-		first[i] = d->line[i];
-		if (first[i] == ' ' || first[i++] == '\0')
-			return (0);
-	}
-	first[i] = '\0';
-	i++;
-	while (d->line[i])
-	{
-		second[j] = d->line[i++];
-		if (second[j++] == ' ')
-			return (0);
-	}
-	second[j] = '\0';
-	if (is_room(d, first) && is_room(d, second))
-	{
-		create_pipe(d, first, second);
-		return (1);
-	}
-	return (0);
 }
 
 int		is_room(lem_data *d, char *room)

@@ -35,6 +35,6 @@ int	lem_atoi(const char *str)
 		str++;
 	}
 	if (*str != ' ' && *str != '\n' && *str != '\0')
-		exit(0);			// Add error message here !
+		exit(1);			// Add error message here !
 	return (sign * (int)res);
 }

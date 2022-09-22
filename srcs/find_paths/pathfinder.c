@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "../../includes/lem_in.h"
 
 void	solve_paths(lem_data *d)
 {
@@ -26,140 +26,36 @@ void	solve_paths(lem_data *d)
 
 }
 
-void	get_unique(lem_data *d)
-{
-	t_room	**route;
-	t_room	*room;
-
-
-	d->path_depth = d->end->floor;
-	d->path_index = 0;
-	d->paths = (t_room ***)malloc(sizeof(t_room **) * PATH_COUNT); // make this dynamic
-	d->unique_paths = (t_room ***)malloc(sizeof(t_room **) * d->path_limit);
-	// check mallocs
-	
-	while (!solution_found(d))
-	{
-		room = d->end;
-		d->current = d->end;
-		route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
-		// check malloc
-		recursive_finder(d, route, room, d->path_depth);
-		d->path_depth += 1;
-		free(route);
-	}
-
-
-	// Tarkista, onko tarpeeksi uniikkeja
-	// Jos ei, niin seuraava leveli
-}
-
-
-int		solution_found(lem_data *d)
-{
-	if (d->path_index < d->path_limit)
-		return (0);
-	return (unicorn_finder(d, 0));
-}
-
-int		unicorn_finder(lem_data	*d, int	level)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	ft_printf("level (line 71)		%d\n", level);
-	if (level == 0)
-	{
-		d->unique_paths[0] = d->paths[0];
-		d->unique_index = 1;
-		if (unicorn_finder(d, 1))
-			return (1);
-	}
-	while (i < d->unique_index) //verrataan kasilla olevaa reittia kaikkiin
-								//aikaisempiin
-	{
-		j = level;
-		while (j < d->path_index)
-		{
-			if (is_conflict(d, i, j))
-			{
-				j++;
-				i = 0;
-			}
-			else
-			{
-				if (i + 1 == d->unique_index)
-				{
-					d->unique_paths[d->unique_index] = d->paths[j];
-					if (d->unique_index == d->path_limit)
-						return (1);
-				}
-				else if (unicorn_finder(d, level + 1))
-						return (1);
-				break ;
-			}
-		}
-		i++;
-	}
-	d->unique_index++;
-	return (0);
-}
-
 int		is_conflict(lem_data *d, int i, int j)
 {
 	int	k;
 	int	m;
-	ft_printf("Is_conflict (line 113 [ennen 'täs']) | i = %d | j = %d\n", i, j);
+	ft_printf("Is_conflict (line 113) | i = %d | j = %d\n", i, j);
 	k = 1;
 	while (d->unique_paths[i] != NULL && d->unique_paths[i][k] != d->end)
 	{
 		m = 1;
 		// ft_printf("current %p %s\n", d->unique_paths[i][k], d->unique_paths[i][k]->name);
 		// ft_printf("end %p %s\n", d->end, d->end->name);
-		// ft_printf("k %d\n", k);
+		//ft_printf("k %d\n", k);
 		while (d->paths[j][m] != d->end)
 		{
 			// ft_printf("current %p %s\n", d->paths[j][m], d->paths[j][m]->name);
 			// ft_printf("end %p %s\n", d->end, d->end->name);
-			// ft_printf("m %d\n", m);
+			//ft_printf("m %d\n", m);
 			if (d->unique_paths[i][k] == d->paths[j][m])
+			{
+				ft_printf("Is_conflict return (1);\n");
 				return (1);
+			}
 			m++;
 		}
 		k++;
 		// ft_printf("current %p %s\n", d->unique_paths[i][k], d->unique_paths[i][k]->name);
 		// ft_printf("end %p %s\n", d->end, d->end->name);
 	}
-	//ft_printf("täs\n");
+	ft_printf("Is_conflict return (0);\n");
 	return (0);
-}
-
-
-
-void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
-{
-	int	pipe_index;
-
-	pipe_index = 0;
-	while (pipe_index < room->pipe_count)
-	{
-		route[steps] = room;
-		if (room == d->start && steps == 0) 
-		{
-			save_path(d, route);
-			return ;
-		}
-		
-		if (room->floor >= room->pipes[pipe_index]->floor && (route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
-		{
-			steps--;
-			if (steps >= 0)
-				recursive_finder(d, route, room->pipes[pipe_index], steps);
-			steps++;
-		}
-		pipe_index++;
-	}
 }
 
 void	save_path(lem_data *d, t_room **route)

@@ -40,6 +40,7 @@ int	main(void)
 	// 	}
 	// 	data->head = data->head->next;
 	// }
+
 	// for (int i = 0; i < 5; i++)
 	// {
 	// 	ft_printf("{red}route %d\n", i);
@@ -48,7 +49,6 @@ int	main(void)
 	// 		ft_printf("%s\n", data->unique_paths[i][j]->name);
 	// 	}
 	// }
-	exit(0);
 
 
 
