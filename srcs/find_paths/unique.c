@@ -90,10 +90,22 @@ void	fill_heat_map(lem_data *d)
 
 int		is_conflict(lem_data *d, int i)
 {
-	i = 1;
+	int	j;
+	int	k;
 
-	(void)d;
-	return i;
+	j = 1;
+	while (d->paths[d->heat_map_index][j] != d->end)
+	{
+		k = 1;
+		while (d->paths[i][k] != d->end)
+		{
+			if (d->paths[d->heat_map_index][j] == d->paths[i][k])
+				return (1);
+			k++;
+		}
+		j++;
+	}
+	return (0);
 }
 
 
