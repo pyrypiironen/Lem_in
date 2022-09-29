@@ -26,37 +26,7 @@ void	solve_paths(lem_data *d)
 
 }
 
-int		is_conflict(lem_data *d, int i, int j)
-{
-	int	k;
-	int	m;
-	ft_printf("Is_conflict (line 113) | i = %d | j = %d\n", i, j);
-	k = 1;
-	while (d->unique_paths[i] != NULL && d->unique_paths[i][k] != d->end)
-	{
-		m = 1;
-		// ft_printf("current %p %s\n", d->unique_paths[i][k], d->unique_paths[i][k]->name);
-		// ft_printf("end %p %s\n", d->end, d->end->name);
-		//ft_printf("k %d\n", k);
-		while (d->paths[j][m] != d->end)
-		{
-			// ft_printf("current %p %s\n", d->paths[j][m], d->paths[j][m]->name);
-			// ft_printf("end %p %s\n", d->end, d->end->name);
-			//ft_printf("m %d\n", m);
-			if (d->unique_paths[i][k] == d->paths[j][m])
-			{
-				ft_printf("Is_conflict return (1);\n");
-				return (1);
-			}
-			m++;
-		}
-		k++;
-		// ft_printf("current %p %s\n", d->unique_paths[i][k], d->unique_paths[i][k]->name);
-		// ft_printf("end %p %s\n", d->end, d->end->name);
-	}
-	ft_printf("Is_conflict return (0);\n");
-	return (0);
-}
+
 
 void	save_path(lem_data *d, t_room **route)
 {

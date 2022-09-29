@@ -24,7 +24,7 @@ void	get_unique(lem_data *d)
 	d->unique_paths = (t_room ***)malloc(sizeof(t_room **) * d->path_limit);
 	// check mallocs
 	
-	while (!solution_found(d))
+	while (d->path_depth < 5)
 	{
 		room = d->end;
 		d->current = d->end;
@@ -40,56 +40,6 @@ void	get_unique(lem_data *d)
 	// Jos ei, niin seuraava leveli
 }
 
-int		solution_found(lem_data *d)
-{
-	if (d->path_index < d->path_limit)
-		return (0);
-	return (unicorn_finder(d, 0));
-}
-
-int		unicorn_finder(lem_data	*d, int	level)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	ft_printf("level (line 71)		%d\n", level);
-	if (level == 0)
-	{
-		d->unique_paths[0] = d->paths[0];
-		d->unique_index = 1;
-		if (unicorn_finder(d, 1))
-			return (1);
-	}
-	while (i < d->unique_index) //verrataan kasilla olevaa reittia kaikkiin
-								//aikaisempiin
-	{
-		j = level;
-		while (j < d->path_index)
-		{
-			if (is_conflict(d, i, j))
-			{
-				j++;
-				i = 0;
-			}
-			else
-			{
-				if (i + 1 == d->unique_index)
-				{
-					d->unique_paths[d->unique_index] = d->paths[j];
-					if (d->unique_index == d->path_limit)
-						return (1);
-				}
-				else if (unicorn_finder(d, level + 1))
-						return (1);
-				break ;
-			}
-		}
-		i++;
-	}
-	d->unique_index++;
-	return (0);
-}
 
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 {
