@@ -80,8 +80,10 @@ void	fill_heat_map(lem_data *d)
 		{
 			if (d->heat_map[k][j] == 2)
 				ft_printf(" %d ", d->heat_map[k][j]);
-			else
+			else if (d->heat_map[k][j] == 0)
 				ft_printf("{green} %d ", d->heat_map[k][j]);
+			else
+				ft_printf("{red} %d ", d->heat_map[k][j]);
 		}
 			
 		ft_printf("\n");
