@@ -71,7 +71,8 @@ void	dynamic_array(t_room *dst)
 	tmp = dst->pipes;
 	dst->pipe_mem += ARRAY_SIZE;
 	dst->pipes = (t_room **)malloc(sizeof(t_room *) * dst->pipe_mem);
-	// add malloc check
+	if (dst->pipes == NULL)
+		exit(1);
 	while (i >= 0)
 	{
 		dst->pipes[i] = tmp[i];

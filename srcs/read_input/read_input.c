@@ -33,7 +33,7 @@ void	read_ants(lem_data *d)
 	d->ants = lem_atoi(str);
 	free(str);
 	if (d->ants < 0 || d->ants > 2147483647)
-		exit(0);			// Add error message here!
+		exit(1);			// Add error message here!
 }
 
 void	read_rooms(lem_data *d)
@@ -54,12 +54,12 @@ void	read_rooms(lem_data *d)
 		else if (skip_comments(d) == 0)
 		{
 			ft_printf("error\n");
-			exit(0); 			// Add error message here!
+			exit(1); 			// Add error message here!
 		}
 		free(d->line);
 	}
 	if (d->start == NULL || d->end == NULL)
-		exit(0); 				// Add error message here!
+		exit(1); 				// Add error message here!
 }
 
 void	read_pipes(lem_data *d)

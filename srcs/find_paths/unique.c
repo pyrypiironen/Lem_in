@@ -20,25 +20,20 @@ void	get_unique(lem_data *d)
 	d->path_depth = d->end->floor;
 	d->path_index = 0;
 	d->heat_map_index = 0;
-	d->paths = (t_room ***)malloc(sizeof(t_room **) * PATH_COUNT); // make this dynamic
-	// check mallocs
-	
+	d->paths = (t_room ***)malloc(sizeof(t_room **) * d->path_mem);
+	if (d->paths == NULL)
+		exit(1);
 	while (!solution_found(d))
 	{
 		room = d->end;
 		d->current = d->end;
 		route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
-		// check malloc
+		if (route == NULL)
+			exit(1);
 		recursive_finder(d, route, room, d->path_depth);
 		d->path_depth += 1;
 		free(route);
-		//if (d->path_depth == 100)
-		//	break ;
 	}
-
-
-	// Tarkista, onko tarpeeksi uniikkeja
-	// Jos ei, niin seuraava leveli
 }
 
 int		solution_found(lem_data *d)
@@ -47,18 +42,16 @@ int		solution_found(lem_data *d)
 		return (0);
 	// Lue nykyinen taso heat_mappiin.
 	fill_heat_map(d);
-	// Tarkista löytyikö ratkaisu
-	int r;
-	r = check_heat_map(d, 0, 0);
-	ft_printf("{purple}check_heat_map return is = %d\n", r);
-	//sleep(10);
-	return (r);
+	// Tarkista löytyikö ratkaisu ja palauta totuusarvo.
+	return (check_heat_map(d, 0, 0));
 }
 
 void	fill_heat_map(lem_data *d)
 {
 	int	i;
 
+	if (d->path_index >= d->map_size)
+		dynamic_heat_map(d);
 	while (d->heat_map_index < d->path_index)
 	{
 		i = 0;
@@ -69,22 +62,55 @@ void	fill_heat_map(lem_data *d)
 		}
 		d->heat_map_index += 1;
 	}
-
-	// ft_printf("path_index: %d\n", d->path_index);
-	// for (int k = 0; k < 20; k++)
-	// {
-	// 	for (int j = 0; j < 20; j++)
-	// 	{
-	// 		if (d->heat_map[k][j] == 2)
-	// 			ft_printf(" %d ", d->heat_map[k][j]);
-	// 		else if (d->heat_map[k][j] == 0)
-	// 			ft_printf("{green} %d ", d->heat_map[k][j]);
-	// 		else
-	// 			ft_printf("{red} %d ", d->heat_map[k][j]);
-	// 	}
+	ft_printf("map_size: %d\n", d->map_size);
+	ft_printf("path_index: %d\n", d->path_index);
+	for (int k = 0; k <= d->path_index; k++)
+	{
+		for (int j = 0; j <= d->path_index; j++)
+		{
+			if (d->heat_map[k][j] == 2)
+				ft_printf(" %d ", d->heat_map[k][j]);
+			else if (d->heat_map[k][j] == 0)
+				ft_printf("{green} %d ", d->heat_map[k][j]);
+			else
+				ft_printf("{red} %d ", d->heat_map[k][j]);
+		}
 			
-	// 	ft_printf("\n");
-	// }
+		ft_printf("\n");
+	}
+}
+
+void	dynamic_heat_map(lem_data *d)
+{
+	int	**tmp;
+	int	i;
+	int	j;
+	int	k;
+
+	i = d->heat_map_index - 1;
+	j = 0;
+	tmp = d->heat_map;
+	d->map_size += d->map_size;
+	d->heat_map = (int **)malloc(sizeof(int *) * d->map_size);
+	if (d->heat_map == NULL)
+		exit(1);
+	while (j < d->map_size)
+	{
+		d->heat_map[j] = (int *)malloc(sizeof(int) * d->map_size);
+		k = 0;
+		while (k < d->map_size)
+		{
+			if (j <= i && k <= i)
+				d->heat_map[j][k] = tmp[j][k];
+			else
+				d->heat_map[j][k] = 2;
+			k++;
+		}
+		if (j <= i)
+			free(tmp[j]);
+		j++;
+	}
+	free(tmp);
 }
 
 int		is_conflict(lem_data *d, int i)
@@ -111,8 +137,6 @@ int		is_conflict(lem_data *d, int i)
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 {
 	int	pipe_index;
-
-	
 
 	pipe_index = 0;
 	while (pipe_index < room->pipe_count)

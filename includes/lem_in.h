@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 
 # define ARRAY_SIZE	42
-# define PATH_COUNT	42
+//# define PATH_COUNT	42
 
 typedef struct	s_room
 {
@@ -36,18 +36,23 @@ typedef struct	s_room
 typedef struct	lem_data
 {
 	struct	s_room	*head;
-	struct	s_room	*current; // Added
+	struct	s_room	*current;
 	struct	s_room	*start;
 	struct	s_room	*end;
 	int		ants;
 	int		path_limit;
-	char	*line;				// Added
+	char	*line;
 	struct	s_room	***paths;
 	int		path_index;
+			// Reittien määrâ.
+	int		path_mem;
+			// Monelleko reitille on allokoitu tilaa.
 	int		heat_map_index;
 	int		path_depth;
+			// Kuinka pitkiä reittejä etsitään
 	int		**heat_map;
 	int		array[10000];
+	int		map_size;
 }			lem_data;
 
 
@@ -83,8 +88,10 @@ int		solution_found(lem_data *d);
 void	fill_heat_map(lem_data *d);
 int		is_conflict(lem_data *d, int i);
 
-int	check_heat_map(lem_data *d, int nb, int in);
-int	compare_array(lem_data *d, int nb, int in);
+int		check_heat_map(lem_data *d, int nb, int in);
+int		compare_array(lem_data *d, int nb, int in);
+void	dynamic_path_mem(lem_data *d);
+void	dynamic_heat_map(lem_data *d);
 
 
 
