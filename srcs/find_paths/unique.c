@@ -45,22 +45,21 @@ void	get_unique(lem_data *d)
 
 int		solution_found(lem_data *d)
 {
-	// if (d->heat_map_index == 0)
-	// 	return (0);
-	// lue nykyinen taso heat_mappiin
+	if (d->path_index == 0)
+		return (0);
+	// Lue nykyinen taso heat_mappiin.
 	fill_heat_map(d);
+	// Tarkista löytyikö ratkaisu
+	int r;
+	r = check_heat_map(d, 0, 0);
+	ft_printf("{purple}check_heat_map return is = %d\n", r);
+	//sleep(10);
 	return (0);
-
-	// tarkista löytyikö ratkaisu
-
-
 }
 
 void	fill_heat_map(lem_data *d)
 {
 	int	i;
-
-
 
 	while (d->heat_map_index < d->path_index)
 	{
@@ -134,4 +133,62 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 		}
 		pipe_index++;
 	}
+}
+
+int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
+{
+	while (1)
+	{
+		while (!compare_array(d, nb, in))
+		{
+			nb++;
+			//ft_printf("{purple}path_index = %i\n", d->path_index);
+			//sleep(5);
+			if (nb == d->path_index)
+			{	
+				ft_printf("{red} return check_heat_map (0)\n");
+				return (0);
+			}
+		}
+		d->array[in] = nb;
+		if (in + 1 == d->path_limit)
+		{
+			int k = 0;
+			while (k < d->path_limit)
+			{
+				ft_printf("{yellow}%i \n", d->array[k]);
+				k++;
+			}
+			return (1);
+		}
+		if (nb + 1  == d->path_index)
+		{	
+			ft_printf("{yellow} return check_heat_map (0)\n");
+			return (0);
+		}
+		if (check_heat_map(d, nb + 1, in + 1) == 1)
+			return (1);
+		nb++;
+
+	}
+	return (-1);
+}
+
+int	compare_array(lem_data *d, int nb, int in)
+{
+	int	i;
+
+	ft_printf("{green}compare array | nb is %i | in = %i\n", nb, in);
+	i = 0;
+	while (i < in)
+	{
+		if (d->heat_map[nb][d->array[i]] != 0)
+		{
+			ft_printf("compare array retunr is 0\n");
+			return (0);
+		}
+		i++;
+	}
+	ft_printf("compare array retunr is 1\n");
+	return (1);
 }

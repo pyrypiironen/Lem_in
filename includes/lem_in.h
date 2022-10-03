@@ -47,6 +47,7 @@ typedef struct	lem_data
 	int		heat_map_index;
 	int		path_depth;
 	int		**heat_map;
+	int		array[10000];
 }			lem_data;
 
 
@@ -82,6 +83,8 @@ int		solution_found(lem_data *d);
 void	fill_heat_map(lem_data *d);
 int		is_conflict(lem_data *d, int i);
 
+int	check_heat_map(lem_data *d, int nb, int in);
+int	compare_array(lem_data *d, int nb, int in);
 
 
 

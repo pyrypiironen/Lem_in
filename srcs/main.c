@@ -41,18 +41,16 @@ int	main(void)
 	// 	data->head = data->head->next;
 	// }
 
-	for (int i = 0; i < 8; i++)
-	{
-		ft_printf("{red}route %d\n", i);
-		for (int j = 0; j < 8; j++)
-		{
-			ft_printf("%s\n", data->paths[i][j]->name);
-		}
-	}
+	// for (int i = 0; i < 8; i++)
+	// {
+	// 	ft_printf("{red}route %d\n", i);
+	// 	for (int j = 0; j < 8; j++)
+	// 	{
+	// 		ft_printf("%s\n", data->paths[i][j]->name);
+	// 	}
+	// }
 
 	
-
-
 
 	return (0);
 }
