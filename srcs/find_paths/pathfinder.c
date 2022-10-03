@@ -20,15 +20,15 @@ void	solve_paths(lem_data *d)
 		d->path_limit = d->end->pipe_count;
 	if (d->path_limit > d->ants)
 		d->path_limit = d->ants;
-	d->heat_map = (int **)malloc(sizeof(int *) * 100);
-	while (i < 100)
+	d->heat_map = (int **)malloc(sizeof(int *) * 1000);
+	while (i < 1000)
 	{
-		d->heat_map[i] = (int *)malloc(sizeof(int) * 100);
+		d->heat_map[i] = (int *)malloc(sizeof(int) * 1000);
 		i++;
 	}
-	for (int k = 0; k < 100; k++)   // helper => remove
+	for (int k = 0; k < 1000; k++)   // helper => remove
 	{
-		for (int j = 0; j < 100; j++)
+		for (int j = 0; j < 1000; j++)
 			d->heat_map[k][j] = 2;
 	}
 	get_floors(d);

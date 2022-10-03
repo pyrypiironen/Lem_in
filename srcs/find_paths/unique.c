@@ -17,8 +17,6 @@ void	get_unique(lem_data *d)
 	t_room	**route;
 	t_room	*room;
 
-
-
 	d->path_depth = d->end->floor;
 	d->path_index = 0;
 	d->heat_map_index = 0;
@@ -34,8 +32,8 @@ void	get_unique(lem_data *d)
 		recursive_finder(d, route, room, d->path_depth);
 		d->path_depth += 1;
 		free(route);
-		if (d->path_depth == 42)
-			break ;
+		//if (d->path_depth == 100)
+		//	break ;
 	}
 
 
@@ -54,7 +52,7 @@ int		solution_found(lem_data *d)
 	r = check_heat_map(d, 0, 0);
 	ft_printf("{purple}check_heat_map return is = %d\n", r);
 	//sleep(10);
-	return (0);
+	return (r);
 }
 
 void	fill_heat_map(lem_data *d)
@@ -72,21 +70,21 @@ void	fill_heat_map(lem_data *d)
 		d->heat_map_index += 1;
 	}
 
-	ft_printf("path_index: %d\n", d->path_index);
-	for (int k = 0; k < 20; k++)
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			if (d->heat_map[k][j] == 2)
-				ft_printf(" %d ", d->heat_map[k][j]);
-			else if (d->heat_map[k][j] == 0)
-				ft_printf("{green} %d ", d->heat_map[k][j]);
-			else
-				ft_printf("{red} %d ", d->heat_map[k][j]);
-		}
+	// ft_printf("path_index: %d\n", d->path_index);
+	// for (int k = 0; k < 20; k++)
+	// {
+	// 	for (int j = 0; j < 20; j++)
+	// 	{
+	// 		if (d->heat_map[k][j] == 2)
+	// 			ft_printf(" %d ", d->heat_map[k][j]);
+	// 		else if (d->heat_map[k][j] == 0)
+	// 			ft_printf("{green} %d ", d->heat_map[k][j]);
+	// 		else
+	// 			ft_printf("{red} %d ", d->heat_map[k][j]);
+	// 	}
 			
-		ft_printf("\n");
-	}
+	// 	ft_printf("\n");
+	// }
 }
 
 int		is_conflict(lem_data *d, int i)
@@ -114,6 +112,8 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 {
 	int	pipe_index;
 
+	
+
 	pipe_index = 0;
 	while (pipe_index < room->pipe_count)
 	{
@@ -123,8 +123,9 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 			save_path(d, route);
 			return ;
 		}
-		
-		if (room->floor >= room->pipes[pipe_index]->floor && (route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
+		// room->floor >= room->pipes[pipe_index]->floor && 
+		if (\
+		(route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
 		{
 			steps--;
 			if (steps >= 0)
@@ -146,7 +147,7 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 			//sleep(5);
 			if (nb == d->path_index)
 			{	
-				ft_printf("{red} return check_heat_map (0)\n");
+				//ft_printf("{red} return check_heat_map (0)\n");
 				return (0);
 			}
 		}
@@ -163,7 +164,7 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 		}
 		if (nb + 1  == d->path_index)
 		{	
-			ft_printf("{yellow} return check_heat_map (0)\n");
+			//ft_printf("{yellow} return check_heat_map (0)\n");
 			return (0);
 		}
 		if (check_heat_map(d, nb + 1, in + 1) == 1)
@@ -178,17 +179,17 @@ int	compare_array(lem_data *d, int nb, int in)
 {
 	int	i;
 
-	ft_printf("{green}compare array | nb is %i | in = %i\n", nb, in);
+	//ft_printf("{green}Compare array | nb is %i | in = %i\n", nb, in);
 	i = 0;
 	while (i < in)
 	{
 		if (d->heat_map[nb][d->array[i]] != 0)
 		{
-			ft_printf("compare array retunr is 0\n");
+			//ft_printf("Compare array return is 0.\n");
 			return (0);
 		}
 		i++;
 	}
-	ft_printf("compare array retunr is 1\n");
+	//ft_printf("Compare array return is 1.\n");
 	return (1);
 }
