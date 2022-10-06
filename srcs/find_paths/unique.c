@@ -176,14 +176,16 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 			}
 		}
 		d->array[in] = nb;
+		if (in + 1 == d->routes_cur->route_count)
+			fill_route_array(d);
 		if (in + 1 == d->path_limit)
 		{
-			int k = 0;
-			while (k < d->path_limit)
-			{
-				ft_printf("{yellow}%i \n", d->array[k]);
-				k++;
-			}
+			// int k = 0;
+			// while (k < d->path_limit)
+			// {
+			// 	ft_printf("{yellow}%i \n", d->array[k]);
+			// 	k++;
+			// }
 			return (1);
 		}
 		if (nb + 1  == d->path_index)
@@ -197,6 +199,49 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 
 	}
 	return (-1);
+}
+
+void	fill_route_array(lem_data *d)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("route_count: %d\n", d->routes_cur->route_count);
+	while (i < d->routes_cur->route_count)
+	{
+		d->routes_cur->arr[i] = d->array[i];
+		i++;
+	}
+	int k = 0;
+	while (k < d->routes_cur->route_count)
+	{
+		ft_printf("{yellow}%i \n", d->routes_cur->arr[k]);
+		k++;
+	}
+	if (d->routes_cur->route_count != d->path_limit)
+		d->routes_cur = d->routes_cur->next;
+}
+
+void	init_routes(lem_data *d)
+{
+	int		i;
+
+	i = 1;
+	d->routes_cur = (routes *)malloc(sizeof(routes));
+	if (d->routes_cur == NULL)
+		exit (1);
+	d->routes_head = d->routes_cur;
+	d->routes_cur->route_count = 1;
+	while (i < d->path_limit)
+	{
+		d->routes_cur->next = (routes *)malloc(sizeof(routes));
+		if (d->routes_cur->next == NULL)
+			exit (1);
+		d->routes_cur = d->routes_cur->next;
+		d->routes_cur->route_count = i + 1;
+		i++;
+	}
+	d->routes_cur = d->routes_head;
 }
 
 int	compare_array(lem_data *d, int nb, int in)

@@ -43,6 +43,7 @@ typedef struct	lem_data
 	int		path_limit;
 	char	*line;
 	struct	s_room	***paths;
+	int		step_array[10000];
 	int		path_index;
 			// Reittien määrâ.
 	int		path_mem;
@@ -53,8 +54,17 @@ typedef struct	lem_data
 	int		**heat_map;
 	int		array[10000];
 	int		map_size;
+	struct routes	*routes_head;
+	struct routes	*routes_cur;
 }			lem_data;
 
+typedef struct routes
+{	
+	int				arr[10000];
+	int				route_count;
+	int				move_count;
+	struct routes	*next;
+}	routes;
 
 // Read input
 void	input(lem_data *d);
@@ -92,6 +102,10 @@ int		check_heat_map(lem_data *d, int nb, int in);
 int		compare_array(lem_data *d, int nb, int in);
 void	dynamic_path_mem(lem_data *d);
 void	dynamic_heat_map(lem_data *d);
+void	find_best(lem_data *d);
+void	init_routes(lem_data *d);
+void	fill_route_array(lem_data *d);
+void	get_move_counts(lem_data *d);
 
 
 

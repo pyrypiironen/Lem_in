@@ -27,9 +27,13 @@ void	solve_paths(lem_data *d)
 	if (d->path_limit > d->ants)
 		d->path_limit = d->ants;
 	d->heat_map = (int **)malloc(sizeof(int *) * d->map_size);
+	if (d->heat_map == NULL)
+		exit (1);
 	while (i < d->map_size)
 	{
 		d->heat_map[i] = (int *)malloc(sizeof(int) * d->map_size);
+		if (d->heat_map[i] == NULL)
+			exit (1);
 		i++;
 	}
 	for (int k = 0; k < d->map_size; k++) // for loopit pois
@@ -37,8 +41,10 @@ void	solve_paths(lem_data *d)
 		for (int j = 0; j < d->map_size; j++)
 			d->heat_map[k][j] = 2;
 	}
+	init_routes(d);
 	get_floors(d);
 	get_unique(d);
+	find_best(d);
 	// Etsi parhaat reitit
 
 
@@ -54,6 +60,7 @@ void	save_path(lem_data *d, t_room **route)
 	d->paths[d->path_index] = (t_room **)malloc(sizeof(t_room) * d->path_depth);
 	if (d->paths == NULL)
 		exit(1);
+	d->step_array[d->path_index] = d->path_depth;
 	while (i <= d->path_depth)
 	{
 		d->paths[d->path_index][i] = route[i];
