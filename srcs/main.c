@@ -41,10 +41,10 @@ int	main(void)
 	// 	data->head = data->head->next;
 	// }
 
-	// for (int i = 0; i < 8; i++)
+	// for (int i = 0; i < 18; i++)
 	// {
 	// 	ft_printf("{red}route %d, depth %d\n", i, data->step_array[i]);
-	// 	for (int j = 0; j < 8; j++)
+	// 	for (int j = 0; j < 18; j++)
 	// 	{
 	// 		ft_printf("%s\n", data->paths[i][j]->name);
 	// 	}

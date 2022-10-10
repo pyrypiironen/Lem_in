@@ -43,7 +43,7 @@ typedef struct	lem_data
 	int		path_limit;
 	char	*line;
 	struct	s_room	***paths;
-	int		step_array[10000];
+	int		step_array[10000];   // bzero this when decided how big we want it
 	int		path_index;
 			// Reittien määrâ.
 	int		path_mem;

@@ -25,6 +25,7 @@ void	get_unique(lem_data *d)
 		exit(1);
 	while (!solution_found(d))
 	{
+		
 		room = d->end;
 		d->current = d->end;
 		route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
@@ -41,6 +42,7 @@ int		solution_found(lem_data *d)
 	if (d->path_index == 0)
 		return (0);
 	// Lue nykyinen taso heat_mappiin.
+	
 	fill_heat_map(d);
 	// Tarkista löytyikö ratkaisu ja palauta totuusarvo.
 	return (check_heat_map(d, 0, 0));
@@ -50,34 +52,35 @@ void	fill_heat_map(lem_data *d)
 {
 	int	i;
 
-	if (d->path_index >= d->map_size)
+	while (d->path_index >= d->map_size)
 		dynamic_heat_map(d);
+	
 	while (d->heat_map_index < d->path_index)
 	{
 		i = 0;
 		while (i < d->heat_map_index)
 		{
-			d->heat_map[d->heat_map_index][i] = is_conflict(d, i);
+			d->heat_map[d->heat_map_index][i] = is_conflict(d, i);;
 			i++;
 		}
 		d->heat_map_index += 1;
 	}
-	ft_printf("map_size: %d\n", d->map_size);
-	ft_printf("path_index: %d\n", d->path_index);
-	for (int k = 0; k <= d->path_index; k++)
-	{
-		for (int j = 0; j <= d->path_index; j++)
-		{
-			if (d->heat_map[k][j] == 2)
-				ft_printf(" %d ", d->heat_map[k][j]);
-			else if (d->heat_map[k][j] == 0)
-				ft_printf("{green} %d ", d->heat_map[k][j]);
-			else
-				ft_printf("{red} %d ", d->heat_map[k][j]);
-		}
+	// ft_printf("map_size: %d\n", d->map_size);
+	// ft_printf("path_index: %d\n", d->path_index);
+	// for (int k = 0; k <= d->path_index; k++)
+	// {
+	// 	for (int j = 0; j <= d->path_index; j++)
+	// 	{
+	// 		if (d->heat_map[k][j] == 2)
+	// 			ft_printf(" %d ", d->heat_map[k][j]);
+	// 		else if (d->heat_map[k][j] == 0)
+	// 			ft_printf("{green} %d ", d->heat_map[k][j]);
+	// 		else
+	// 			ft_printf("{red} %d ", d->heat_map[k][j]);
+	// 	}
 			
-		ft_printf("\n");
-	}
+	// 	ft_printf("\n");
+	// }
 }
 
 void	dynamic_heat_map(lem_data *d)
@@ -87,6 +90,7 @@ void	dynamic_heat_map(lem_data *d)
 	int	j;
 	int	k;
 
+	
 	i = d->heat_map_index - 1;
 	j = 0;
 	tmp = d->heat_map;
