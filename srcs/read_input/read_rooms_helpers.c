@@ -108,3 +108,30 @@ void	create_room(lem_data *d)
 	// Nyt menee läpi myö rivit, jossa on ylimääräistä tavaraa koordinaattien
 	// perässä. Luo error check.
 }
+
+int	lem_atoi(const char *str)
+{
+	unsigned long int	res;
+	int					sign;
+
+	res = 0;
+	sign = 1;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str && *str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (unsigned long int)*str - '0';
+		if (res > 9223372036854775807 && sign < 0)
+			return (0);
+		if (res > 9223372036854775807 && sign > 0)
+			return (-1);
+		str++;
+	}
+	if (*str != ' ' && *str != '\n' && *str != '\0')
+		exit(1);			// Add error message here !
+	return (sign * (int)res);
+}

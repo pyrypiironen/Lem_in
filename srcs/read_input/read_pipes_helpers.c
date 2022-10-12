@@ -52,7 +52,6 @@ void	create_pipe(lem_data *d, char *first, char *second)
 void	add_pipe(lem_data *d, t_room *src, t_room *dst)
 {	
 	(void)d; /////
-	//t_room **tmp;
 
 	if (dst->pipe_count == 0)
 		dst->pipes = (t_room **)malloc(sizeof(t_room *) * dst->pipe_mem);

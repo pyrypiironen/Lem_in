@@ -75,18 +75,17 @@ int		skip_comments(lem_data *d);
 
 // Read rooms helpers
 int		check_start_end(lem_data *d);
-int		is_pipe(lem_data *d);
 int		is_room(lem_data *d, char *room);
 int		is_valid(lem_data *d);
 void	create_room(lem_data *d);
+int		lem_atoi(const char *str);
 
 // Read pipes helpers
 void	create_pipe(lem_data *d, char *first, char *second);
+int		is_pipe(lem_data *d);
 void	add_pipe(lem_data *d, t_room *src, t_room *dst);
 void	dynamic_array(t_room *dst);
 
-// Helpers
-int		lem_atoi(const char *str);
 
 // Solving paths
 void	solve_paths(lem_data *d);
@@ -94,14 +93,17 @@ void	get_floors(lem_data *d);
 void	get_unique(lem_data *d);
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps);
 void	save_path(lem_data *d, t_room **route);
+
+// Solution_found.c
 int		solution_found(lem_data *d);
 void	fill_heat_map(lem_data *d);
+void	dynamic_heat_map(lem_data *d);
 int		is_conflict(lem_data *d, int i);
-
 int		check_heat_map(lem_data *d, int nb, int in);
+
+
 int		compare_array(lem_data *d, int nb, int in);
 void	dynamic_path_mem(lem_data *d);
-void	dynamic_heat_map(lem_data *d);
 void	find_best(lem_data *d);
 void	init_routes(lem_data *d);
 void	fill_route_array(lem_data *d);
