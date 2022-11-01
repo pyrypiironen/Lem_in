@@ -88,6 +88,7 @@ void	create_room(lem_data *d)
 	//d->current->pipes = (t_room **)malloc(sizeof(t_room *));
 	// add malloc checks
 	d->current->pipe_count = 0;
+	d->current->ant_nbr = 0;
 	d->current->pipe_mem = ARRAY_SIZE;
 	d->current->floor = -1;
 	if (d->head == NULL)

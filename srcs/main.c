@@ -25,6 +25,7 @@ int	main(void)
 			exit(0);
 	input(data);
 	solve_paths(data);
+	send_ants(data);
 	
 
 

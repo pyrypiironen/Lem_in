@@ -30,6 +30,7 @@ typedef struct	s_room
 	int			pipe_mem;
 				// Määrä muistia, joka putkia varten allokoidaan. Dynaaminen.
 	int			floor;
+	int			ant_nbr;
 				// Monennessa kerroksessa huone on. Start on floor 0.
 }				t_room;
 
@@ -56,6 +57,7 @@ typedef struct	lem_data
 	int		map_size;
 	struct routes	*routes_head;
 	struct routes	*routes_cur;
+	struct routes	*routes_best;
 }			lem_data;
 
 typedef struct routes
@@ -108,7 +110,9 @@ void	find_best(lem_data *d);
 void	init_routes(lem_data *d);
 void	fill_route_array(lem_data *d);
 void	get_move_counts(lem_data *d);
-
+void	send_ants(lem_data *d);
+void	move_ants(lem_data *d, t_room ***best_paths, int *best_steps);
+void	move_ant(lem_data *d, int *best_steps, t_room ***best_paths, int i, int j);
 
 
 #endif
