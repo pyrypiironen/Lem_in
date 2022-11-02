@@ -55,6 +55,8 @@ typedef struct	lem_data
 	int		**heat_map;
 	int		array[10000];
 	int		map_size;
+	int		best_route_count;
+	int		space;
 	struct routes	*routes_head;
 	struct routes	*routes_cur;
 	struct routes	*routes_best;
