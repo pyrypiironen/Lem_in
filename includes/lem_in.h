@@ -57,6 +57,8 @@ typedef struct	lem_data
 	int		map_size;
 	int		best_route_count;
 	int		space;
+	int		rec_counter;
+	int		max_route_count;
 	struct routes	*routes_head;
 	struct routes	*routes_cur;
 	struct routes	*routes_best;

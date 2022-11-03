@@ -14,13 +14,16 @@
 
 int		solution_found(lem_data *d)
 {
+	int	ret;
+
 	if (d->path_index == 0)
 		return (0);
 	// Lue nykyinen taso heat_mappiin.
 	
 	fill_heat_map(d);
 	// Tarkista löytyikö ratkaisu ja palauta totuusarvo.
-	return (check_heat_map(d, 0, 0));
+	ret = check_heat_map(d, 0, 0);
+	return (ret);
 }
 
 void	fill_heat_map(lem_data *d)
@@ -118,14 +121,14 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 		while (!compare_array(d, nb, in))
 		{
 			nb++;
-			//ft_printf("{purple}path_index = %i\n", d->path_index);
-			//sleep(5);
-			if (nb == d->path_index)
-			{	
-				//ft_printf("{red} return check_heat_map (0)\n");
+			if (nb == d->path_index) //ei loytynyt ei-konfliktaavaa reittia
+			{
+				d->rec_counter += 1;
 				return (0);
 			}
+				
 		}
+
 		d->array[in] = nb;
 		if (in + 1 == d->routes_cur->route_count)
 			fill_route_array(d);
@@ -149,5 +152,6 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 		nb++;
 
 	}
+	
 	return (-1);
 }

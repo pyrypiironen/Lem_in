@@ -32,6 +32,12 @@ void	get_unique(lem_data *d)
 			exit(1);
 		recursive_finder(d, route, room, d->path_depth);
 		d->path_depth += 1;
+		if (d->rec_counter > 1000000)
+		{
+			d->path_limit = d->max_route_count;
+			break ;
+		}
+		ft_printf("rec_counter %i\n", d->rec_counter);
 		free(route);
 	}
 }
@@ -44,8 +50,10 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 	int	pipe_index;
 
 	pipe_index = 0;
+	
 	while (pipe_index < room->pipe_count)
 	{
+		//d->rec_counter += 1;
 		route[steps] = room;
 		if (room == d->start && steps == 0) 
 		{
@@ -70,6 +78,7 @@ void	fill_route_array(lem_data *d)
 	int	i;
 
 	i = 0;
+	d->max_route_count = d->routes_cur->route_count;
 	ft_printf("route_count: %d\n", d->routes_cur->route_count);
 	while (i < d->routes_cur->route_count)
 	{

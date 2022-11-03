@@ -20,8 +20,7 @@ void	solve_paths(lem_data *d)
 
 	d->path_mem = 42;
 	d->map_size = 2;		// fix size to final version
-
-
+	d->rec_counter = 0;
 	d->path_limit = d->start->pipe_count;
 	if (d->end->pipe_count < d->path_limit)
 		d->path_limit = d->end->pipe_count;
