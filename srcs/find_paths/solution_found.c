@@ -14,16 +14,13 @@
 
 int		solution_found(lem_data *d)
 {
-	int	ret;
-
 	if (d->path_index == 0)
 		return (0);
 	// Lue nykyinen taso heat_mappiin.
 	
 	fill_heat_map(d);
 	// Tarkista löytyikö ratkaisu ja palauta totuusarvo.
-	ret = check_heat_map(d, 0, 0);
-	return (ret);
+	return (check_heat_map(d, 0, 0));
 }
 
 void	fill_heat_map(lem_data *d)
@@ -37,7 +34,7 @@ void	fill_heat_map(lem_data *d)
 		i = 0;
 		while (i < d->heat_map_index)
 		{
-			d->heat_map[d->heat_map_index][i] = is_conflict(d, i);;
+			d->heat_map[d->heat_map_index][i] = is_conflict(d, i);
 			i++;
 		}
 		d->heat_map_index += 1;
@@ -114,6 +111,9 @@ int		is_conflict(lem_data *d, int i)
 	return (0);
 }
 
+
+
+// nb == heat_mapin rivi / pathsin reitin indeksi, in == indeksi reitti arrayssa (uniikit kombot)
 int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 {
 	while (1)
@@ -137,20 +137,24 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 			// int k = 0;
 			// while (k < d->path_limit)
 			// {
-			// 	ft_printf("{yellow}%i \n", d->array[k]);
+			// 	ft_printf("{yellow}here %i \n", d->array[k]);
 			// 	k++;
 			// }
-			return (1);
+
+			return (0);// oli return 1
 		}
 		if (nb + 1  == d->path_index)
 		{	
+			ft_printf("return 0 from\n");
 			//ft_printf("{yellow} return check_heat_map (0)\n");
 			return (0);
 		}
+
 		if (check_heat_map(d, nb + 1, in + 1) == 1)
 			return (1);
 		nb++;
-
+		if (nb == d->path_index)
+			return (1);
 	}
 	
 	return (-1);
