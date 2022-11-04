@@ -59,6 +59,8 @@ typedef struct	lem_data
 	int		space;
 	int		rec_counter;
 	int		max_route_count;
+	int		total_steps;
+	int		current_steps;
 	struct routes	*routes_head;
 	struct routes	*routes_cur;
 	struct routes	*routes_best;
@@ -117,6 +119,7 @@ void	get_move_counts(lem_data *d);
 void	send_ants(lem_data *d);
 void	move_ants(lem_data *d, t_room ***best_paths, int *best_steps);
 void	move_ant(lem_data *d, int *best_steps, t_room ***best_paths, int i, int j);
+void	update_current_steps(lem_data *d, int in);
 
 
 #endif

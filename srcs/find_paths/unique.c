@@ -93,6 +93,7 @@ void	fill_route_array(lem_data *d)
 	}
 	if (d->routes_cur->route_count != d->path_limit)
 		d->routes_cur = d->routes_cur->next;
+	d->total_steps = d->current_steps;
 }
 
 void	init_routes(lem_data *d)
@@ -100,6 +101,7 @@ void	init_routes(lem_data *d)
 	int		i;
 
 	i = 1;
+	d->total_steps = 2147483647;
 	d->routes_cur = (routes *)malloc(sizeof(routes));
 	if (d->routes_cur == NULL)
 		exit (1);
