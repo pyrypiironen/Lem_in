@@ -112,7 +112,6 @@ int		is_conflict(lem_data *d, int i)
 }
 
 
-
 // nb == heat_mapin rivi / pathsin reitin indeksi, in == indeksi reitti arrayssa (uniikit kombot)
 int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 {
@@ -162,11 +161,11 @@ int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 		if (check_heat_map(d, nb + 1, in + 1) == 1)
 			return (1);
 		nb++;
-		if (nb == d->path_index)
-		{
-			//ft_printf("{yellow} return check_heat_map (1)\n");
-			return (1);
-		}
+		// if (nb == d->path_index)
+		// {
+		// 	//ft_printf("{yellow} return check_heat_map (1)\n");
+		// 	return (1);
+		// }
 			
 	}
 	

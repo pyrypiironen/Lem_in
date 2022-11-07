@@ -23,13 +23,18 @@ void	get_unique(lem_data *d)
 	d->paths = (t_room ***)malloc(sizeof(t_room **) * d->path_mem);
 	if (d->paths == NULL)
 		exit(1);
+
+	// return 1 = taso löytyi | return 2 = haetaan lisää reittejä
+
 	while (!solution_found(d))
 	{
+		// Täällä tason korotus, jos palautus 1 ja tsekki, onko lopullinen ratkaisu
 		room = d->end;
 		d->current = d->end;
 		route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
 		if (route == NULL)
 			exit(1);
+		// Pitäiskö recursive finder tehdä tämän loopin ulkopuolella, niin ei aloiteta aina alusta
 		recursive_finder(d, route, room, d->path_depth);
 		d->path_depth += 1;
 		if (d->rec_counter > 1000000)
@@ -91,8 +96,10 @@ void	fill_route_array(lem_data *d)
 		ft_printf("{yellow}%i \n", d->routes_cur->arr[k]);
 		k++;
 	}
-	if (d->routes_cur->route_count != d->path_limit)
-		d->routes_cur = d->routes_cur->next;
+	// if (d->routes_cur->route_count != d->path_limit)
+	// 	d->routes_cur = d->routes_cur->next;
+
+		
 	d->total_steps = d->current_steps;
 }
 
