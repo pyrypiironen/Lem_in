@@ -112,65 +112,65 @@ int		is_conflict(lem_data *d, int i)
 }
 
 
-// nb == heat_mapin rivi / pathsin reitin indeksi, in == indeksi reitti arrayssa (uniikit kombot)
-int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
-{
-	while (1)
-	{
-		while (!compare_array(d, nb, in))
-		{
-			nb++;
-			if (nb == d->path_index) //ei loytynyt ei-konfliktaavaa reittia
-			{
-				d->rec_counter += 1;
-				return (0);
-			}
+// // nb == heat_mapin rivi / pathsin reitin indeksi, in == indeksi reitti arrayssa (uniikit kombot)
+// int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
+// {
+// 	while (1)
+// 	{
+// 		while (!compare_array(d, nb, in))
+// 		{
+// 			nb++;
+// 			if (nb == d->path_index) //ei loytynyt ei-konfliktaavaa reittia
+// 			{
+// 				d->rec_counter += 1;
+// 				return (0);
+// 			}
 				
-		}
-		//ft_printf("cur: %d, total: %d\n", d->current_steps, d->total_steps);
+// 		}
+// 		//ft_printf("cur: %d, total: %d\n", d->current_steps, d->total_steps);
 
-		d->array[in] = nb;
-		update_current_steps(d, in);
+// 		d->array[in] = nb;
+// 		update_current_steps(d, in);
 		
-		sleep(1);
-		if (d->current_steps >= d->total_steps)
-			return (0);
-		if (in + 1 == d->routes_cur->route_count)
-		{
-			if (d->current_steps < d->total_steps)
-				fill_route_array(d);
-		}
+// 		sleep(1);
+// 		if (d->current_steps >= d->total_steps)
+// 			return (0);
+// 		if (in + 1 == d->routes_cur->route_count)
+// 		{
+// 			if (d->current_steps < d->total_steps)
+// 				fill_route_array(d);
+// 		}
 			
-		if (in + 1 == d->path_limit)
-		{
-			// int k = 0;
-			// while (k < d->path_limit)
-			// {
-			// 	ft_printf("{yellow}here %i \n", d->array[k]);
-			// 	k++;
-			// }
-			//ft_printf("{yellow} return check_heat_map (0)\n");
-			return (0);// oli return 1
-		}
-		if (nb + 1  == d->path_index)
-		{	
-			//d->total_steps = 2147483647;
-			return (0);
-		}
-		ft_printf("cur: %d, total: %d\n", d->current_steps, d->total_steps);
-		if (check_heat_map(d, nb + 1, in + 1) == 1)
-			return (1);
-		nb++;
-		// if (nb == d->path_index)
-		// {
-		// 	//ft_printf("{yellow} return check_heat_map (1)\n");
-		// 	return (1);
-		// }
+// 		if (in + 1 == d->path_limit)
+// 		{
+// 			// int k = 0;
+// 			// while (k < d->path_limit)
+// 			// {
+// 			// 	ft_printf("{yellow}here %i \n", d->array[k]);
+// 			// 	k++;
+// 			// }
+// 			//ft_printf("{yellow} return check_heat_map (0)\n");
+// 			return (1);// oli return 1
+// 		}
+// 		if (nb + 1  == d->path_index)
+// 		{	
+// 			//d->total_steps = 2147483647;
+// 			return (0);
+// 		}
+// 		ft_printf("cur: %d, total: %d\n", d->current_steps, d->total_steps);
+// 		if (check_heat_map(d, nb + 1, in + 1) == 1)
+// 			return (1);
+// 		nb++;
+// 		// if (nb == d->path_index)
+// 		// {
+// 		// 	//ft_printf("{yellow} return check_heat_map (1)\n");
+// 		// 	return (1);
+// 		// }
 			
-	}
+// 	}
 	
-	return (-1);
-}
+// 	return (-1);
+// }
 
 void	update_current_steps(lem_data *d, int in)
 {

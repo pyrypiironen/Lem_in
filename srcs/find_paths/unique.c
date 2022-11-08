@@ -16,18 +16,42 @@ void	get_unique(lem_data *d)
 {
 	t_room	**route;
 	t_room	*room;
+	int		ret;
 
 	d->path_depth = d->end->floor;
 	d->path_index = 0;
 	d->heat_map_index = 0;
+	int	i = 0;
+	while (i < 10000)
+		d->array[i++] = 2147483647;
 	d->paths = (t_room ***)malloc(sizeof(t_room **) * d->path_mem);
 	if (d->paths == NULL)
 		exit(1);
 
 	// return 1 = taso löytyi | return 2 = haetaan lisää reittejä
 
-	while (!solution_found(d))
-	{
+	while (1)
+	{	
+		ret = solution_found(d);
+		//ft_printf("{green}ret: %d", ret);
+		// if (ret == 2)
+		// 	break ;
+		if (ret == 1)
+		{
+			if (d->routes_cur->route_count == d->path_limit)
+				break ;
+			d->routes_cur = d->routes_cur->next;
+			d->total_steps = 2147483647;
+
+		}
+		if (d->routes_cur->route_count == 12)
+		{
+			d->path_limit = d->max_route_count;
+			break ;
+		}
+			
+			
+
 		// Täällä tason korotus, jos palautus 1 ja tsekki, onko lopullinen ratkaisu
 		room = d->end;
 		d->current = d->end;
@@ -42,7 +66,7 @@ void	get_unique(lem_data *d)
 			d->path_limit = d->max_route_count;
 			break ;
 		}
-		ft_printf("rec_counter %i\n", d->rec_counter);
+		//ft_printf("rec_counter %i\n", d->rec_counter);
 		free(route);
 	}
 }
@@ -93,7 +117,7 @@ void	fill_route_array(lem_data *d)
 	int k = 0;
 	while (k < d->routes_cur->route_count)
 	{
-		ft_printf("{yellow}%i \n", d->routes_cur->arr[k]);
+		ft_printf("{yellow}%i [%d]\n", d->routes_cur->arr[k], d->step_array[d->routes_cur->arr[k]]);
 		k++;
 	}
 	// if (d->routes_cur->route_count != d->path_limit)
