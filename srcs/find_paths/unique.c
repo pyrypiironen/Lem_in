@@ -33,7 +33,7 @@ void	get_unique(lem_data *d)
 	while (1)
 	{	
 		ret = solution_found(d);
-		//ft_printf("{green}ret: %d", ret);
+		ft_printf("{green}ret: %d", ret);
 
 		if (ret == 1)
 		{

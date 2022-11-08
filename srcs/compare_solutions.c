@@ -49,7 +49,14 @@ void	get_move_counts(lem_data *d)
 		value_array[i] += 1;
 		ants--;
 	}
+	i = 0;
 	d->routes_cur->move_count = value_array[d->routes_cur->route_count - 1] - 1;
+	while (i < d->routes_cur->route_count)
+	{
+		if (value_array[i] - 1 > d->routes_cur->move_count)
+			d->routes_cur->move_count = value_array[i] - 1;
+		i++;
+	}
 	ft_printf("moves: %d, route_count %d\n", d->routes_cur->move_count, d->routes_cur->route_count);
 }
 
