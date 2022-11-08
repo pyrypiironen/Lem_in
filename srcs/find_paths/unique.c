@@ -34,8 +34,7 @@ void	get_unique(lem_data *d)
 	{	
 		ret = solution_found(d);
 		//ft_printf("{green}ret: %d", ret);
-		// if (ret == 2)
-		// 	break ;
+
 		if (ret == 1)
 		{
 			if (d->routes_cur->route_count == d->path_limit)
@@ -44,7 +43,7 @@ void	get_unique(lem_data *d)
 			d->total_steps = 2147483647;
 
 		}
-		if (d->routes_cur->route_count == 12)
+		if (d->routes_cur->route_count == 12) // HARD CODED
 		{
 			d->path_limit = d->max_route_count;
 			break ;

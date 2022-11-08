@@ -21,7 +21,7 @@ int	check_heat_map(lem_data *d, int nb, int in)
 				return (0);
 			}
 		}
-		//ft_printf("in: %d\n", in);
+		//ft_printf("in: %d, nb: %d\n", in, nb);
 		d->array[in] = nb;
 		update_current_steps(d, in);
 		//ft_printf("cur: %d, total: %d\n", d->current_steps, d->total_steps);
@@ -50,12 +50,12 @@ int	check_heat_map(lem_data *d, int nb, int in)
 		
 		if (ret != 0)
 			return (ret);
-		while (d->step_array[d->array[in]] == d->step_array[nb])
-		{
+		// while (d->step_array[d->array[in]] == d->step_array[nb])
+		// {
 			if (nb + 1 == d->path_index)
 				return (2);
 			nb++;
-		}
+		// }
 			
 
 	}

@@ -73,6 +73,8 @@ void	move_ants(lem_data *d, t_room ***best_paths, int *best_steps)
 	//sleep(1);
 	// ft_printf("{red}i: %i, j: %d", i, j);
 	ft_printf("{yellow}|moves: %d", d->routes_best->move_count);
+	if (d->routes_best->move_count < 0)
+		sleep(20);
 	//ft_printf("{green}i: %d, routes: %d", i, d->routes_best->route_count);
 	ft_printf("\n");
 	

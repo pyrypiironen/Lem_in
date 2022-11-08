@@ -25,6 +25,8 @@ void	find_best(lem_data *d)
 	
 }
 
+
+// UUSI
 void	get_move_counts(lem_data *d)
 {
 	int	ants;
@@ -42,15 +44,18 @@ void	get_move_counts(lem_data *d)
 	while (ants > 0)
 	{
 		i = d->routes_cur->route_count - 1;
-		while (value_array[i - 1] <= value_array[i] && i > 1)
+		while (value_array[i - 1] <= value_array[i] && i >= 1)
 			i--;
 		value_array[i] += 1;
 		ants--;
 	}
-	d->routes_cur->move_count = value_array[d->routes_cur->route_count - 1];
+	d->routes_cur->move_count = value_array[d->routes_cur->route_count - 1] - 1;
 	ft_printf("moves: %d, route_count %d\n", d->routes_cur->move_count, d->routes_cur->route_count);
 }
 
+
+
+// VANHA
 // void	get_move_counts(lem_data *d)
 // {
 // 	int	ants;
