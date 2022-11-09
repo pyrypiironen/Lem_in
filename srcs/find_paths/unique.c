@@ -33,7 +33,7 @@ void	get_unique(lem_data *d)
 	while (1)
 	{	
 		ret = solution_found(d);
-		ft_printf("{green}ret: %d", ret);
+		//ft_printf("{green}ret: %d", ret);
 
 		if (ret == 1)
 		{
@@ -43,7 +43,7 @@ void	get_unique(lem_data *d)
 			d->total_steps = 2147483647;
 
 		}
-		if (d->routes_cur->route_count == 12) // HARD CODED
+		if (d->routes_cur->route_count == 10) // HARD CODED
 		{
 			d->path_limit = d->max_route_count;
 			break ;
@@ -60,7 +60,7 @@ void	get_unique(lem_data *d)
 		// Pitäiskö recursive finder tehdä tämän loopin ulkopuolella, niin ei aloiteta aina alusta
 		recursive_finder(d, route, room, d->path_depth);
 		d->path_depth += 1;
-		if (d->rec_counter > 1000000)
+		if (d->rec_counter > 1000000000)
 		{
 			d->path_limit = d->max_route_count;
 			break ;

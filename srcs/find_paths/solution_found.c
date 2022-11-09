@@ -112,8 +112,8 @@ int		is_conflict(lem_data *d, int i)
 }
 
 
-// // nb == heat_mapin rivi / pathsin reitin indeksi, in == indeksi reitti arrayssa (uniikit kombot)
-// int	check_heat_map(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
+// nb == heat_mapin rivi / pathsin reitin indeksi, in == indeksi reitti arrayssa (uniikit kombot)
+// int	check_heat_map_big(lem_data *d, int nb, int in) // Eka kutsu in = 0; nb 0;
 // {
 // 	while (1)
 // 	{
