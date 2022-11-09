@@ -41,13 +41,20 @@ void	get_unique(lem_data *d)
 				break ;
 			d->routes_cur = d->routes_cur->next;
 			d->total_steps = 2147483647;
+			d->rec_counter = 0;
 
 		}
-		if (d->routes_cur->route_count == 11) // HARD CODED
+		if (ret == 3)
 		{
+			ft_printf("{purple}rec_counter break\n");
 			d->path_limit = d->max_route_count;
 			break ;
 		}
+		// if (d->routes_cur->route_count == 12) // HARD CODED
+		// {
+		// 	d->path_limit = d->max_route_count;
+		// 	break ;
+		// }
 		//ft_printf("{green}find_more_routes IN\n");
 		find_more_routes(d);
 		//ft_printf("{red}find_more_routes OUT\n");
@@ -62,11 +69,11 @@ void	get_unique(lem_data *d)
 		// //Pitäiskö recursive finder tehdä tämän loopin ulkopuolella, niin ei aloiteta aina alusta
 		// recursive_finder(d, route, room, d->path_depth);
 		// d->path_depth += 1;
-		if (d->rec_counter > 1000000000)
-		{
-			d->path_limit = d->max_route_count;
-			break ;
-		}
+		// if (d->rec_counter > 1000000)
+		// {
+		// 	d->path_limit = d->max_route_count;
+		// 	break ;
+		// }
 		//ft_printf("rec_counter %i\n", d->rec_counter);
 		// free(route);
 	}

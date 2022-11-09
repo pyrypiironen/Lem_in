@@ -13,8 +13,11 @@ int	check_heat_map(lem_data *d, int nb, int in)
 {
 	int	ret;
 
+	d->rec_counter += 1;
 	//find_more_routes(d);
 	// sleep(1);
+	if (d->rec_counter > 5000000)
+		return (3);
 	while (1)
 	{
 		while (!compare_array(d, nb, in))
@@ -22,14 +25,14 @@ int	check_heat_map(lem_data *d, int nb, int in)
 			nb++;
 			if (nb == d->path_index) //ei loytynyt ei-konfliktaavaa reittia
 			{
-				d->rec_counter += 1;
+				//d->rec_counter += 1;
 				return (0);
 			}
 		}
 		d->array[in] = nb;
-		update_current_steps(d, in);
-		if (d->current_steps >= d->total_steps)
-			return (0);
+		// update_current_steps(d, in);
+		// if (d->current_steps >= d->total_steps)
+		// 	return (0);
 		if (in + 1 == d->routes_cur->route_count && d->current_steps < d->total_steps)
 		{
 			fill_route_array(d);
