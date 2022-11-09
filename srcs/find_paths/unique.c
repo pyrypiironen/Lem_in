@@ -21,6 +21,7 @@ void	get_unique(lem_data *d)
 	d->path_depth = d->end->floor;
 	d->path_index = 0;
 	d->heat_map_index = 0;
+	d->best_moves = 2147483647;
 	int	i = 0;
 	while (i < 10000)
 		d->array[i++] = 2147483647;
@@ -37,8 +38,17 @@ void	get_unique(lem_data *d)
 		ret = solution_found(d);
 		if (ret == 1)
 		{
+			get_move_counts(d);
+			if (d->routes_cur->move_count < d->best_moves)
+				d->best_moves = d->routes_cur->move_count;
+			else
+			{
+				d->path_limit = d->routes_cur->route_count;
+				break ;
+			}
 			if (d->routes_cur->route_count == d->path_limit)
 				break ;
+
 			d->routes_cur = d->routes_cur->next;
 			d->total_steps = 2147483647;
 			d->rec_counter = 0;
@@ -50,13 +60,21 @@ void	get_unique(lem_data *d)
 			d->path_limit = d->max_route_count;
 			break ;
 		}
-		// if (d->routes_cur->route_count == 12) // HARD CODED
+		// if (d->routes_cur->route_count == 8) // HARD CODED
 		// {
 		// 	d->path_limit = d->max_route_count;
 		// 	break ;
 		// }
+		
+		if (d->best_moves <= d->path_depth)
+		{
+			d->path_limit = d->max_route_count;
+			ft_printf("{purple}path_depth break %d, route_count %d\n", d->path_depth, d->path_index);
+			break ;
+		}
 		//ft_printf("{green}find_more_routes IN\n");
-		find_more_routes(d);
+		if (ret == 2 || ret == 0)
+			find_more_routes(d);
 		//ft_printf("{red}find_more_routes OUT\n");
 			
 

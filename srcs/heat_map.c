@@ -16,7 +16,7 @@ int	check_heat_map(lem_data *d, int nb, int in)
 	d->rec_counter += 1;
 	//find_more_routes(d);
 	// sleep(1);
-	if (d->rec_counter > 5000000)
+	if (d->rec_counter > 3000000)
 		return (3);
 	while (1)
 	{

@@ -61,6 +61,7 @@ typedef struct	lem_data
 	int		max_route_count;
 	int		total_steps;
 	int		current_steps;
+	int		best_moves;
 	struct routes	*routes_head;
 	struct routes	*routes_cur;
 	struct routes	*routes_best;
