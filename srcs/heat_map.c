@@ -13,6 +13,8 @@ int	check_heat_map(lem_data *d, int nb, int in)
 {
 	int	ret;
 
+	//find_more_routes(d);
+	// sleep(1);
 	while (1)
 	{
 		while (!compare_array(d, nb, in))
@@ -47,11 +49,8 @@ int	check_heat_map(lem_data *d, int nb, int in)
 			return (0);
 		}
 		ret = check_heat_map(d, nb + 1, in + 1);
-		
 		if (ret != 0)
 			return (ret);
-		if (nb + 1 == d->path_index)
-			return (2);
 		nb++;
 	}
 	return (-1);

@@ -14,8 +14,8 @@
 
 void	get_unique(lem_data *d)
 {
-	t_room	**route;
-	t_room	*room;
+	// t_room	**route;
+	// t_room	*room;
 	int		ret;
 
 	d->path_depth = d->end->floor;
@@ -30,11 +30,11 @@ void	get_unique(lem_data *d)
 
 	// return 1 = taso löytyi | return 2 = haetaan lisää reittejä
 
+
 	while (1)
 	{	
+		
 		ret = solution_found(d);
-		//ft_printf("{green}ret: %d", ret);
-
 		if (ret == 1)
 		{
 			if (d->routes_cur->route_count == d->path_limit)
@@ -43,34 +43,50 @@ void	get_unique(lem_data *d)
 			d->total_steps = 2147483647;
 
 		}
-		if (d->routes_cur->route_count == 10) // HARD CODED
+		if (d->routes_cur->route_count == 11) // HARD CODED
 		{
 			d->path_limit = d->max_route_count;
 			break ;
 		}
-			
+		//ft_printf("{green}find_more_routes IN\n");
+		find_more_routes(d);
+		//ft_printf("{red}find_more_routes OUT\n");
 			
 
 		// Täällä tason korotus, jos palautus 1 ja tsekki, onko lopullinen ratkaisu
-		room = d->end;
-		d->current = d->end;
-		route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
-		if (route == NULL)
-			exit(1);
-		// Pitäiskö recursive finder tehdä tämän loopin ulkopuolella, niin ei aloiteta aina alusta
-		recursive_finder(d, route, room, d->path_depth);
-		d->path_depth += 1;
+		// room = d->end;
+		// d->current = d->end;
+		// route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
+		// if (route == NULL)
+		// 	exit(1);
+		// //Pitäiskö recursive finder tehdä tämän loopin ulkopuolella, niin ei aloiteta aina alusta
+		// recursive_finder(d, route, room, d->path_depth);
+		// d->path_depth += 1;
 		if (d->rec_counter > 1000000000)
 		{
 			d->path_limit = d->max_route_count;
 			break ;
 		}
 		//ft_printf("rec_counter %i\n", d->rec_counter);
-		free(route);
+		// free(route);
 	}
 }
 
+void	find_more_routes(lem_data *d)
+{
+	t_room	**route;
+	t_room	*room;
 
+	room = d->end;
+	d->current = d->end;
+	route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
+	if (route == NULL)
+		exit(1);
+	recursive_finder(d, route, room, d->path_depth);
+	d->path_depth += 1;
+	free(route);
+	//ft_printf("depth: %d\n", d->path_depth);
+}
 
 
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
@@ -78,15 +94,16 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 	int	pipe_index;
 
 	pipe_index = 0;
-	
 	while (pipe_index < room->pipe_count)
 	{
 		//d->rec_counter += 1;
 		route[steps] = room;
 		if (room == d->start && steps == 0) 
 		{
-			save_path(d, route);
+			if (!check_duplicates(route, d->path_depth))
+				save_path(d, route);
 			return ;
+			
 		}
 		// room->floor >= room->pipes[pipe_index]->floor && 
 		if (\
@@ -99,6 +116,26 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 		}
 		pipe_index++;
 	}
+}
+
+int		check_duplicates(t_room **route, int steps)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < steps)
+	{
+		j = i + 1;
+		while (j < steps)
+		{
+			if (ft_strcmp(route[i]->name, route[j]->name) == 0)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	fill_route_array(lem_data *d)
