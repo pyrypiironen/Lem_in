@@ -1,5 +1,4 @@
 208
-#Here is the number of lines required: 84
 ##start
 Kyg3 1 1
 ##end
@@ -12,6 +11,7 @@ Tpu1 16 16
 Qib3 19 19
 Q_e7 21 21
 Ibz0 22 22
+#Here is the number of lines required: 84
 Bwq0 24 24
 Ikv2 28 28
 Hiv9 30 30

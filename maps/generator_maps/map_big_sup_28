@@ -1,5 +1,4 @@
 256
-#Here is the number of lines required: 80
 ##start
 Bjk4 2 2
 ##end
@@ -11,6 +10,7 @@ Tkn5 16 16
 Nf_2 19 19
 Tgo4 22 22
 Ypr9 25 25
+#Here is the number of lines required: 80
 Rn_7 28 28
 Dxc2 30 30
 Ccv1 35 35

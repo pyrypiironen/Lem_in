@@ -1,5 +1,4 @@
 184
-#Here is the number of lines required: 86
 ##start
 Mbv7 1 1
 ##end
@@ -11,6 +10,7 @@ Umh8 14 14
 Bsf4 17 17
 R_b1 19 19
 Hkg1 21 21
+#Here is the number of lines required: 86
 Po_2 23 23
 Gpd1 27 27
 R_b5 30 30
