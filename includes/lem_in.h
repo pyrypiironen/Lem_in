@@ -32,6 +32,7 @@ typedef struct	s_room
 	int			floor;
 	int			ant_nbr;
 				// Monennessa kerroksessa huone on. Start on floor 0.
+	int			used;
 }				t_room;
 
 typedef struct	lem_data

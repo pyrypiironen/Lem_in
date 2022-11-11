@@ -41,11 +41,11 @@ void	get_unique(lem_data *d)
 			get_move_counts(d);
 			if (d->routes_cur->move_count < d->best_moves)
 				d->best_moves = d->routes_cur->move_count;
-			else
-			{
-				d->path_limit = d->routes_cur->route_count;
-				break ;
-			}
+			// else
+			// {
+			// 	d->path_limit = d->routes_cur->route_count;
+			// 	break ;
+			// }
 			if (d->routes_cur->route_count == d->path_limit)
 				break ;
 
@@ -60,7 +60,7 @@ void	get_unique(lem_data *d)
 			d->path_limit = d->max_route_count;
 			break ;
 		}
-		// if (d->routes_cur->route_count == 8) // HARD CODED
+		// if (d->routes_cur->route_count == 7) // HARD CODED
 		// {
 		// 	d->path_limit = d->max_route_count;
 		// 	break ;
@@ -119,6 +119,7 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 	int	pipe_index;
 
 	pipe_index = 0;
+	//d->rec_counter += 1;
 	while (pipe_index < room->pipe_count)
 	{
 		//d->rec_counter += 1;
@@ -128,15 +129,20 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 			if (!check_duplicates(route, d->path_depth))
 				save_path(d, route);
 			return ;
-			
 		}
 		// room->floor >= room->pipes[pipe_index]->floor && 
 		if (\
 		(route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
 		{
 			steps--;
-			if (steps >= 0)
-				recursive_finder(d, route, room->pipes[pipe_index], steps);
+			if (steps >= 0) // Tsekkaa tässä, että ei mennä jo käytettyyn huoneeseen
+			{
+				room->used = 1;
+				//ft_printf("room: %s %d, next: %s %d\n", room->name, room->used, room->pipes[pipe_index]->name, room->pipes[pipe_index]->used);
+				if (room->pipes[pipe_index]->used != 1)
+					recursive_finder(d, route, room->pipes[pipe_index], steps);
+				room->used = -1;
+			}
 			steps++;
 		}
 		pipe_index++;

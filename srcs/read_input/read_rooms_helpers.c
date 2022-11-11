@@ -91,6 +91,7 @@ void	create_room(lem_data *d)
 	d->current->ant_nbr = 0;
 	d->current->pipe_mem = ARRAY_SIZE;
 	d->current->floor = -1;
+	d->current->used = -1;
 	if (d->head == NULL)
 		d->head = d->current;
 	// Save the name and coordinates to node s_room.
