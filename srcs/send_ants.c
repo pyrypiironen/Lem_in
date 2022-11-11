@@ -43,32 +43,20 @@ void	move_ants(lem_data *d, t_room ***best_paths, int *best_steps)
 	int	i;
 	int	j;
 
-
 	i = 0;
 	d->space = 0;
 	while (i < d->best_route_count)
 	{
-		
-		//sleep(1);
 		j = best_steps[i] - 1;
-		
 		ft_printf("{red}loop");
 		while (j >= 0)
 		{
 			//ft_printf("name: %s, ant_count %d\n", best_paths[i][j]->name, best_paths[i][j]->ant_nbr);
 			if (best_paths[i][j]->ant_nbr != 0)
-			{
 				move_ant(d, best_steps, best_paths, i, j);
-				
-		
-				
-				//break ;
-			}
 			j--;
 		}
 		i++;
-		// if (i < d->routes_best->route_count)
-		// 	ft_printf(" ");
 	}
 	//sleep(1);
 	// ft_printf("{red}i: %i, j: %d", i, j);
@@ -76,10 +64,8 @@ void	move_ants(lem_data *d, t_room ***best_paths, int *best_steps)
 	if (d->routes_best->move_count < 0)
 		sleep(20);
 	//ft_printf("{green}i: %d, routes: %d", i, d->routes_best->route_count);
+	//ft_printf("{purple}best %d, routes->best %d\n", d->best_route_count, d->routes_best->route_count);
 	ft_printf("\n");
-	
-
-	
 	d->routes_best->move_count -= 1;
 	while (d->routes_best->move_count < best_steps[d->routes_best->route_count - 1])
 		d->routes_best->route_count -= 1;
@@ -89,9 +75,14 @@ void	move_ants(lem_data *d, t_room ***best_paths, int *best_steps)
 
 void	move_ant(lem_data *d, int *best_steps, t_room ***best_paths, int i, int j)
 {
+	int	ant_number;
 
+	ant_number = best_paths[i][j]->ant_nbr;
+	(void)ant_number;
 	if (i >= d->routes_best->route_count && j == 0)
 		return ;
+
+		
 	if (j + 1 == best_steps[i])
 		d->end->ant_nbr += 1;
 	else
@@ -105,7 +96,9 @@ void	move_ant(lem_data *d, int *best_steps, t_room ***best_paths, int i, int j)
 	if (d->space)
 		ft_printf(" ");
 	d->space = 1;
-	ft_printf("L%d-%s", best_paths[i][j + 1]->ant_nbr, best_paths[i][j + 1]->name);
+
+
+	ft_printf("L%d-%s", ant_number, best_paths[i][j + 1]->name);
 	//sleep(1);
 	// if (i + 1 <= d->best_route_count && best_paths[i][j]->ant_nbr != 0)
 	// 	ft_printf(" ");
