@@ -43,6 +43,8 @@ void	solve_paths(lem_data *d)
 	}
 	init_routes(d);
 	get_floors(d);
+	if (d->end->floor == -1)
+		print_error();
 	get_unique(d);
 	find_best(d);
 	

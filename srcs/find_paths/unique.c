@@ -126,8 +126,7 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 		route[steps] = room;
 		if (room == d->start && steps == 0) 
 		{
-			if (!check_duplicates(route, d->path_depth))
-				save_path(d, route);
+			save_path(d, route);
 			return ;
 		}
 		// room->floor >= room->pipes[pipe_index]->floor && 
@@ -147,26 +146,6 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 		}
 		pipe_index++;
 	}
-}
-
-int		check_duplicates(t_room **route, int steps)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < steps)
-	{
-		j = i + 1;
-		while (j < steps)
-		{
-			if (ft_strcmp(route[i]->name, route[j]->name) == 0)
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
 }
 
 void	fill_route_array(lem_data *d)

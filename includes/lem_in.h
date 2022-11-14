@@ -124,7 +124,9 @@ void	move_ant(lem_data *d, int *best_steps, t_room ***best_paths, int i, int j);
 void	update_current_steps(lem_data *d, int in);
 int		check_heat_map_big(lem_data *d, int nb, int in);
 void	find_more_routes(lem_data *d);
-int		check_duplicates(t_room **route, int steps);
+void	check_duplicates(lem_data *d);
+void	check_duplicate_pipes(lem_data *d);
+void	print_error(void);
 
 
 #endif

@@ -22,25 +22,69 @@ void	input(lem_data *d)
 	read_ants(d);
 	read_rooms(d);
 	read_pipes(d);
+	check_duplicates(d);
 	// Check duplicates
+}
+
+void	check_duplicates(lem_data *d)
+{
+	t_room *tmp;
+
+	d->current = d->head;
+	while (d->current)
+	{
+		tmp = d->current->next;
+		while (tmp)
+		{
+			if (strcmp(d->current->name, tmp->name) == 0)
+				print_error();
+			tmp = tmp->next;
+		}
+		check_duplicate_pipes(d);
+		d->current = d->current->next;
+	}
+	d->current = d->head;
+}
+
+void	check_duplicate_pipes(lem_data *d)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < d->current->pipe_count)
+	{
+		j = i + 1;
+		while (j < d->current->pipe_count)
+		{
+			if (ft_strcmp(d->current->pipes[i]->name, d->current->pipes[j]->name) == 0)
+				print_error();
+			j++;
+		}
+		i++;
+	}
 }
 
 void	read_ants(lem_data *d)
 {
-	char *str;
-
-	get_next_line(0, &str);
-	d->ants = lem_atoi(str);
-	free(str);
-	if (d->ants < 0 || d->ants > 2147483647)
-		exit(1);			// Add error message here!
+	get_next_line(0, &d->line);
+	if (!d->line)
+		print_error();
+	skip_comments(d);
+	d->ants = lem_atoi(d->line);
+	free(d->line);
+	if (d->ants < 0)
+		print_error();
 }
 
 void	read_rooms(lem_data *d)
 {
+
 	while (1)
 	{
-		get_next_line(0, &d->line);
+		if (get_next_line(0, &d->line) == 0)
+			print_error();
+		skip_comments(d);
 		if (check_start_end(d))
 			;
 		else if (is_pipe(d))
@@ -48,18 +92,14 @@ void	read_rooms(lem_data *d)
 			free(d->line);
 			break ;
 		}
-
 		else if (is_valid(d))
 			create_room(d);
-		else if (skip_comments(d) == 0)
-		{
-			ft_printf("error\n");
-			exit(1); 			// Add error message here!
-		}
+		else
+			print_error();
 		free(d->line);
 	}
 	if (d->start == NULL || d->end == NULL)
-		exit(1); 				// Add error message here!
+		print_error();
 }
 
 void	read_pipes(lem_data *d)
@@ -69,10 +109,7 @@ void	read_pipes(lem_data *d)
 		if (get_next_line(0, &d->line) == 0 || skip_comments(d) == -1)
 			break ;
 		if (!is_pipe(d))
-		{
-			ft_printf("errori\n"); // Clean error message
-			exit(1);
-		}
+			print_error();
 		free(d->line);
 	}
 }
@@ -93,4 +130,9 @@ int		skip_comments(lem_data *d)
 	return (ret);
 }
 
+void	print_error(void)
+{
+	ft_printf("ERROR\n");
+	exit(1);
+}
 

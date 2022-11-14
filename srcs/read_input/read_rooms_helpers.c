@@ -12,7 +12,8 @@ int		check_start_end(lem_data *d)
 	{
 		free(d->line);
 		get_next_line(0, &d->line);
-		skip_comments(d);
+		if (skip_comments(d) == 1 || !is_valid(d) || d->start != NULL)
+			print_error();
 		create_room(d);	// Maybe should ask is_valid first.
 		d->start = d->current;
 		ret = 1;
@@ -21,7 +22,8 @@ int		check_start_end(lem_data *d)
 	{
 		free(d->line);
 		get_next_line(0, &d->line);
-		skip_comments(d);
+		if (skip_comments(d) == 1 || !is_valid(d) || d->end != NULL)
+			print_error();
 		create_room(d);	// Maybe should ask is_valid first.
 		d->end = d->current;
 		ret = 1;
@@ -46,7 +48,7 @@ int		is_valid(lem_data *d)
 	int	i;
 
 	i = 0;
-	skip_comments(d);
+	//skip_comments(d);
 	while (d->line[i++] != ' ')
 		if (d->line[i - 1] == '\0')
 			return (0);
@@ -75,6 +77,8 @@ void	create_room(lem_data *d)
 
 	// d->head yms pitää alustaa nulleiksi, kun lem_data luodaan.
 	i = 0;
+	if (d->line[0] == 'L')
+		print_error();
 	// If head is null, there is not a single room, and new room will be created
 	// to d->current and is the head. Else new room will be created to
 	//	d->current->next. After this function, d->current is last created room.
@@ -107,8 +111,6 @@ void	create_room(lem_data *d)
 		i++;
 	d->current->y = lem_atoi(&d->line[i + 1]);
 	d->current->next = NULL;
-	// Nyt menee läpi myö rivit, jossa on ylimääräistä tavaraa koordinaattien
-	// perässä. Luo error check.
 }
 
 int	lem_atoi(const char *str)
@@ -127,13 +129,13 @@ int	lem_atoi(const char *str)
 	while (*str && *str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (unsigned long int)*str - '0';
-		if (res > 9223372036854775807 && sign < 0)
-			return (0);
-		if (res > 9223372036854775807 && sign > 0)
-			return (-1);
+		if (res > 2147483648 && sign < 0)
+			print_error();
+		if (res > 2147483647 && sign > 0)
+			print_error();
 		str++;
 	}
 	if (*str != ' ' && *str != '\n' && *str != '\0')
-		exit(1);			// Add error message here !
+		print_error();			// Add error message here !
 	return (sign * (int)res);
 }

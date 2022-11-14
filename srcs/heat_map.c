@@ -4,10 +4,6 @@
 #include "../includes/lem_in.h"
 
 
-// int	check_heat_map_big(lem_data *d, int nb, int in)
-// {
-
-// }
 
 int	check_heat_map(lem_data *d, int nb, int in)
 {
@@ -44,7 +40,7 @@ int	check_heat_map(lem_data *d, int nb, int in)
 		if (in == 0 && nb >= d->array[d->routes_cur->route_count - 1])
 			return (1);
 		if (nb + 1 == d->path_index)
-			return (2); 
+			return (2);
 		if (d->current_steps + d->step_array[nb + 1] >= d->total_steps || nb > d->array[d->routes_cur->route_count - 1])
 		{
 			if (nb == 0)
