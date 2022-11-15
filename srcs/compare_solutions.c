@@ -57,7 +57,6 @@ void	get_move_counts(lem_data *d)
 			d->routes_cur->move_count = value_array[i] - 1;
 		i++;
 	}
-	//ft_printf("moves: %d, route_count %d\n", d->routes_cur->move_count, d->routes_cur->route_count);
 }
 
 

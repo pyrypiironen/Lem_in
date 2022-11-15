@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	lem_data	*data;
 
@@ -21,6 +21,11 @@ int	main(void)
 			exit(0);
 	input(data);
 	solve_paths(data);
+	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
+	{
+		ft_printf(">>>> [%d] <<<<\n", data->best_moves);
+		return (0);
+	}
 	print_input(data);
 	send_ants(data);
 	
