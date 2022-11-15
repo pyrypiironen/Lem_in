@@ -19,8 +19,8 @@ void	find_best(lem_data *d)
 		d->routes_cur = d->routes_cur->next;
 
 	}
-	ft_printf("BEST, moves: %d, route_count %d\n", d->routes_best->move_count, d->routes_best->route_count);
-	ft_printf("BEST, route 1 %d, route 2 %d\n", d->routes_best->arr[0], d->routes_best->arr[1]);
+	//ft_printf("BEST, moves: %d, route_count %d\n", d->routes_best->move_count, d->routes_best->route_count);
+	//ft_printf("BEST, route 1 %d, route 2 %d\n", d->routes_best->arr[0], d->routes_best->arr[1]);
 
 	
 }
@@ -57,7 +57,7 @@ void	get_move_counts(lem_data *d)
 			d->routes_cur->move_count = value_array[i] - 1;
 		i++;
 	}
-	ft_printf("moves: %d, route_count %d\n", d->routes_cur->move_count, d->routes_cur->route_count);
+	//ft_printf("moves: %d, route_count %d\n", d->routes_cur->move_count, d->routes_cur->route_count);
 }
 
 

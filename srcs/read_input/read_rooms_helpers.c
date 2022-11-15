@@ -7,24 +7,25 @@ int		check_start_end(lem_data *d)
 {
 	int	ret;
 	ret = 0;
-	// If line is "##start", get_next_line and save it to d->start;
 	if (ft_strcmp(d->line, "##start") == 0)
 	{
+		lem_to_print(d);
 		free(d->line);
 		get_next_line(0, &d->line);
 		if (skip_comments(d) == 1 || !is_valid(d) || d->start != NULL)
 			print_error();
-		create_room(d);	// Maybe should ask is_valid first.
+		create_room(d);
 		d->start = d->current;
 		ret = 1;
 	}
 	else if (ft_strcmp(d->line, "##end") == 0)
 	{
+		lem_to_print(d);
 		free(d->line);
 		get_next_line(0, &d->line);
 		if (skip_comments(d) == 1 || !is_valid(d) || d->end != NULL)
 			print_error();
-		create_room(d);	// Maybe should ask is_valid first.
+		create_room(d);
 		d->end = d->current;
 		ret = 1;
 	}

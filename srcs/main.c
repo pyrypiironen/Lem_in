@@ -14,10 +14,6 @@
 
 int	main(void)
 {
-
-
-
-
 	lem_data	*data;
 
 	data = (lem_data *)malloc(sizeof(lem_data));
@@ -25,9 +21,9 @@ int	main(void)
 			exit(0);
 	input(data);
 	solve_paths(data);
-	//send_ants(data);
+	print_input(data);
+	send_ants(data);
 	
-
 
 	// while (data->head)
 	// {
@@ -56,3 +52,15 @@ int	main(void)
 	return (0);
 }
 
+
+void	print_input(lem_data *d)
+{
+	while (d->print_head != NULL)
+	{
+		ft_printf("%s\n", d->print_head->str);
+		d->print_head = d->print_head->next;
+	}
+	ft_printf("\n");
+}
+
+	
