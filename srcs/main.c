@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	solve_paths(data);
 	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
 	{
-		ft_printf(">>>> [%d] <<<<\n", data->best_moves);
+		ft_printf(">>>> %d <<<<\n", data->best_moves);
 		return (0);
 	}
 	print_input(data);
