@@ -24,6 +24,8 @@ int	check_heat_map(lem_data *d, int nb, int in)
 			if (nb++ == d->path_index)
 				return (0);
 		d->array[in] = nb;
+		if (in == 9999)
+			return (3);
 		if (in + 1 == d->routes_cur->route_count)
 			return (fill_route_array(d));
 		if (nb + 1 == d->path_index)

@@ -59,6 +59,8 @@ void	create_room(lem_data *d)
 	init_current(d);
 	while (d->line[i] != ' ')
 	{
+		if (i == 200)
+			print_error();
 		d->current->name[i] = d->line[i];
 		i++;
 	}

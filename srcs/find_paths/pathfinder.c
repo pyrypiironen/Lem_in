@@ -29,9 +29,10 @@ void	save_path(lem_data *d, t_room **route)
 
 	i = 0;
 	d->paths[d->path_index] = (t_room **)malloc(sizeof(t_room) * d->path_depth);
-	if (d->paths == NULL)
+	if (d->paths[d->path_index] == NULL)
 		exit(1);
-	d->step_array[d->path_index] = d->path_depth;
+	if (d->path_index < 10000)
+		d->step_array[d->path_index] = d->path_depth;
 	while (i <= d->path_depth)
 	{
 		d->paths[d->path_index][i] = route[i];

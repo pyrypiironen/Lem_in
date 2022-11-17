@@ -21,14 +21,14 @@ int	is_pipe(lem_data *d)
 
 	i = 0;
 	j = 0;
-	while (d->line[i] != '-' && i < 42)
+	while (d->line[i] != '-' && i < 200)
 	{
 		first[i] = d->line[i];
 		if (first[i] == ' ' || first[i++] == '\0')
 			return (0);
 	}
 	first[i++] = '\0';
-	while (d->line[i] && j < 42)
+	while (d->line[i] && j < 200)
 	{
 		second[j] = d->line[i++];
 		if (second[j++] == ' ')

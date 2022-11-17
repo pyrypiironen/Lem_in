@@ -20,7 +20,7 @@
 
 typedef struct	s_room
 {
-	char		name[42]; // Ei voi olla pointteri, jos ei allokoida tilaa erikseen.
+	char		name[200]; // Ei voi olla pointteri, jos ei allokoida tilaa erikseen.
 	int			x;
 	int			y;
 	struct		s_room	*next;
