@@ -14,8 +14,33 @@ LEMIN = lem-in
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 
-FILES = *.c
+MAIN = 			main.c
 
+ALGO_FILES =	compare_solutions.c \
+				heat_map.c \
+				send_ants.c
+
+PATH_FILES =	helpers.c \
+				pathfinder.c \
+				solution_found.c \
+				unique.c
+
+PRINT_FILES =	printing.c
+
+INPUT_FILES =	checking.c \
+				read_input.c \
+				read_pipes_helpers.c \
+				read_rooms_helpers.c
+
+MAIN_SRCS = $(addprefix srcs/, $(MAIN))
+ALGO_SRCS = $(addprefix srcs/algorithm/, $(ALGO_FILES))
+PATH_SRCS = $(addprefix srcs/find_paths/, $(PATH_FILES))
+PRINT_SRCS = $(addprefix srcs/printing/, $(PRINT_FILES))
+INPUT_SRCS = $(addprefix srcs/read_input/, $(INPUT_FILES))
+
+SRCS = $(MAIN_SRCS) $(ALGO_SRCS) $(PATH_SRCS) $(PRINT_SRCS) $(INPUT_SRCS)
+
+OBJS = $(SRCS:.c=.o)
 
 
 all: $(LEMIN)
@@ -30,9 +55,10 @@ $(LIBFT):
 clean:
 		@rm -f $(OBJS)
 		@$(MAKE) -C libft clean
+		@echo "Make clean succesfully done."
 
 fclean: clean
-		@rm f- $(LEMIN)
+		@rm -f $(LEMIN)
 		@$(MAKE) -C libft fclean
 		@echo "Make fclean succesfully done."
 

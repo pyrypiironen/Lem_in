@@ -130,14 +130,12 @@ $(NAME):
 	@ranlib $(NAME)
 	@mkdir $(OBJS_DIR)
 	@mv *.o $(OBJS_DIR)
-	@echo "Make succesfully done."
+	@echo "Libft succesfully done."
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "Make clean succesfully done."
 
 fclean: clean
 	@rm -f $(NAME) *.gch
-	@echo "Make fclean succesfully done."
 
 re: fclean all
