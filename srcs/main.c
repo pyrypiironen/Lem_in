@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 	lem_data	*data;
 
 	data = (lem_data *)malloc(sizeof(lem_data));
-		if (data == NULL)
-			exit(0);
+	if (data == NULL)
+		exit(0);
 	input(data);
 	solve_paths(data);
 	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
@@ -28,44 +28,5 @@ int	main(int argc, char **argv)
 	}
 	print_input(data);
 	send_ants(data);
-	
-
-	// while (data->head)
-	// {
-	// 	int i = 0;
-	// 	ft_printf("{green}room %s floor: %d: used: %d\n", data->head->name, data->head->floor, data->head->used);
-	// 	while (i < data->head->pipe_count)
-	// 	{
-	// 		ft_printf("link: %s\n", data->head->pipes[i]->name);
-	// 		//data->head = data->head->next;
-	// 		i++;
-	// 	}
-	// 	data->head = data->head->next;
-	// }
-
-	// for (int i = 0; i < 18; i++)
-	// {
-	// 	ft_printf("{red}route %d, depth %d\n", i, data->step_array[i]);
-	// 	for (int j = 0; j < 18; j++)
-	// 	{
-	// 		ft_printf("%s\n", data->paths[i][j]->name);
-	// 	}
-	// }
-
-	
-
 	return (0);
 }
-
-
-void	print_input(lem_data *d)
-{
-	while (d->print_head != NULL)
-	{
-		ft_printf("%s\n", d->print_head->str);
-		d->print_head = d->print_head->next;
-	}
-	ft_printf("\n");
-}
-
-	

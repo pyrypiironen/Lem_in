@@ -1,8 +1,18 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_pipes_helpers.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjokela <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 14:39:35 by mjokela           #+#    #+#             */
+/*   Updated: 2022/11/17 14:39:38 by mjokela          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/lem_in.h"
 
-int		is_pipe(lem_data *d)
+int	is_pipe(lem_data *d)
 {
 	char	first[42];
 	char	second[42];
@@ -11,15 +21,14 @@ int		is_pipe(lem_data *d)
 
 	i = 0;
 	j = 0;
-	while (d->line[i] != '-')
+	while (d->line[i] != '-' && i < 42)
 	{
 		first[i] = d->line[i];
 		if (first[i] == ' ' || first[i++] == '\0')
 			return (0);
 	}
-	first[i] = '\0';
-	i++;
-	while (d->line[i])
+	first[i++] = '\0';
+	while (d->line[i] && j < 42)
 	{
 		second[j] = d->line[i++];
 		if (second[j++] == ' ')
@@ -27,32 +36,27 @@ int		is_pipe(lem_data *d)
 	}
 	second[j] = '\0';
 	if (is_room(d, first) && is_room(d, second))
-	{
-		create_pipe(d, first, second);
-		return (1);
-	}
+		return (create_pipe(d, first, second));
 	return (0);
 }
 
-void	create_pipe(lem_data *d, char *first, char *second)
+int	create_pipe(lem_data *d, char *first, char *second)
 {
-	t_room *room;
+	t_room	*room;
 
 	room = d->head;
 	d->current = d->head;
-
 	while (ft_strcmp(d->current->name, first) != 0)
 		d->current = d->current->next;
 	while (ft_strcmp(room->name, second) != 0)
 		room = room->next;
-	add_pipe(d, d->current, room);
-	add_pipe(d, room, d->current);
+	add_pipe(d->current, room);
+	add_pipe(room, d->current);
+	return (1);
 }
 
-void	add_pipe(lem_data *d, t_room *src, t_room *dst)
+void	add_pipe(t_room *src, t_room *dst)
 {	
-	(void)d; /////
-
 	if (dst->pipe_count == 0)
 		dst->pipes = (t_room **)malloc(sizeof(t_room *) * dst->pipe_mem);
 	else if (dst->pipe_count == dst->pipe_mem)

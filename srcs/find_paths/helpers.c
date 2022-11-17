@@ -14,10 +14,9 @@
 
 void	init_data(lem_data *d)
 {
-	int i;
-	
-	i = 0;
+	int	i;
 
+	i = 0;
 	d->path_mem = 42;
 	d->map_size = 42;
 	d->rec_counter = 0;
@@ -41,10 +40,9 @@ void	init_data(lem_data *d)
 
 void	init_routes(lem_data *d)
 {
-	int		i;
+	int	i;
 
 	i = 1;
-	d->total_steps = 2147483647;
 	d->routes_cur = (routes *)malloc(sizeof(routes));
 	if (d->routes_cur == NULL)
 		exit (1);
@@ -68,10 +66,10 @@ void	init_heat_map(lem_data *d)
 	int	j;
 
 	k = 0;
-	while(k < d->map_size)
+	while (k < d->map_size)
 	{
 		j = 0;
-		while(j < d->map_size)
+		while (j < d->map_size)
 		{
 			d->heat_map[k][j] = 2;
 			j++;
@@ -83,7 +81,7 @@ void	init_heat_map(lem_data *d)
 void	init_unique(lem_data *d)
 {
 	int	i;
-	
+
 	i = 0;
 	d->path_depth = d->end->floor;
 	d->path_index = 0;

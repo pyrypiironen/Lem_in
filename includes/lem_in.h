@@ -61,11 +61,13 @@ typedef struct	lem_data
 	int		map_size;
 	int		best_route_count;
 	int		space;
+	//int		ret;
 	int		rec_counter;
 	int		max_route_count;
-	int		total_steps;
-	int		current_steps;
+	//int		total_steps;
+	//int		current_steps;
 	int		best_moves;
+	int		*best_steps;
 	struct routes	*routes_head;
 	struct routes	*routes_cur;
 	struct routes	*routes_best;
@@ -101,9 +103,9 @@ void	create_room(lem_data *d);
 int		lem_atoi(const char *str);
 
 // Read pipes helpers
-void	create_pipe(lem_data *d, char *first, char *second);
+int		create_pipe(lem_data *d, char *first, char *second);
 int		is_pipe(lem_data *d);
-void	add_pipe(lem_data *d, t_room *src, t_room *dst);
+void	add_pipe(t_room *src, t_room *dst);
 void	dynamic_array(t_room *dst);
 
 
@@ -119,6 +121,7 @@ void	save_path(lem_data *d, t_room **route);
 int		solution_found(lem_data *d);
 void	fill_heat_map(lem_data *d);
 void	dynamic_heat_map(lem_data *d);
+void	copy_heat_map(lem_data *d, int **tmp);
 int		is_conflict(lem_data *d, int i);
 int		check_heat_map(lem_data *d, int nb, int in);
 
@@ -127,13 +130,11 @@ int		compare_array(lem_data *d, int nb, int in);
 void	dynamic_path_mem(lem_data *d);
 void	find_best(lem_data *d);
 
-void	fill_route_array(lem_data *d);
+int		fill_route_array(lem_data *d);
 void	get_move_counts(lem_data *d);
 void	send_ants(lem_data *d);
-void	move_ants(lem_data *d, t_room ***best_paths, int *best_steps);
-void	move_ant\
-		(lem_data *d, int *best_steps, t_room ***best_paths, int i, int j);
-void	update_current_steps(lem_data *d, int in);
+void	move_ants(lem_data *d, t_room ***best_paths);
+void	move_ant(lem_data *d, t_room ***best_paths, int i, int j);
 int		check_heat_map_big(lem_data *d, int nb, int in);
 void	find_more_routes(lem_data *d);
 void	check_duplicates(lem_data *d);
@@ -142,6 +143,7 @@ void	print_error(void);
 
 // 
 void	init_data(lem_data *d);
+void	init_current(lem_data *d);
 void	init_routes(lem_data *d);
 void	init_heat_map(lem_data *d);
 void	init_unique(lem_data *d);

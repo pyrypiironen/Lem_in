@@ -25,74 +25,6 @@ void	input(lem_data *d)
 	check_one_step_solution(d);
 }
 
-void	check_duplicates(lem_data *d)
-{
-	t_room *tmp;
-
-	d->current = d->head;
-	while (d->current)
-	{
-		tmp = d->current->next;
-		while (tmp)
-		{
-			if (strcmp(d->current->name, tmp->name) == 0)
-				print_error();
-			tmp = tmp->next;
-		}
-		check_duplicate_pipes(d);
-		d->current = d->current->next;
-	}
-	d->current = d->head;
-}
-
-void	check_duplicate_pipes(lem_data *d)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < d->current->pipe_count)
-	{
-		j = i + 1;
-		while (j < d->current->pipe_count)
-		{
-			if (ft_strcmp(d->current->pipes[i]->name, d->current->pipes[j]->name) == 0)
-				print_error();
-			j++;
-		}
-		i++;
-	}
-}
-
-void	check_one_step_solution(lem_data *d)
-{
-	int	i;
-
-	i = 0;
-	while (i < d->start->pipe_count)
-	{
-		if (d->start->pipes[i] == d->end)
-			print_super_solution(d);
-		i++;
-	}
-}
-
-void	print_super_solution(lem_data *d)
-{
-	int	i;
-
-	i = 1;
-	while (i <= d->ants)
-	{
-		ft_printf("L%d-%s", i, d->end->name);
-		if (i < d->ants)
-			ft_printf(" ");
-		i++;
-	}
-	ft_printf("\n");
-	exit(0);
-}
-
 void	read_ants(lem_data *d)
 {
 	get_next_line(0, &d->line);
@@ -109,7 +41,6 @@ void	read_ants(lem_data *d)
 
 void	read_rooms(lem_data *d)
 {
-
 	while (1)
 	{
 		if (get_next_line(0, &d->line) == 0)
@@ -146,7 +77,7 @@ void	read_pipes(lem_data *d)
 	}
 }
 
-int		skip_comments(lem_data *d)
+int	skip_comments(lem_data *d)
 {
 	int	ret;
 
@@ -160,31 +91,4 @@ int		skip_comments(lem_data *d)
 		ret = 1;
 	}
 	return (ret);
-}
-
-void	print_error(void)
-{
-	ft_printf("ERROR\n");
-	exit(1);
-}
-
-void	lem_to_print(lem_data *d)
-{
-	lem_print *new;
-
-	new = (lem_print *)malloc(sizeof(lem_print));
-	if (new == NULL)
-		exit(1);
-	new->str = ft_strdup(d->line);
-	new->next = NULL;
-	if (d->print_head == NULL)
-	{
-		d->print_head = new;
-		d->print_current = d->print_head;
-	}
-	else
-	{
-		d->print_current->next = new;
-		d->print_current = d->print_current->next;
-	}
 }

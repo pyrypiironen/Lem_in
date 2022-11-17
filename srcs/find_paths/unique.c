@@ -28,7 +28,6 @@ void	get_unique(lem_data *d)
 			if (d->routes_cur->route_count == d->path_limit)
 				break ;
 			d->routes_cur = d->routes_cur->next;
-			d->total_steps = 2147483647;
 			d->rec_counter = 0;
 		}
 		if (ret == 3 || d->best_moves <= d->path_depth)
@@ -64,7 +63,7 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 	while (pipe_index < room->pipe_count)
 	{
 		route[steps] = room;
-		if (room == d->start && steps == 0) 
+		if (room == d->start && steps == 0)
 			return (save_path(d, route));
 		if (\
 		(route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
@@ -81,39 +80,4 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 		}
 		pipe_index++;
 	}
-}
-
-void	fill_route_array(lem_data *d)
-{
-	int	i;
-
-	i = 0;
-	d->max_route_count = d->routes_cur->route_count;
-	//ft_printf("route_count: %d\n", d->routes_cur->route_count);
-	while (i < d->routes_cur->route_count)
-	{
-		d->routes_cur->arr[i] = d->array[i];
-		i++;
-	}
-	int k = 0;
-	while (k < d->routes_cur->route_count)
-	{
-		//ft_printf("{yellow}%i [%d]\n", d->routes_cur->arr[k], d->step_array[d->routes_cur->arr[k]]);
-		k++;
-	}
-	d->total_steps = d->current_steps;
-}
-
-int	compare_array(lem_data *d, int nb, int in)
-{
-	int	i;
-
-	i = 0;
-	while (i < in)
-	{
-		if (d->heat_map[nb][d->array[i]] != 0)
-			return (0);
-		i++;
-	}
-	return (1);
 }

@@ -66,7 +66,6 @@ void	get_floors(lem_data *d)
 	int	new;
 	int	level;
 
-
 	new = 1;
 	level = 0;
 	d->start->floor = 0;
@@ -78,11 +77,11 @@ void	get_floors(lem_data *d)
 	}
 }
 
-int		get_floors_helper(lem_data *d, int level)
+int	get_floors_helper(lem_data *d, int level)
 {
 	int	i;
 	int	new;
-	
+
 	new = 0;
 	while (d->current->next != NULL)
 	{
