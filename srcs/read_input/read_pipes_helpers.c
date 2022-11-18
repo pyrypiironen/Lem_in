@@ -58,7 +58,11 @@ int	create_pipe(lem_data *d, char *first, char *second)
 void	add_pipe(t_room *src, t_room *dst)
 {	
 	if (dst->pipe_count == 0)
+	{
 		dst->pipes = (t_room **)malloc(sizeof(t_room *) * dst->pipe_mem);
+		if (dst->pipes == NULL)
+			exit(1);
+	}
 	else if (dst->pipe_count == dst->pipe_mem)
 		dynamic_array(dst);
 	dst->pipes[dst->pipe_count] = src;

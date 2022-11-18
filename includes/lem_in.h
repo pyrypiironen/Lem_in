@@ -20,7 +20,7 @@
 
 typedef struct	s_room
 {
-	char		name[200]; // Ei voi olla pointteri, jos ei allokoida tilaa erikseen.
+	char		name[200];
 	int			x;
 	int			y;
 	struct		s_room	*next;
@@ -88,70 +88,77 @@ typedef struct lem_print
 
 }				lem_print;
 
-// Read input
+//		* * * * * READ_INPUT * * * * *
+//		read_input.c
 void	input(lem_data *d);
 void	read_ants(lem_data *d);
 void	read_rooms(lem_data *d);
 void	read_pipes(lem_data *d);
 int		skip_comments(lem_data *d);
-
-// Read rooms helpers
-int		check_start_end(lem_data *d);
+//		read_rooms_helpers.c
 int		is_room(lem_data *d, char *room);
 int		is_valid(lem_data *d);
 void	create_room(lem_data *d);
+void	init_current(lem_data *d);
 int		lem_atoi(const char *str);
-
-// Read pipes helpers
-int		create_pipe(lem_data *d, char *first, char *second);
+//		read_pipes_helpers.c
 int		is_pipe(lem_data *d);
+int		create_pipe(lem_data *d, char *first, char *second);
 void	add_pipe(t_room *src, t_room *dst);
 void	dynamic_array(t_room *dst);
+//		checking.c
+void	check_duplicates(lem_data *d);
+void	check_duplicate_pipes(lem_data *d);
+void	check_one_step_solution(lem_data *d);
+int		check_start_end(lem_data *d);
 
-
-// Solving paths
+//		* * * * * FIND_PATHS * * * * *
+//		pathfinder.c
 void	solve_paths(lem_data *d);
+void	save_path(lem_data *d, t_room **route);
+void	dynamic_path_mem(lem_data *d);
 void	get_floors(lem_data *d);
 int		get_floors_helper(lem_data *d, int level);
+//		unique.c
 void	get_unique(lem_data *d);
+void	find_more_routes(lem_data *d);
 void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps);
-void	save_path(lem_data *d, t_room **route);
-
-// Solution_found.c
+//		solution_found.c
 int		solution_found(lem_data *d);
 void	fill_heat_map(lem_data *d);
 void	dynamic_heat_map(lem_data *d);
 void	copy_heat_map(lem_data *d, int **tmp);
 int		is_conflict(lem_data *d, int i);
-int		check_heat_map(lem_data *d, int nb, int in);
-
-
-int		compare_array(lem_data *d, int nb, int in);
-void	dynamic_path_mem(lem_data *d);
-void	find_best(lem_data *d);
-
-int		fill_route_array(lem_data *d);
-void	get_move_counts(lem_data *d);
-void	send_ants(lem_data *d);
-void	move_ants(lem_data *d, t_room ***best_paths);
-void	move_ant(lem_data *d, t_room ***best_paths, int i, int j);
-int		check_heat_map_big(lem_data *d, int nb, int in);
-void	find_more_routes(lem_data *d);
-void	check_duplicates(lem_data *d);
-void	check_duplicate_pipes(lem_data *d);
-void	print_error(void);
-
-// 
+//		helpers.c
 void	init_data(lem_data *d);
-void	init_current(lem_data *d);
 void	init_routes(lem_data *d);
 void	init_heat_map(lem_data *d);
 void	init_unique(lem_data *d);
 
-void	check_one_step_solution(lem_data *d);
-void	print_super_solution(lem_data *d);
+//		* * * * * ALGORITHM
+//		compare_solutions.c
+void	find_best(lem_data *d);
+void	get_move_counts(lem_data *d);
+//		heat_map.c
+int		check_heat_map(lem_data *d, int nb, int in);
+int		fill_route_array(lem_data *d);
+int		compare_array(lem_data *d, int nb, int in);
+//		send_ants.c
+void	send_ants(lem_data *d);
+void	move_ants(lem_data *d, t_room ***best_paths);
+void	move_ant(lem_data *d, t_room ***best_paths, int i, int j);
 
+//		* * * * * PRINTING * * * * *
+//		printing.c
+void	print_error(void);
 void	lem_to_print(lem_data *d);
+void	print_super_solution(lem_data *d);
 void	print_input(lem_data *d);
+
+
+
+
+//int		check_heat_map_big(lem_data *d, int nb, int in);
+
 
 #endif
