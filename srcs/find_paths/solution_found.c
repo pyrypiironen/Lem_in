@@ -41,13 +41,20 @@ void	fill_heat_map(lem_data *d)
 void	dynamic_heat_map(lem_data *d)
 {
 	int	**tmp;
+	int	j;
 
 	tmp = d->heat_map;
+	j = d->map_size - 1;
 	d->map_size += d->map_size;
 	d->heat_map = (int **)malloc(sizeof(int *) * d->map_size);
 	if (d->heat_map == NULL)
 		exit(1);
 	copy_heat_map(d, tmp);
+	while (j >= 0)
+	{
+		free(tmp[j]);
+		j--;
+	}
 	free(tmp);
 }
 
@@ -73,8 +80,6 @@ void	copy_heat_map(lem_data *d, int **tmp)
 				d->heat_map[j][k] = 2;
 			k++;
 		}
-		if (j <= i)
-			free(tmp[j]);
 		j++;
 	}
 }

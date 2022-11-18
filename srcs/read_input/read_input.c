@@ -49,10 +49,7 @@ void	read_rooms(lem_data *d)
 		if (check_start_end(d))
 			;
 		else if (is_pipe(d))
-		{
-			free(d->line);
 			break ;
-		}
 		else if (is_valid(d))
 			create_room(d);
 		else
@@ -69,11 +66,11 @@ void	read_pipes(lem_data *d)
 	while (1)
 	{
 		lem_to_print(d);
+		free(d->line);
 		if (get_next_line(0, &d->line) == 0 || skip_comments(d) == -1)
 			break ;
 		if (!is_pipe(d))
 			print_error();
-		free(d->line);
 	}
 }
 

@@ -14,8 +14,8 @@
 
 int	is_pipe(lem_data *d)
 {
-	char	first[42];
-	char	second[42];
+	char	first[200];
+	char	second[200];
 	int		i;
 	int		j;
 

@@ -35,6 +35,7 @@ void	send_ants(lem_data *d)
 	}
 	while (d->end->ant_nbr < ants)
 		move_ants(d, best_paths);
+	free(best_paths);
 }
 
 void	move_ants(lem_data *d, t_room ***best_paths)

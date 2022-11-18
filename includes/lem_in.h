@@ -16,7 +16,6 @@
 # include "../libft/libft.h"
 
 # define ARRAY_SIZE	42
-//# define PATH_COUNT	42
 
 typedef struct	s_room
 {
@@ -48,7 +47,7 @@ typedef struct	lem_data
 	int		path_limit;
 	char	*line;
 	struct	s_room	***paths;
-	int		step_array[10000];   // bzero this when decided how big we want it
+	int		step_array[10000];
 	int		path_index;
 			// Reittien määrâ.
 	int		path_mem;
@@ -61,11 +60,8 @@ typedef struct	lem_data
 	int		map_size;
 	int		best_route_count;
 	int		space;
-	//int		ret;
 	int		rec_counter;
 	int		max_route_count;
-	//int		total_steps;
-	//int		current_steps;
 	int		best_moves;
 	int		*best_steps;
 	struct routes	*routes_head;
@@ -154,11 +150,5 @@ void	print_error(void);
 void	lem_to_print(lem_data *d);
 void	print_super_solution(lem_data *d);
 void	print_input(lem_data *d);
-
-
-
-
-//int		check_heat_map_big(lem_data *d, int nb, int in);
-
 
 #endif

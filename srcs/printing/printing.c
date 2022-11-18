@@ -57,10 +57,11 @@ void	print_super_solution(lem_data *d)
 
 void	print_input(lem_data *d)
 {
-	while (d->print_head != NULL)
+	d->print_current = d->print_head;
+	while (d->print_current != NULL)
 	{
-		ft_printf("%s\n", d->print_head->str);
-		d->print_head = d->print_head->next;
+		ft_printf("%s\n", d->print_current->str);
+		d->print_current = d->print_current->next;
 	}
 	ft_printf("\n");
 }

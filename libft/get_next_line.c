@@ -31,6 +31,7 @@ int	get_next_line(const int fd, char **line)
 	}
 	if (ft_strcmp(arr[FD_SIZE - 1], "0") == 0)
 	{
+		free(*line);
 		*line = NULL;
 		return (0);
 	}
