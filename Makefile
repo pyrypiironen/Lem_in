@@ -32,7 +32,7 @@ INPUT_FILES =	checking.c \
 				read_pipes_helpers.c \
 				read_rooms_helpers.c
 
-MAIN_SRCS = $(addprefix srcs/, $(MAIN))
+MAIN_SRCS = $(addprefix srcs/main/, $(MAIN))
 ALGO_SRCS = $(addprefix srcs/algorithm/, $(ALGO_FILES))
 PATH_SRCS = $(addprefix srcs/find_paths/, $(PATH_FILES))
 PRINT_SRCS = $(addprefix srcs/printing/, $(PRINT_FILES))
