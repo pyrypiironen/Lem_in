@@ -18,11 +18,30 @@ void	input(lem_data *d)
 	d->current = NULL;
 	d->start = NULL;
 	d->end = NULL;
+	d->room_count = 0;
 	read_ants(d);
 	read_rooms(d);
 	read_pipes(d);
 	check_duplicates(d);
 	check_one_step_solution(d);
+	create_room_array(d);
+}
+
+void	create_room_array(lem_data *d)
+{
+	int	i;
+
+	i = 0;
+	d->current = d->head;
+	d->room_array = (t_room **)malloc(sizeof(t_room *) * d->room_count);
+	if (d->room_array == NULL)
+		print_error();
+	while (i < d->room_count)
+	{
+		d->room_array[i] = d->current;
+		d->current = d->current->next;
+		i++;
+	}
 }
 
 void	read_ants(lem_data *d)

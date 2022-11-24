@@ -26,6 +26,7 @@ typedef struct	s_room
 	struct		s_room	**pipes;
 	int			pipe_count;
 				// Montako putkea huoneesta lähtee.
+	int			r_index;
 	int			pipe_mem;
 				// Määrä muistia, joka putkia varten allokoidaan. Dynaaminen.
 	int			floor;
@@ -48,6 +49,8 @@ typedef struct	lem_data
 	char	*line;
 	struct	s_room	***paths;
 	int		step_array[10000];
+	t_room	**room_array;
+	int		room_count;
 	int		path_index;
 			// Reittien määrâ.
 	int		path_mem;
@@ -91,6 +94,7 @@ void	read_ants(lem_data *d);
 void	read_rooms(lem_data *d);
 void	read_pipes(lem_data *d);
 int		skip_comments(lem_data *d);
+void	create_room_array(lem_data *d);
 //		read_rooms_helpers.c
 int		is_room(lem_data *d, char *room);
 int		is_valid(lem_data *d);
@@ -150,5 +154,9 @@ void	print_error(void);
 void	lem_to_print(lem_data *d);
 void	print_super_solution(lem_data *d);
 void	print_input(lem_data *d);
+
+//		* * * FLOW * * *
+void	flow(lem_data *d);
+void	bfs(lem_data *d);
 
 #endif

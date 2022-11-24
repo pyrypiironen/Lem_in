@@ -19,7 +19,7 @@ void	solve_paths(lem_data *d)
 	get_floors(d);
 	if (d->end->floor == -1)
 		print_error();
-	get_unique(d);
+	// get_unique(d); // Replace with flow
 	find_best(d);
 }
 
@@ -31,16 +31,19 @@ void	save_path(lem_data *d, t_room **route)
 	d->paths[d->path_index] = (t_room **)malloc(sizeof(t_room) * d->path_depth);
 	if (d->paths[d->path_index] == NULL)
 		exit(1);
+	//ft_printf("path nr. %d\n", d->path_index);
 	if (d->path_index < 10000)
 		d->step_array[d->path_index] = d->path_depth;
 	while (i <= d->path_depth)
 	{
 		d->paths[d->path_index][i] = route[i];
+		//ft_printf("%d -> ", route[i]->x);
 		i++;
 	}
 	d->path_index += 1;
 	if (d->path_index == d->path_mem)
 		dynamic_path_mem(d);
+	//ft_printf("\n");
 }
 
 void	dynamic_path_mem(lem_data *d)

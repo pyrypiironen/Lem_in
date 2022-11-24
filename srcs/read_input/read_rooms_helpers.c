@@ -71,6 +71,8 @@ void	create_room(lem_data *d)
 		i++;
 	d->current->y = lem_atoi(&d->line[i + 1]);
 	d->current->next = NULL;
+	d->current->r_index = d->room_count;
+	d->room_count += 1;
 }
 
 void	init_current(lem_data *d)
