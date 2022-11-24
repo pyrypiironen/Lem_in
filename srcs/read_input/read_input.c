@@ -33,12 +33,18 @@ void	create_room_array(lem_data *d)
 
 	i = 0;
 	d->current = d->head;
-	d->room_array = (t_room **)malloc(sizeof(t_room *) * d->room_count);
-	if (d->room_array == NULL)
+	d->hashmap = (t_room **)malloc(sizeof(t_room *) * d->room_count);
+	d->bfs_rooms = (int *)malloc(sizeof(int) * d->room_count);
+	d->bfs_copy = (int *)malloc(sizeof(int) * d->room_count);
+	if (d->hashmap == NULL || d->bfs_rooms == NULL || d->bfs_copy == NULL)
 		print_error();
 	while (i < d->room_count)
 	{
-		d->room_array[i] = d->current;
+		d->current->pipe_flow = (int *)malloc(sizeof(int) * \
+			d->current->pipe_count);
+		if (d->current->pipe_flow == NULL)
+			print_error();
+		d->hashmap[i] = d->current;
 		d->current = d->current->next;
 		i++;
 	}

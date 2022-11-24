@@ -19,7 +19,7 @@ void	solve_paths(lem_data *d)
 	get_floors(d);
 	if (d->end->floor == -1)
 		print_error();
-	// get_unique(d); // Replace with flow
+	get_unique(d); // Replace with flow
 	find_best(d);
 }
 

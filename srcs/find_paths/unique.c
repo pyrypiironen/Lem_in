@@ -30,15 +30,16 @@ void	get_unique(lem_data *d)
 			d->routes_cur = d->routes_cur->next;
 			d->rec_counter = 0;
 		}
-		if (ret == 3 || d->best_moves <= d->path_depth)
-		{
-			d->path_limit = d->max_route_count;
-			break ;
-		}
+		// if (ret == 3 || d->best_moves <= d->path_depth)
+		// {
+		// 	d->path_limit = d->max_route_count;
+		// 	break ;
+		// }
 		if (ret == 2 || ret == 0)
 		{
 			ft_printf("{green}find_more_routes IN, path_depth: %d, path_index: %d, route_count: %d\n", d->path_depth, d->path_index, d->routes_cur->route_count);
-			find_more_routes(d);
+			//find_more_routes(d);
+			flow_routes(d);
 			ft_printf("{red}find_more_routes OUT\n");
 		}
 			
