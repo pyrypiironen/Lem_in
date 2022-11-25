@@ -33,12 +33,15 @@ typedef struct	s_room
 	int			ant_nbr;
 				// Monennessa kerroksessa huone on. Start on floor 0.
 	int			used;
-	int			parent; // r_index edellisestä huoneesta
+	int			parent_a;
+	int			parent_b; // r_index edellisestä huoneesta
 	int			*pipe_flow; /* 
 							0 == empty
 							1 == arrow in
 							2 == arrow out
 							3 == arrow both ways
+							4 == arrow in belonging to path
+							5 == arrow out belonging to path
 							*/
 }				t_room;
 
@@ -173,6 +176,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow);
 void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow);
 void	against_flow(lem_data *d, t_room *from, t_room *to, int flow);
 void	copy_bfs(lem_data *d);
+void	init_bfs(lem_data *d);
 
 
 #endif

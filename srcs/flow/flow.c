@@ -28,6 +28,7 @@ void	flow_routes(lem_data *d)
 	// 	i++;
 	// }
 	// d->bfs_copy[i] = -1;
+	init_bfs(d);
 	while (!d->stop_bfs)
 		bfs(d);
 	for (int i = 0; i < d->room_count; i++)
@@ -38,6 +39,8 @@ void	flow_routes(lem_data *d)
 			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
 		}
 	}
+	// backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
+	// Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
 	exit(1);
 }
 
@@ -70,14 +73,18 @@ void	bfs(lem_data *d)
 void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 {
 	if (from->pipe_flow[flow] == 2 || from->pipe_flow[flow] == 3 || \
-		from->parent == to->r_index)
+		from->parent_a == to->r_index || from->parent_b == to->r_index || \
+		to->used == 2)
 		return ;
-	to->parent = from->r_index;
+	if (to->parent_a == -1)
+		to->parent_a = from->r_index;
+	else
+		to->parent_b = from->r_index;
 	if (from->pipe_flow[flow] == 0)
 		add_to_empty(d, from, to, flow);
 	else // On 1, vastakkainen nuoli
 		against_flow(d, from, to, flow);
-
+	from->used += 1;
 }
 
 void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow)
@@ -119,4 +126,18 @@ void	copy_bfs(lem_data *d)
 		i++;
 	}
 	d->bfs_copy[i] = -1;
+}
+
+void	init_bfs(lem_data *d)
+{
+	int	i;
+
+	i = 0;
+	while (i < d->room_count)
+	{
+		d->hashmap[i]->used = 0;
+		d->hashmap[i]->parent_a = -1;
+		d->hashmap[i]->parent_b = -1;
+		i++;
+	}
 }
