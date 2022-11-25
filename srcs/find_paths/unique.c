@@ -37,10 +37,10 @@ void	get_unique(lem_data *d)
 		// }
 		if (ret == 2 || ret == 0)
 		{
-			ft_printf("{green}find_more_routes IN, path_depth: %d, path_index: %d, route_count: %d\n", d->path_depth, d->path_index, d->routes_cur->route_count);
+			//ft_printf("{green}find_more_routes IN, path_depth: %d, path_index: %d, route_count: %d\n", d->path_depth, d->path_index, d->routes_cur->route_count);
 			//find_more_routes(d);
 			flow_routes(d);
-			ft_printf("{red}find_more_routes OUT\n");
+			//ft_printf("{red}find_more_routes OUT\n");
 		}
 			
 	}

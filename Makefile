@@ -32,13 +32,17 @@ INPUT_FILES =	checking.c \
 				read_pipes_helpers.c \
 				read_rooms_helpers.c
 
+FLOW_FILES = flow.c
+
 MAIN_SRCS = $(addprefix srcs/main/, $(MAIN))
 ALGO_SRCS = $(addprefix srcs/algorithm/, $(ALGO_FILES))
 PATH_SRCS = $(addprefix srcs/find_paths/, $(PATH_FILES))
 PRINT_SRCS = $(addprefix srcs/printing/, $(PRINT_FILES))
 INPUT_SRCS = $(addprefix srcs/read_input/, $(INPUT_FILES))
+FLOW_SRCS = $(addprefix srcs/flow/, $(FLOW_FILES))
 
-SRCS = $(MAIN_SRCS) $(ALGO_SRCS) $(PATH_SRCS) $(PRINT_SRCS) $(INPUT_SRCS)
+SRCS = $(MAIN_SRCS) $(ALGO_SRCS) $(PATH_SRCS) $(PRINT_SRCS) $(INPUT_SRCS) \
+$(FLOW_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 

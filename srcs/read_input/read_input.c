@@ -30,6 +30,7 @@ void	input(lem_data *d)
 void	create_room_array(lem_data *d)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	d->current = d->head;
@@ -38,12 +39,16 @@ void	create_room_array(lem_data *d)
 	d->bfs_copy = (int *)malloc(sizeof(int) * d->room_count);
 	if (d->hashmap == NULL || d->bfs_rooms == NULL || d->bfs_copy == NULL)
 		print_error();
+	
 	while (i < d->room_count)
 	{
+		j = 0;
 		d->current->pipe_flow = (int *)malloc(sizeof(int) * \
 			d->current->pipe_count);
 		if (d->current->pipe_flow == NULL)
 			print_error();
+		while (j < d->current->pipe_count)
+			d->current->pipe_flow[j++] = 0;
 		d->hashmap[i] = d->current;
 		d->current = d->current->next;
 		i++;
