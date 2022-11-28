@@ -5,10 +5,12 @@ int	backtrack(lem_data *d)
 	int		i;
 	int		j;
 	t_room	**route;
+	int apu = 0;
 
-	i = d->path_depth;
+	i = d->room_count;
 	d->current = d->end;
-	route = (t_room **)malloc(sizeof(t_room) * d->path_depth + 1);
+	d->path_depth = 0;
+	route = (t_room **)malloc(sizeof(t_room) * d->room_count + 1);
 	if (route == NULL)
 		print_error();
 	while (d->current != d->start)
@@ -22,10 +24,20 @@ int	backtrack(lem_data *d)
 				return (1);
 			}
 		}
+		d->path_depth += 1;
+		if (d->current->r_index == 16)
+		{
+			ft_printf("{purple}o reitille\n");
+			apu = 1;
+			//sleep(1);
+		}
+		if (apu)
+			ft_printf("{purple}huone: %s\n", d->current->name);
 		route[i--] = d->current;
 		d->current= update_pipe_flow(d, j);
 	}
-	save_path(d, route);
+	save_path(d, &route[i]);
+	free(route);
 	return (0);
 }
 

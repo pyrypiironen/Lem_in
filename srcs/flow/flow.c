@@ -15,18 +15,26 @@
 void	flow_routes(lem_data *d)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	init_bfs(d);
 	while (!d->stop_bfs)
 	{
+
 		bfs(d);
-		d->path_depth += 1;
+		//d->path_depth += 1;
 	}
 	
-	while (!backtrack(d))
-		;
-	cleanup(d);
+	while (j < d->end->pipe_count)
+	{
+		if (d->end->pipe_flow[j] == 1)
+			backtrack(d);
+		j++;
+	}
+		
+	sleep(5);
 	for (int i = 0; i < d->path_index; i++)
 	{
 		for (int j = 0; d->paths[i][j] != d->end; j++)
@@ -45,6 +53,7 @@ void	flow_routes(lem_data *d)
 			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
 		}
 	}
+	cleanup(d);
 	// // backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
 	// // Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
 	// exit(1);
@@ -80,7 +89,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 {
 	if (from->pipe_flow[flow] == 2 || from->pipe_flow[flow] == 3 || \
 		from->parent_a == to->r_index || from->parent_b == to->r_index || \
-		to->used == 1)
+		to->used == 2)
 		return ;
 	if (to->parent_a == -1)
 		to->parent_a = from->r_index;
@@ -104,8 +113,8 @@ void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow)
 		i++;
 	to->pipe_flow[i] = 1;
 	d->bfs_index += 1;
-	if (to->r_index == d->end->r_index)
-		d->stop_bfs = 1;
+	// if (to->r_index == d->end->r_index)
+	// 	d->stop_bfs = 1;
 }
 
 void	against_flow(lem_data *d, t_room *from, t_room *to, int flow)
@@ -126,6 +135,8 @@ void	copy_bfs(lem_data *d)
 	int	i;
 
 	i = 0;
+	if (d->bfs_rooms[0] == -1)
+		d->stop_bfs = 1;
 	while (d->bfs_rooms[i] != -1)
 	{
 		d->bfs_copy[i] = d->bfs_rooms[i];
@@ -139,7 +150,6 @@ void	init_bfs(lem_data *d)
 	int	i;
 
 	i = 0;
-	d->path_depth = 0;
 	d->bfs_index = 0;
 	d->bfs_rooms[0] = -1;
 	d->stop_bfs = 0;

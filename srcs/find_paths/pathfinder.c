@@ -44,7 +44,7 @@ void	save_path(lem_data *d, t_room **route)
 	d->path_index += 1;
 	if (d->path_index == d->path_mem)
 		dynamic_path_mem(d);
-	free(route);
+	
 	//ft_printf("\n");
 }
 
