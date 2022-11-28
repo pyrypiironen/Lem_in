@@ -28,6 +28,7 @@ void	save_path(lem_data *d, t_room **route)
 	int	i;
 
 	i = 0;
+	route[0] = d->start;
 	d->paths[d->path_index] = (t_room **)malloc(sizeof(t_room) * d->path_depth);
 	if (d->paths[d->path_index] == NULL)
 		exit(1);
@@ -43,6 +44,7 @@ void	save_path(lem_data *d, t_room **route)
 	d->path_index += 1;
 	if (d->path_index == d->path_mem)
 		dynamic_path_mem(d);
+	free(route);
 	//ft_printf("\n");
 }
 

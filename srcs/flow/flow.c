@@ -17,31 +17,37 @@ void	flow_routes(lem_data *d)
 	int	i;
 
 	i = 0;
-	d->bfs_index = 0;
-	d->bfs_rooms[0] = -1;
-	d->stop_bfs = 0;
-	d->bfs_copy[0] = d->start->r_index;
-	d->bfs_copy[1] = -1;
-	// while (i < d->start->pipe_count)
-	// {
-	// 	d->bfs_copy[i] = d->start->pipes[i]->r_index;
-	// 	i++;
-	// }
-	// d->bfs_copy[i] = -1;
 	init_bfs(d);
 	while (!d->stop_bfs)
+	{
 		bfs(d);
+		d->path_depth += 1;
+	}
+	
+	while (!backtrack(d))
+		;
+	cleanup(d);
+	for (int i = 0; i < d->path_index; i++)
+	{
+		for (int j = 0; d->paths[i][j] != d->end; j++)
+			ft_printf("{red}%s -> ", d->paths[i][j]->name);
+		ft_printf("{red}%s -> ", d->end->name);
+		ft_printf("\n");
+	}
+		
+	
+
 	for (int i = 0; i < d->room_count; i++)
 	{
-		ft_printf("{green}room: %s (%d)\n", d->hashmap[i]->name, d->hashmap[i]->r_index);
+		ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
 		for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
 		{
 			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
 		}
 	}
-	// backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
-	// Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
-	exit(1);
+	// // backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
+	// // Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
+	// exit(1);
 }
 
 void	bfs(lem_data *d)
@@ -74,7 +80,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 {
 	if (from->pipe_flow[flow] == 2 || from->pipe_flow[flow] == 3 || \
 		from->parent_a == to->r_index || from->parent_b == to->r_index || \
-		to->used == 2)
+		to->used == 1)
 		return ;
 	if (to->parent_a == -1)
 		to->parent_a = from->r_index;
@@ -84,7 +90,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 		add_to_empty(d, from, to, flow);
 	else // On 1, vastakkainen nuoli
 		against_flow(d, from, to, flow);
-	from->used += 1;
+	to->used += 1;
 }
 
 void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow)
@@ -133,6 +139,12 @@ void	init_bfs(lem_data *d)
 	int	i;
 
 	i = 0;
+	d->path_depth = 0;
+	d->bfs_index = 0;
+	d->bfs_rooms[0] = -1;
+	d->stop_bfs = 0;
+	d->bfs_copy[0] = d->start->r_index;
+	d->bfs_copy[1] = -1;
 	while (i < d->room_count)
 	{
 		d->hashmap[i]->used = 0;

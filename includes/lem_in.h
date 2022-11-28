@@ -177,6 +177,9 @@ void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow);
 void	against_flow(lem_data *d, t_room *from, t_room *to, int flow);
 void	copy_bfs(lem_data *d);
 void	init_bfs(lem_data *d);
+int		backtrack(lem_data *d);
+t_room	*update_pipe_flow(lem_data *d, int j);
+void	cleanup(lem_data *d);
 
 
 #endif

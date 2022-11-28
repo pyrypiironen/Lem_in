@@ -32,7 +32,9 @@ INPUT_FILES =	checking.c \
 				read_pipes_helpers.c \
 				read_rooms_helpers.c
 
-FLOW_FILES = flow.c
+FLOW_FILES =	flow.c \
+				backtracking.c \
+				cleanup.c
 
 MAIN_SRCS = $(addprefix srcs/main/, $(MAIN))
 ALGO_SRCS = $(addprefix srcs/algorithm/, $(ALGO_FILES))
