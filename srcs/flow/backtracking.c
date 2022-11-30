@@ -44,7 +44,7 @@ void	save_path(lem_data *d, t_room **route)
 		exit(1);
 	//ft_printf("path nr. %d\n", d->path_index);
 	if (d->path_index < 10000)
-		d->step_array[d->path_index] = j;
+		d->step_array[d->path_index] = j - 1;
 	while (i < j)
 	{
 		//ft_printf("täsä\n");

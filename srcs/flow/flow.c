@@ -27,14 +27,14 @@ void	flow_routes(lem_data *d)
 		bfs(d);
 		//d->path_depth += 1;
 	}
-	for (int i = 0; i < d->room_count; i++)
-	{
-		ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
-		for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
-		{
-			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
-		}
-	}
+	// for (int i = 0; i < d->room_count; i++)
+	// {
+	// 	ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
+	// 	for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
+	// 	{
+	// 		ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
+	// 	}
+	// }
 
 	backtrack(d, room, i);
 
@@ -44,23 +44,23 @@ void	flow_routes(lem_data *d)
 	// 		backtrack(d);
 	// 	j++;
 	// }
-	ft_printf("{purple}---bactrack---");
-		for (int i = 0; i < d->room_count; i++)
-	{
-		ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
-		for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
-		{
-			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
-		}
-	}
-	//sleep(1);
-	for (int i = 0; i < d->path_index; i++)
-	{
-		for (int j = 0; d->paths[i][j] != d->end; j++)
-			ft_printf("{red}%s -> ", d->paths[i][j]->name);
-		ft_printf("{red}%s -> ", d->end->name);
-		ft_printf("\n");
-	}
+	// ft_printf("{purple}---bactrack---");
+	// 	for (int i = 0; i < d->room_count; i++)
+	// {
+	// 	ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
+	// 	for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
+	// 	{
+	// 		ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
+	// 	}
+	// }
+	// //sleep(1);
+	// for (int i = 0; i < d->path_index; i++)
+	// {
+	// 	for (int j = 0; d->paths[i][j] != d->end; j++)
+	// 		ft_printf("{red}%s -> ", d->paths[i][j]->name);
+	// 	ft_printf("{red}%s -> ", d->end->name);
+	// 	ft_printf("\n");
+	// }
 		
 	
 	cleanup(d);

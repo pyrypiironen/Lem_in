@@ -21,6 +21,13 @@ int	main(int argc, char **argv)
 		exit(0);
 	input(data);
 	solve_paths(data);
+		for (int i = 0; i < data->path_index; i++)
+	{
+		for (int j = 0; data->paths[i][j] != data->end; j++)
+			ft_printf("{red}%s -> ", data->paths[i][j]->name);
+		ft_printf("{red}%s -> ", data->end->name);
+		ft_printf("\n");
+	}
 	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
 	{
 		ft_printf(">>>> %d <<<<\n", data->best_moves);
