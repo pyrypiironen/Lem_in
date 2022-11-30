@@ -15,10 +15,11 @@
 void	flow_routes(lem_data *d)
 {
 	int	i;
-	int	j;
+	t_room *room;
 
-	i = 0;
-	j = 0;
+	i = d->room_count - 1;
+ 	room = d->end;
+ 	d->path_depth = 0;
 	init_bfs(d);
 	while (!d->stop_bfs)
 	{
@@ -26,15 +27,33 @@ void	flow_routes(lem_data *d)
 		bfs(d);
 		//d->path_depth += 1;
 	}
-	
-	while (j < d->end->pipe_count)
+	for (int i = 0; i < d->room_count; i++)
 	{
-		if (d->end->pipe_flow[j] == 1)
-			backtrack(d);
-		j++;
+		ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
+		for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
+		{
+			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
+		}
 	}
-	
-	sleep(1);
+
+	backtrack(d, room, i);
+
+	// while (j < d->end->pipe_count)
+	// {
+	// 	if (d->end->pipe_flow[j] == 1)
+	// 		backtrack(d);
+	// 	j++;
+	// }
+	ft_printf("{purple}---bactrack---");
+		for (int i = 0; i < d->room_count; i++)
+	{
+		ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
+		for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
+		{
+			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
+		}
+	}
+	//sleep(1);
 	for (int i = 0; i < d->path_index; i++)
 	{
 		for (int j = 0; d->paths[i][j] != d->end; j++)
@@ -44,16 +63,8 @@ void	flow_routes(lem_data *d)
 	}
 		
 	
-
-	for (int i = 0; i < d->room_count; i++)
-	{
-		ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
-		for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
-		{
-			ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
-		}
-	}
 	cleanup(d);
+
 	// // backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
 	// // Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
 	// exit(1);

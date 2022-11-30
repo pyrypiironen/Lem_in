@@ -53,6 +53,7 @@ typedef struct	lem_data
 	struct	s_room		*end;
 	struct	lem_print	*print_head;
 	struct	lem_print	*print_current;
+	struct	s_room		**route;
 	
 	int		ants;
 	int		path_limit;
@@ -70,7 +71,7 @@ typedef struct	lem_data
 	int		path_mem;
 			// Monelleko reitille on allokoitu tilaa.
 	int		heat_map_index;
-	int		path_depth;
+	int		path_depth;  //  onko nyt turha??
 			// Kuinka pitkiä reittejä etsitään
 	int		**heat_map;
 	int		array[10000];
@@ -129,6 +130,7 @@ int		check_start_end(lem_data *d);
 //		* * * * * FIND_PATHS * * * * *
 //		pathfinder.c
 void	solve_paths(lem_data *d);
+//void	save_path(lem_data *d, t_room **route);
 void	save_path(lem_data *d, t_room **route);
 void	dynamic_path_mem(lem_data *d);
 void	get_floors(lem_data *d);
@@ -177,9 +179,11 @@ void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow);
 void	against_flow(lem_data *d, t_room *from, t_room *to, int flow);
 void	copy_bfs(lem_data *d);
 void	init_bfs(lem_data *d);
-int		backtrack(lem_data *d);
-t_room	*update_pipe_flow(lem_data *d, int j);
+//int		backtrack(lem_data *d);
+//t_room	*update_pipe_flow(lem_data *d, int j);
+void	update_pipe_flow(lem_data *d);
 void	cleanup(lem_data *d);
+void	backtrack(lem_data *d, t_room *room, int i);
 
 
 #endif

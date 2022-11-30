@@ -25,8 +25,9 @@ void	init_data(lem_data *d)
 		d->path_limit = d->end->pipe_count;
 	if (d->path_limit > d->ants)
 		d->path_limit = d->ants;
+	d->route = (t_room **)malloc(sizeof(t_room *) * d->room_count);
 	d->heat_map = (int **)malloc(sizeof(int *) * d->map_size);
-	if (d->heat_map == NULL)
+	if (d->route == NULL || d->heat_map == NULL)
 		exit (1);
 	while (i < d->map_size)
 	{

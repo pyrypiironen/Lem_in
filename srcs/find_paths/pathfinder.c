@@ -23,30 +23,30 @@ void	solve_paths(lem_data *d)
 	find_best(d);
 }
 
-void	save_path(lem_data *d, t_room **route)
-{
-	int	i;
+// void	save_path(lem_data *d, t_room **route)
+// {
+// 	int	i;
 
-	i = 0;
-	route[0] = d->start;
-	d->paths[d->path_index] = (t_room **)malloc(sizeof(t_room) * d->path_depth);
-	if (d->paths[d->path_index] == NULL)
-		exit(1);
-	//ft_printf("path nr. %d\n", d->path_index);
-	if (d->path_index < 10000)
-		d->step_array[d->path_index] = d->path_depth;
-	while (i <= d->path_depth)
-	{
-		d->paths[d->path_index][i] = route[i];
-		//ft_printf("%d -> ", route[i]->x);
-		i++;
-	}
-	d->path_index += 1;
-	if (d->path_index == d->path_mem)
-		dynamic_path_mem(d);
+// 	i = 0;
+// 	route[0] = d->start;
+// 	d->paths[d->path_index] = (t_room **)malloc(sizeof(t_room) * d->path_depth);
+// 	if (d->paths[d->path_index] == NULL)
+// 		exit(1);
+// 	//ft_printf("path nr. %d\n", d->path_index);
+// 	if (d->path_index < 10000)
+// 		d->step_array[d->path_index] = d->path_depth;
+// 	while (i <= d->path_depth)
+// 	{
+// 		d->paths[d->path_index][i] = route[i];
+// 		//ft_printf("%d -> ", route[i]->x);
+// 		i++;
+// 	}
+// 	d->path_index += 1;
+// 	if (d->path_index == d->path_mem)
+// 		dynamic_path_mem(d);
 	
-	//ft_printf("\n");
-}
+// 	//ft_printf("\n");
+// }
 
 void	dynamic_path_mem(lem_data *d)
 {
@@ -108,3 +108,8 @@ int	get_floors_helper(lem_data *d, int level)
 	}
 	return (new);
 }
+
+
+
+
+
