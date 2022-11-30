@@ -33,8 +33,8 @@ void	flow_routes(lem_data *d)
 			backtrack(d);
 		j++;
 	}
-		
-	sleep(5);
+	
+	sleep(1);
 	for (int i = 0; i < d->path_index; i++)
 	{
 		for (int j = 0; d->paths[i][j] != d->end; j++)
@@ -89,7 +89,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 {
 	if (from->pipe_flow[flow] == 2 || from->pipe_flow[flow] == 3 || \
 		from->parent_a == to->r_index || from->parent_b == to->r_index || \
-		to->used == 2)
+		to->used == 1)
 		return ;
 	if (to->parent_a == -1)
 		to->parent_a = from->r_index;

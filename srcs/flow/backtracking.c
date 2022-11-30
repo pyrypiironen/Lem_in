@@ -16,8 +16,12 @@ int	backtrack(lem_data *d)
 	while (d->current != d->start)
 	{
 		j = 0;
-		while (d->current->pipe_flow[j] != 1)
+		while (1)
 		{
+			if (d->current->pipe_flow[j] == 1)
+				break ;
+			else if (d->current->pipe_flow[j] == 4 && d->current != d->end)
+				break ;
 			if (j++ == d->current->pipe_count)
 			{
 				free(route);
@@ -25,9 +29,9 @@ int	backtrack(lem_data *d)
 			}
 		}
 		d->path_depth += 1;
-		if (d->current->r_index == 16)
+		if (d->current->r_index == 14)
 		{
-			ft_printf("{purple}o reitille\n");
+			ft_printf("{purple}m reitille\n");
 			apu = 1;
 			//sleep(1);
 		}
