@@ -27,6 +27,40 @@
 // 	}
 // }
 
+int		check_duplicate_path(lem_data *d, t_room **route)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	//sleep(1);
+	while (i < d->path_index)
+	{
+		j = 1;
+		while (d->paths[i][j] != d->end || route[j] != d->end)
+		{
+			//ft_printf("huone 1: %s, huone 2: %s\n", d->paths[i][j]->name, route[j]->name);
+			if (d->paths[i][j] != route[j])
+			{
+				
+				break ;
+			}
+				
+			j++;
+		}
+		if (d->paths[i][j] == d->end && route[j] == d->end)
+		{
+			//ft_printf("{blue}return 1 check_dupplicates\n");
+			return (1);
+		}
+		i++;
+		//ft_printf("loop");
+	}
+	//sleep(1);
+	//ft_printf("{yellow}no loop");
+	return (0);
+}
+
 void	save_path(lem_data *d, t_room **route)
 {
 	int	i;
@@ -35,6 +69,9 @@ void	save_path(lem_data *d, t_room **route)
 
 	i = 0;
 	j = 0;
+	if (d->path_index != 0 && check_duplicate_path(d, route) == 1)
+		return ;
+	d->stop_backtrack = 0;
 	//ft_printf("täs\n");
 	while (route[j] != d->end)
 		j++;
@@ -58,6 +95,7 @@ void	save_path(lem_data *d, t_room **route)
 	d->path_index += 1;
 	if (d->path_index == d->path_mem)
 		dynamic_path_mem(d);
+	print_paths(d);
 }
 
 void	backtrack(lem_data *d, t_room *room, int i)

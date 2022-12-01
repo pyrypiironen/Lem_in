@@ -66,6 +66,7 @@ typedef struct	lem_data
 	int		bfs_index;
 	int		*bfs_copy;
 	int		stop_bfs;
+	int		stop_backtrack;
 	int		room_count;
 	int		path_index;
 			// Reittien määrâ.
@@ -185,6 +186,12 @@ void	init_bfs(lem_data *d);
 void	update_pipe_flow(lem_data *d);
 void	cleanup(lem_data *d);
 void	backtrack(lem_data *d, t_room *room, int i);
+
+
+
+
+
+void	print_paths(lem_data *d);
 
 
 #endif

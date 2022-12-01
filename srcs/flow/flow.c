@@ -17,61 +17,42 @@ void	flow_routes(lem_data *d)
 	int	i;
 	t_room *room;
 
-	i = d->room_count - 1;
- 	room = d->end;
- 	d->path_depth = 0;
-	init_bfs(d);
-	while (!d->stop_bfs)
+	while (1)
 	{
-		//ft_printf("{green}bfs IN\n");
-		bfs(d);
-		//ft_printf("{red}bfs OUT\n");
-		//d->path_depth += 1;
+		init_bfs(d);
+		i = d->room_count - 1;
+ 		room = d->end;
+		while (!d->stop_bfs)
+			bfs(d);
+
+		backtrack(d, room, i);
+
+
+		if (d->stop_backtrack == 1)
+			break ;
+		cleanup(d);
+
+
 	}
-	// for (int i = 0; i < d->room_count; i++)
-	// {
-	// 	ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
-	// 	for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
-	// 	{
-	// 		ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
-	// 	}
-	// }
-
-	//ft_printf("{green}backtrack IN\n");
-	backtrack(d, room, i);
-	//ft_printf("{red}backtrack OUT\n");
-
-	// while (j < d->end->pipe_count)
-	// {
-	// 	if (d->end->pipe_flow[j] == 1)
-	// 		backtrack(d);
-	// 	j++;
-	// }
-	// ft_printf("{purple}---bactrack---");
-	// 	for (int i = 0; i < d->room_count; i++)
-	// {
-	// 	ft_printf("{green}room: %s (%d) a: %d, b: %d\n", d->hashmap[i]->name, d->hashmap[i]->r_index, d->hashmap[i]->parent_a, d->hashmap[i]->parent_b);
-	// 	for (int j = 0; j < d->hashmap[i]->pipe_count; j++)
-	// 	{
-	// 		ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
-	// 	}
-	// }
-	//sleep(1);
-	//ft_printf("{purple}kierros\n");
-	// for (int i = 0; i < d->path_index; i++)
-	// {
-	// 	for (int j = 0; d->paths[i][j] != d->end; j++)
-	// 		ft_printf("{red}%s -> ", d->paths[i][j]->name);
-	// 	ft_printf("{red}%s -> ", d->end->name);
-	// 	ft_printf("\n");
-	// }
-		
+	//sort_paths(d);
 	
-	cleanup(d);
+	
 
 	// // backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
 	// // Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
 	// exit(1);
+}
+
+void	print_paths(lem_data *d) //helper, remove
+{
+	ft_printf("{purple}path_index: %d\n", d->path_index);
+	for (int i = 0; i < d->path_index; i++)
+		{
+			for (int j = 0; d->paths[i][j] != d->end; j++)
+				ft_printf("{red}%s -> ", d->paths[i][j]->name);
+			ft_printf("{red}%s -> ", d->end->name);
+			ft_printf("\n");
+		}
 }
 
 void	bfs(lem_data *d)
@@ -171,6 +152,8 @@ void	init_bfs(lem_data *d)
 	d->stop_bfs = 0;
 	d->bfs_copy[0] = d->start->r_index;
 	d->bfs_copy[1] = -1;
+	d->path_depth = 0;
+	d->stop_backtrack = 1;
 	while (i < d->room_count)
 	{
 		d->hashmap[i]->used = 0;
