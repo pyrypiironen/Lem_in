@@ -16,8 +16,8 @@ int	check_heat_map(lem_data *d, int nb, int in)
 {
 	int	ret;
 
-	// if (d->rec_counter++ > 3000000)
-	// 	return (3);
+	if (d->rec_counter++ > 3000000)
+		return (3);
 	while (1)
 	{
 		while (!compare_array(d, nb, in))

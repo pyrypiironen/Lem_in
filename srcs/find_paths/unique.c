@@ -34,6 +34,12 @@ void	get_unique(lem_data *d)
 			d->routes_cur = d->routes_cur->next;
 			d->rec_counter = 0;
 		}
+		else if (ret == 3)
+		{
+			ft_printf("{yellow}break at route count %d\n", d->routes_cur->route_count);
+			d->path_limit = d->routes_cur->route_count;
+			break ;
+		}
 
 			
 	}

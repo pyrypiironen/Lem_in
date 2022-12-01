@@ -60,6 +60,7 @@ typedef struct	lem_data
 	int		path_limit;
 	char	*line;
 	struct	s_room	***paths;
+	struct	s_room	***sorted_paths;
 	int		step_array[10000];
 	t_room	**hashmap;
 	int		*bfs_rooms;
@@ -186,6 +187,7 @@ void	init_bfs(lem_data *d);
 void	update_pipe_flow(lem_data *d);
 void	cleanup(lem_data *d);
 void	backtrack(lem_data *d, t_room *room, int i);
+void	sort_paths(lem_data *d);
 
 
 

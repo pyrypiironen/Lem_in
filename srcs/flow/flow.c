@@ -34,13 +34,71 @@ void	flow_routes(lem_data *d)
 
 
 	}
-	//sort_paths(d);
+	sort_paths(d);
+	print_paths(d);
+
+
 	
 	
 
 	// // backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
 	// // Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
 	// exit(1);
+}
+
+void	sort_paths(lem_data *d)
+{
+	int	max;
+	int	current;
+	int	i;
+	int	j;
+	int	sorted_steps[10000];
+
+	max = 0;
+	i = 0;
+	j = 0;
+	current = d->step_array[0];
+	d->sorted_paths = (t_room ***)malloc(sizeof(t_room **) * d->path_index + 1);
+	while (i < d->path_index)
+	{
+		if (d->step_array[i] > max)
+			max = d->step_array[i];
+		i++;
+	}
+	while (current <= max)
+	{
+		i = 0;
+		while (i < d->path_index)
+		{
+			if (d->step_array[i] == current)
+			{
+				d->sorted_paths[j] = d->paths[i];
+				sorted_steps[j] = d->step_array[i];
+				j++;
+			}
+			i++;
+		}
+		current++;
+	}
+	i = 0;
+	while (i < d->path_index)
+	{
+		d->paths[i] = d->sorted_paths[i];
+		d->step_array[i] = sorted_steps[i];
+		i++;
+	}
+
+
+	
+	ft_printf("{yellow}path_index: %d\n", d->path_index);
+	for (int i = 0; i < d->path_index; i++)
+		{
+			for (int j = 0; d->sorted_paths[i][j] != d->end; j++)
+				ft_printf("{blue}%s -> ", d->sorted_paths[i][j]->name);
+			ft_printf("{blue}%s -> ", d->end->name);
+			ft_printf("{yellow} | %d", sorted_steps[i]);
+			ft_printf("\n");
+		}
 }
 
 void	print_paths(lem_data *d) //helper, remove
