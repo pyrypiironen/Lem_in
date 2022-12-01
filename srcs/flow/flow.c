@@ -56,7 +56,8 @@ void	flow_routes(lem_data *d)
 	// 		ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
 	// 	}
 	// }
-	// sleep(1);
+	//sleep(1);
+	//ft_printf("{purple}kierros\n");
 	// for (int i = 0; i < d->path_index; i++)
 	// {
 	// 	for (int j = 0; d->paths[i][j] != d->end; j++)
