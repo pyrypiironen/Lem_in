@@ -33,6 +33,7 @@ typedef struct	s_room
 	int			ant_nbr;
 				// Monennessa kerroksessa huone on. Start on floor 0.
 	int			used;
+	int			total_used;
 	int			parent_a;
 	int			parent_b; // r_index edellisestä huoneesta
 	int			*pipe_flow; /* 

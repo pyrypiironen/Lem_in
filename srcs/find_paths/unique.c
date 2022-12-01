@@ -20,11 +20,11 @@ void	get_unique(lem_data *d)
 	while (1)
 	{	
 		ret = solution_found(d);
-		//ft_printf("route_count: %d, path_limit: %d\n", d->routes_cur->route_count, d->path_limit);
-		//sleep(1);
+		// ft_printf("route_count: %d, path_limit: %d\n", d->routes_cur->route_count, d->path_limit);
+		// ft_printf("{red}ret: %d", ret);
 
-		//if (ret == 1)
-	//	{
+		if (ret == 1)
+		{
 			get_move_counts(d);
 			if (d->routes_cur->move_count < d->best_moves)
 				d->best_moves = d->routes_cur->move_count;
@@ -32,12 +32,17 @@ void	get_unique(lem_data *d)
 				break ;
 			d->routes_cur = d->routes_cur->next;
 			d->rec_counter = 0;
-		//}
+		}
 		// if (ret == 3 || d->best_moves <= d->path_depth)
 		// {
 		// 	d->path_limit = d->max_route_count;
 		// 	break ;
 		// }
+		if (d->routes_cur->route_count == 6)
+		{
+			d->path_limit = d->max_route_count;
+			break ;
+		}
 		if (ret == 2 || ret == 0)
 		{
 			//ft_printf("{green}find_more_routes IN, path_depth: %d, path_index: %d, route_count: %d\n", d->path_depth, d->path_index, d->routes_cur->route_count);
@@ -49,6 +54,7 @@ void	get_unique(lem_data *d)
 	}
 	// for (int i = 0; i < d->path_index; i++)
 	// {
+	// 	ft_printf("{green}path %d, steps %d\n", i + 1, d->step_array[i]);
 	// 	for (int j = 0; d->paths[i][j] != d->end; j++)
 	// 		ft_printf("{red}%s -> ", d->paths[i][j]->name);
 	// 	ft_printf("{red}%s -> ", d->end->name);

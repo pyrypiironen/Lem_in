@@ -23,8 +23,9 @@ void	flow_routes(lem_data *d)
 	init_bfs(d);
 	while (!d->stop_bfs)
 	{
-
+		//ft_printf("{green}bfs IN\n");
 		bfs(d);
+		//ft_printf("{red}bfs OUT\n");
 		//d->path_depth += 1;
 	}
 	// for (int i = 0; i < d->room_count; i++)
@@ -36,7 +37,9 @@ void	flow_routes(lem_data *d)
 	// 	}
 	// }
 
+	//ft_printf("{green}backtrack IN\n");
 	backtrack(d, room, i);
+	//ft_printf("{red}backtrack OUT\n");
 
 	// while (j < d->end->pipe_count)
 	// {
@@ -53,7 +56,7 @@ void	flow_routes(lem_data *d)
 	// 		ft_printf("{yellow}pipes: %s %i\n", d->hashmap[i]->pipes[j]->name, d->hashmap[i]->pipe_flow[j]);
 	// 	}
 	// }
-	// //sleep(1);
+	// sleep(1);
 	// for (int i = 0; i < d->path_index; i++)
 	// {
 	// 	for (int j = 0; d->paths[i][j] != d->end; j++)
@@ -100,7 +103,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 {
 	if (from->pipe_flow[flow] == 2 || from->pipe_flow[flow] == 3 || \
 		from->parent_a == to->r_index || from->parent_b == to->r_index || \
-		to->used == 1)
+		to->used == 1/* || to->total_used == 2*/)
 		return ;
 	if (to->parent_a == -1)
 		to->parent_a = from->r_index;
@@ -111,6 +114,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 	else // On 1, vastakkainen nuoli
 		against_flow(d, from, to, flow);
 	to->used += 1;
+	to->total_used += 1;
 }
 
 void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow)
