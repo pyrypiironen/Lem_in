@@ -109,6 +109,7 @@ void	print_paths(lem_data *d) //helper, remove
 			for (int j = 0; d->paths[i][j] != d->end; j++)
 				ft_printf("{red}%s -> ", d->paths[i][j]->name);
 			ft_printf("{red}%s -> ", d->end->name);
+			ft_printf("{yellow} | %d",d->step_array[i]);
 			ft_printf("\n");
 		}
 }

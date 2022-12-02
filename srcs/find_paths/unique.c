@@ -15,9 +15,12 @@
 void	get_unique(lem_data *d)
 {
 	int		ret;
+	int		path_stop;
 
 	init_unique(d);
 	flow_routes(d);
+	path_stop = d->path_index;
+	d->path_index = 0;
 	while (1)
 	{	
 		ret = solution_found(d);
@@ -40,8 +43,32 @@ void	get_unique(lem_data *d)
 			d->path_limit = d->routes_cur->route_count;
 			break ;
 		}
+		if (ret == 2 || ret == 0)
+		{
+			ft_printf("{green}path_index: %d, route_count: %d\n", d->path_index, d->routes_cur->route_count);
+			d->path_index += 1;
+			if (d->path_index == path_stop)
+			{
+				ft_printf("{yellow}break, loppu\n");
+				d->path_limit = d->routes_cur->route_count;
+				break ;
+			}
+		}
 
 			
+	}
+	for (int i = 0; i < d->map_size; i++)
+	{
+		for (int j = 0; j < d->map_size; j++)
+		{
+			if (d->heat_map[i][j] == 0)
+				ft_printf("{green}%d ", d->heat_map[i][j]);
+			else if (d->heat_map[i][j] == 1)
+				ft_printf("{red}%d ", d->heat_map[i][j]);
+			else
+				ft_printf("%d ", d->heat_map[i][j]);
+		}
+		ft_printf("\n");
 	}
 	// for (int i = 0; i < d->path_index; i++)
 	// {

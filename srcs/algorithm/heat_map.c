@@ -29,7 +29,7 @@ int	check_heat_map(lem_data *d, int nb, int in)
 		if (in + 1 == d->routes_cur->route_count)
 			return (fill_route_array(d));
 		if (nb + 1 == d->path_index)
-			return (0); // oli 2
+			return (2); // oli 2
 		ret = check_heat_map(d, nb + 1, in + 1);
 		if (ret != 0)
 			return (ret);
@@ -45,12 +45,12 @@ int	fill_route_array(lem_data *d)
 	i = 0;
 	//k = 0;
 	d->max_route_count = d->routes_cur->route_count;
-	//ft_printf("{purple}route_count: %d\n", d->routes_cur->route_count);
+	ft_printf("{purple}route_count: %d\n", d->routes_cur->route_count);
 	while (i < d->routes_cur->route_count)
 	{
-		// for (int j = 0; d->paths[d->array[i]][j] != d->end; j++)
-		// 	ft_printf("{red}%s -> ", d->paths[d->array[i]][j]->name);
-		// ft_printf("{red}%s\n", d->end->name);
+		for (int j = 0; d->paths[d->array[i]][j] != d->end; j++)
+			ft_printf("{red}%s -> ", d->paths[d->array[i]][j]->name);
+		ft_printf("{red}%s\n", d->end->name);
 		d->routes_cur->arr[i] = d->array[i];
 		i++;
 	}

@@ -3,6 +3,6 @@
 make re
 make clean
 clear
-./lem-in -m < maps/generator_maps/gen_big_0
-#./lem-in -m < maps/generator_maps/map_big_sup_1
-#./lem-in -m < mini_gauntlet/cases/augment_8.map
+time ./lem-in -m < maps/generator_maps/gen_big_0
+#time ./lem-in -m < maps/generator_maps/map_big_sup_1
+#time ./lem-in -m < mini_gauntlet/cases/augment_8.map
