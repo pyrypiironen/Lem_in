@@ -16,8 +16,11 @@ int	check_heat_map(lem_data *d, int nb, int in)
 {
 	int	ret;
 
-	if (d->rec_counter++ > 3000000)
+	if (d->rec_counter++ > 25000000)
+	{
+		ft_printf("{blue}rec_counter stop - there is exit now at check_heat_map\n");
 		return (3);
+	}
 	while (1)
 	{
 		while (!compare_array(d, nb, in))
@@ -29,7 +32,7 @@ int	check_heat_map(lem_data *d, int nb, int in)
 		if (in + 1 == d->routes_cur->route_count)
 			return (fill_route_array(d));
 		if (nb + 1 == d->path_index)
-			return (2); // oli 2
+			return (2);
 		ret = check_heat_map(d, nb + 1, in + 1);
 		if (ret != 0)
 			return (ret);
@@ -45,12 +48,15 @@ int	fill_route_array(lem_data *d)
 	i = 0;
 	//k = 0;
 	d->max_route_count = d->routes_cur->route_count;
-	ft_printf("{purple}route_count: %d\n", d->routes_cur->route_count);
+	//ft_printf("{purple}route_count: %d\n", d->routes_cur->route_count);
 	while (i < d->routes_cur->route_count)
 	{
-		for (int j = 0; d->paths[d->array[i]][j] != d->end; j++)
-			ft_printf("{red}%s -> ", d->paths[d->array[i]][j]->name);
-		ft_printf("{red}%s\n", d->end->name);
+		// ONLY PRINT
+		// for (int j = 0; d->paths[d->array[i]][j] != d->end; j++)
+		// 	ft_printf("{red}%s -> ", d->paths[d->array[i]][j]->name);
+		// ft_printf("{red}%s\n", d->end->name);
+		//Indeksit uniikeille reiteille:
+		//ft_printf("{cyan}i: %d", d->array[i]);
 		d->routes_cur->arr[i] = d->array[i];
 		i++;
 	}

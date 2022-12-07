@@ -17,9 +17,15 @@ void	cleanup(lem_data *d)
 			// if (d->hashmap[i]->pipe_flow[j] < 4)
 			// 	d->hashmap[i]->pipe_flow[j] = 0;
 			if (d->hashmap[i]->pipe_flow[j] == 4)
+			{
 				d->hashmap[i]->pipe_flow[j] = 1;
+				d->hashmap[i]->used = 2;
+			}
 			else if (d->hashmap[i]->pipe_flow[j] == 5)
+			{
 				d->hashmap[i]->pipe_flow[j] = 2;
+				d->hashmap[i]->used = 2;
+			}
 			else
 				d->hashmap[i]->pipe_flow[j] = 0;
 			j++;

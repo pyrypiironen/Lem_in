@@ -85,6 +85,7 @@ typedef struct	lem_data
 	int		max_route_count;
 	int		best_moves;
 	int		*best_steps;
+	char	*optimized; // CHECK THIS
 	struct routes	*routes_head;
 	struct routes	*routes_cur;
 	struct routes	*routes_best;
@@ -194,6 +195,7 @@ void	sort_paths(lem_data *d);
 
 
 void	print_paths(lem_data *d);
+void print_heat_map(lem_data *d);
 
 
 #endif

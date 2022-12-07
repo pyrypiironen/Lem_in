@@ -39,37 +39,24 @@ void	get_unique(lem_data *d)
 		}
 		else if (ret == 3)
 		{
-			ft_printf("{yellow}break at route count %d\n", d->routes_cur->route_count);
+			//ft_printf("{yellow}break at route count %d\n", d->routes_cur->route_count);
 			d->path_limit = d->routes_cur->route_count;
 			break ;
 		}
 		if (ret == 2 || ret == 0)
 		{
-			ft_printf("{green}path_index: %d, route_count: %d\n", d->path_index, d->routes_cur->route_count);
+			//ft_printf("{green}path_index: %d, route_count: %d\n", d->path_index, d->routes_cur->route_count);
 			d->path_index += 1;
-			if (d->path_index == path_stop)
+			if (d->path_index - 1 == path_stop)
 			{
-				ft_printf("{yellow}break, loppu\n");
-				d->path_limit = d->routes_cur->route_count;
+				d->path_limit = d->routes_cur->route_count - 1;
 				break ;
 			}
 		}
 
 			
 	}
-	for (int i = 0; i < d->map_size; i++)
-	{
-		for (int j = 0; j < d->map_size; j++)
-		{
-			if (d->heat_map[i][j] == 0)
-				ft_printf("{green}%d ", d->heat_map[i][j]);
-			else if (d->heat_map[i][j] == 1)
-				ft_printf("{red}%d ", d->heat_map[i][j]);
-			else
-				ft_printf("%d ", d->heat_map[i][j]);
-		}
-		ft_printf("\n");
-	}
+
 	// for (int i = 0; i < d->path_index; i++)
 	// {
 	// 	ft_printf("{green}path %d, steps %d\n", i + 1, d->step_array[i]);
@@ -121,3 +108,20 @@ void	get_unique(lem_data *d)
 // 		pipe_index++;
 // 	}
 // }
+
+void print_heat_map(lem_data *d)
+{
+		for (int i = 0; i < d->map_size; i++)
+	{
+		for (int j = 0; j < d->map_size; j++)
+		{
+			if (d->heat_map[i][j] == 0)
+				ft_printf("{green}%d ", d->heat_map[i][j]);
+			else if (d->heat_map[i][j] == 1)
+				ft_printf("{red}%d ", d->heat_map[i][j]);
+			else
+				ft_printf("%d ", d->heat_map[i][j]);
+		}
+		ft_printf("\n");
+	}
+}

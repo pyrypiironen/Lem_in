@@ -16,7 +16,14 @@ void	flow_routes(lem_data *d)
 {
 	int	i;
 	t_room *room;
-
+	// clean up later
+	i = 0;
+	while (i < d->room_count)
+	{
+		d->hashmap[i]->used = 0;
+		i++;
+	}
+	//
 	while (1)
 	{
 		init_bfs(d);
@@ -26,8 +33,6 @@ void	flow_routes(lem_data *d)
 			bfs(d);
 
 		backtrack(d, room, i);
-
-
 		if (d->stop_backtrack == 1)
 			break ;
 		cleanup(d);
@@ -35,15 +40,6 @@ void	flow_routes(lem_data *d)
 
 	}
 	sort_paths(d);
-	print_paths(d);
-
-
-	
-	
-
-	// // backtrack tähän ja tallennetaan pathseihin, merkkaa 4 ja 5 tallennettuihin reitteihin
-	// // Puhdista kartta, jätä 4 ja 5 vai muuta 1 ja 2
-	// exit(1);
 }
 
 void	sort_paths(lem_data *d)
@@ -86,19 +82,7 @@ void	sort_paths(lem_data *d)
 		d->paths[i] = d->sorted_paths[i];
 		d->step_array[i] = sorted_steps[i];
 		i++;
-	}
-
-
-	
-	ft_printf("{yellow}path_index: %d\n", d->path_index);
-	for (int i = 0; i < d->path_index; i++)
-		{
-			for (int j = 0; d->sorted_paths[i][j] != d->end; j++)
-				ft_printf("{blue}%s -> ", d->sorted_paths[i][j]->name);
-			ft_printf("{blue}%s -> ", d->end->name);
-			ft_printf("{yellow} | %d", sorted_steps[i]);
-			ft_printf("\n");
-		}
+	}	
 }
 
 void	print_paths(lem_data *d) //helper, remove
@@ -146,6 +130,8 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 		from->parent_a == to->r_index || from->parent_b == to->r_index || \
 		to->used == 1/* || to->total_used == 2*/)
 		return ;
+	if (to->used == 2)
+		to->used = -6; 															// VARIABLE
 	if (to->parent_a == -1)
 		to->parent_a = from->r_index;
 	else
@@ -155,7 +141,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow)
 	else // On 1, vastakkainen nuoli
 		against_flow(d, from, to, flow);
 	to->used += 1;
-	to->total_used += 1;
+	//to->total_used += 1;
 }
 
 void	add_to_empty(lem_data *d, t_room *from, t_room *to, int flow)
@@ -215,7 +201,7 @@ void	init_bfs(lem_data *d)
 	d->stop_backtrack = 1;
 	while (i < d->room_count)
 	{
-		d->hashmap[i]->used = 0;
+		//d->hashmap[i]->used = 0;
 		d->hashmap[i]->parent_a = -1;
 		d->hashmap[i]->parent_b = -1;
 		i++;

@@ -112,6 +112,8 @@ int	skip_comments(lem_data *d)
 	while (ft_strncmp(d->line, "#", 1) == 0 && \
 		ft_strcmp(d->line, "##start") != 0 && ft_strcmp(d->line, "##end") != 0)
 	{
+		if (ft_strncmp(d->line, "#Here is the number", 19) == 0) //CHECKK
+			d->optimized = ft_strdup(d->line); // THIS
 		free(d->line);
 		if (get_next_line(0, &d->line) == 0)
 			return (-1);
