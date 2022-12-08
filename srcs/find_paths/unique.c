@@ -57,57 +57,11 @@ void	get_unique(lem_data *d)
 			
 	}
 
-	// for (int i = 0; i < d->path_index; i++)
-	// {
-	// 	ft_printf("{green}path %d, steps %d\n", i + 1, d->step_array[i]);
-	// 	for (int j = 0; d->paths[i][j] != d->end; j++)
-	// 		ft_printf("{red}%s -> ", d->paths[i][j]->name);
-	// 	ft_printf("{red}%s -> ", d->end->name);
-	// 	ft_printf("\n");
-	// }
 }
 
-// void	find_more_routes(lem_data *d)
-// {
-// 	t_room	**route;
-// 	t_room	*room;
 
-// 	room = d->end;
-// 	d->current = d->end;
-// 	route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
-// 	if (route == NULL)
-// 		exit(1);
-// 	recursive_finder(d, route, room, d->path_depth);
-// 	d->path_depth += 1;
-// 	free(route);
-// }
 
-// void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
-// {
-// 	int	pipe_index;
 
-// 	pipe_index = 0;
-// 	while (pipe_index < room->pipe_count)
-// 	{
-// 		route[steps] = room;
-// 		if (room == d->start && steps == 0)
-// 			return (save_path(d, route));
-// 		if (\
-// 		(route[steps] == d->end || route[steps + 1] != room->pipes[pipe_index]))
-// 		{
-// 			steps--;
-// 			if (steps >= 0)
-// 			{
-// 				room->used = 1;
-// 				if (room->pipes[pipe_index]->used != 1)
-// 					recursive_finder(d, route, room->pipes[pipe_index], steps);
-// 				room->used = -1;
-// 			}
-// 			steps++;
-// 		}
-// 		pipe_index++;
-// 	}
-// }
 
 void print_heat_map(lem_data *d)
 {

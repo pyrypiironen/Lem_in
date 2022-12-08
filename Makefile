@@ -18,7 +18,8 @@ MAIN = 			main.c
 
 ALGO_FILES =	compare_solutions.c \
 				heat_map.c \
-				send_ants.c
+				send_ants.c \
+				recursive.c
 
 PATH_FILES =	helpers.c \
 				pathfinder.c \

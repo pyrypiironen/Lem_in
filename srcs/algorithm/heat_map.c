@@ -16,9 +16,9 @@ int	check_heat_map(lem_data *d, int nb, int in)
 {
 	int	ret;
 
-	if (d->rec_counter++ > 25000000)
+	if (d->rec_counter++ > 3000000)
 	{
-		ft_printf("{blue}rec_counter stop - there is exit now at check_heat_map\n");
+		
 		return (3);
 	}
 	while (1)

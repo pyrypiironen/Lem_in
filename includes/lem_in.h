@@ -60,6 +60,7 @@ typedef struct	lem_data
 	int		path_limit;
 	char	*line;
 	struct	s_room	***paths;
+	struct	s_room	***rec_paths;
 	struct	s_room	***sorted_paths;
 	int		step_array[10000];
 	t_room	**hashmap;
@@ -196,6 +197,16 @@ void	sort_paths(lem_data *d);
 
 void	print_paths(lem_data *d);
 void print_heat_map(lem_data *d);
+
+
+//recursive
+void	init_unique_recursive(lem_data *d);
+void	get_unique_recursive(lem_data *d);
+void	save_path_recursive(lem_data *d, t_room **route);
+void	dynamic_path_mem_recursive(lem_data *d);
+int		solution_found_recursive(lem_data *d);
+void	fill_heat_map_recursive(lem_data *d);
+int		is_conflict_recursive(lem_data *d, int i);
 
 
 #endif

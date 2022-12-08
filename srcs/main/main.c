@@ -20,16 +20,15 @@ int	main(int argc, char **argv)
 	if (data == NULL)
 		exit(0);
 	input(data);
-	exit(10);
 	solve_paths(data);
 	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
 	{
-		ft_printf("{green}>>>> %d <<<<\n", data->best_moves);
-		ft_printf("{yellow}%s\n", data->optimized);
+		ft_printf(">>>> %d <<<<\n", data->best_moves);
+		// ft_printf("{yellow}%s\n", data->optimized);
 
-		ft_printf("{purple}path_index: %d || used routes: %d\n", data->path_index, data->routes_best->route_count);
+		// ft_printf("{purple}path_index: %d || used routes: %d\n", data->path_index, data->routes_best->route_count);
 
-		ft_printf("{yellow}Path lengths: %d | %d | %d\n", data->step_array[0], data->step_array[1], data->step_array[2]);
+		// ft_printf("{yellow}Path lengths: %d | %d | %d\n", data->step_array[0], data->step_array[1], data->step_array[2]);
 		return (0);
 	}
 	print_input(data);
