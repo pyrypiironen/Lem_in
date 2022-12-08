@@ -98,6 +98,19 @@ void	print_paths(lem_data *d) //helper, remove
 		}
 }
 
+void	print_rec_paths(lem_data *d) //helper, remove
+{
+	ft_printf("{purple}path_index: %d\n", d->path_index);
+	for (int i = 0; i < d->path_index; i++)
+		{
+			for (int j = 0; d->rec_paths[i][j] != d->end; j++)
+				ft_printf("{red}%s -> ", d->rec_paths[i][j]->name);
+			ft_printf("{red}%s -> ", d->end->name);
+			ft_printf("{yellow} | %d",d->step_array[i]);
+			ft_printf("\n");
+		}
+}
+
 void	bfs(lem_data *d)
 {
 	int	i;

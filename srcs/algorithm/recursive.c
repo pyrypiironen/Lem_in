@@ -23,6 +23,7 @@ void	get_unique_recursive(lem_data *d)
 		if (ret == 1)
 		{
 			get_move_counts(d);
+			
 			if (d->routes_cur->move_count < d->best_moves)
 				d->best_moves = d->routes_cur->move_count;
 			if (d->routes_cur->route_count == d->path_limit)
@@ -36,7 +37,17 @@ void	get_unique_recursive(lem_data *d)
 			break ;
 		}
 		if (ret == 2 || ret == 0)
-			find_more_routes(d);
+		{
+			if (find_more_routes(d) == 3)
+			{
+				d->path_limit = d->max_route_count;
+				break ;
+			}
+			
+
+		}
+		
+			
 	}
 
 }
@@ -57,26 +68,34 @@ void	init_unique_recursive(lem_data *d)
 		exit(1);
 }
 
-void	find_more_routes(lem_data *d)
+int	find_more_routes(lem_data *d)
 {
 	t_room	**route;
 	t_room	*room;
+	int		ret;
 
 	room = d->end;
 	d->current = d->end;
 	route = (t_room **)malloc(sizeof(t_room) * d->path_depth);
 	if (route == NULL)
 		exit(1);
-	recursive_finder(d, route, room, d->path_depth);
+	ret = recursive_finder(d, route, room, d->path_depth);
 	d->path_depth += 1;
 	free(route);
+	return (ret);
+	
 }
 
-void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
+int	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 {
 	int	pipe_index;
 
 	pipe_index = 0;
+	if (d->rec_counter++ > 30000000)
+	{
+		
+		return (3);
+	}
 	while (pipe_index < room->pipe_count)
 	{
 		route[steps] = room;
@@ -90,16 +109,18 @@ void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps)
 			{
 				room->used = 1;
 				if (room->pipes[pipe_index]->used != 1)
-					recursive_finder(d, route, room->pipes[pipe_index], steps);
+					if (recursive_finder(d, route, room->pipes[pipe_index], steps) == 3)
+						return (3);
 				room->used = -1;
 			}
 			steps++;
 		}
 		pipe_index++;
 	}
+	return (1);
 }
 
-void	save_path_recursive(lem_data *d, t_room **route)
+int	save_path_recursive(lem_data *d, t_room **route)
 {
 	int	i;
 
@@ -117,6 +138,7 @@ void	save_path_recursive(lem_data *d, t_room **route)
 	d->path_index += 1;
 	if (d->path_index == d->path_mem)
 		dynamic_path_mem_recursive(d);
+	return (0);
 }
 
 void	dynamic_path_mem_recursive(lem_data *d)

@@ -15,17 +15,18 @@
 void	find_best(lem_data *d)
 {
 	d->routes_head->move_count = 2147483647;
-	d->routes_best = d->routes_head;
 	d->routes_cur = d->routes_head;
 	while (1)
 	{
 		get_move_counts(d);
 		if (d->routes_cur->move_count < d->routes_best->move_count)
 			d->routes_best = d->routes_cur;
-		if (d->routes_cur->route_count == d->path_limit)
+		if (d->routes_cur->route_count >= d->path_limit)
 			break ;
+
 		d->routes_cur = d->routes_cur->next;
 	}
+	
 }
 
 void	get_move_counts(lem_data *d)

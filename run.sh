@@ -2,7 +2,7 @@
 #leaks -atExit -- ./a.out < test.txt
 make re
 make clean
-clear
+#clear
 echo "START HERE"
 echo "START HERE"
 echo "START HERE"
@@ -12,10 +12,10 @@ echo "START HERE"
 echo "START HERE"
 echo "START HERE"
 
-# time ./lem-in -m < maps/generator_maps/gen_big_0
-# time ./lem-in -m < maps/generator_maps/gen_big_1
-# time ./lem-in -m < maps/generator_maps/gen_big_2
-# time ./lem-in -m < maps/generator_maps/gen_big_3
+time ./lem-in -m < maps/generator_maps/gen_big_0
+time ./lem-in -m < maps/generator_maps/gen_big_1
+time ./lem-in -m < maps/generator_maps/gen_big_2
+time ./lem-in -m < maps/generator_maps/gen_big_3
 
 
 echo "BIG SUP"

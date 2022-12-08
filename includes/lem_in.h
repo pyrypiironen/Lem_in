@@ -142,8 +142,8 @@ void	get_floors(lem_data *d);
 int		get_floors_helper(lem_data *d, int level);
 //		unique.c
 void	get_unique(lem_data *d);
-void	find_more_routes(lem_data *d);
-void	recursive_finder(lem_data *d, t_room **route, t_room *room, int steps);
+int		find_more_routes(lem_data *d);
+int		recursive_finder(lem_data *d, t_room **route, t_room *room, int steps);
 //		solution_found.c
 int		solution_found(lem_data *d);
 void	fill_heat_map(lem_data *d);
@@ -196,13 +196,14 @@ void	sort_paths(lem_data *d);
 
 
 void	print_paths(lem_data *d);
+void	print_rec_paths(lem_data *d);
 void print_heat_map(lem_data *d);
 
 
 //recursive
 void	init_unique_recursive(lem_data *d);
 void	get_unique_recursive(lem_data *d);
-void	save_path_recursive(lem_data *d, t_room **route);
+int		save_path_recursive(lem_data *d, t_room **route);
 void	dynamic_path_mem_recursive(lem_data *d);
 int		solution_found_recursive(lem_data *d);
 void	fill_heat_map_recursive(lem_data *d);

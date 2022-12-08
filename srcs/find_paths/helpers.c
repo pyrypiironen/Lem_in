@@ -59,6 +59,7 @@ void	init_routes(lem_data *d)
 		i++;
 	}
 	d->routes_cur = d->routes_head;
+	d->routes_best = d->routes_head;
 }
 
 void	init_heat_map(lem_data *d)

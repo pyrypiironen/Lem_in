@@ -14,6 +14,9 @@
 
 int	check_heat_map(lem_data *d, int nb, int in)
 {
+	
+
+
 	int	ret;
 
 	if (d->rec_counter++ > 3000000)
@@ -24,7 +27,7 @@ int	check_heat_map(lem_data *d, int nb, int in)
 	while (1)
 	{
 		while (!compare_array(d, nb, in))
-			if (nb++ == d->path_index)
+			if (nb++ >= d->path_index)
 				return (0);
 		d->array[in] = nb;
 		if (in == 9999)
@@ -68,14 +71,20 @@ int	fill_route_array(lem_data *d)
 
 int	compare_array(lem_data *d, int nb, int in)
 {
+	//ft_printf("{green}fill_route_array IN, routes: %d, in: %d, nd: %d\n", d->path_index, in, nb);
 	int	i;
 
 	i = 0;
 	while (i < in)
 	{
 		if (d->heat_map[nb][d->array[i]] != 0)
-			return (0);
+		{
+			//	ft_printf("{red}fill_route_array OUT 0\n");
+				return (0);
+		}
+			
 		i++;
 	}
+	//ft_printf("{red}fill_route_array OUT 1\n");
 	return (1);
 }
