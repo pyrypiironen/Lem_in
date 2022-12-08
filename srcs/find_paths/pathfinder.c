@@ -19,11 +19,20 @@ void	solve_paths(lem_data *d)
 	get_floors(d);
 	if (d->end->floor == -1)
 		print_error();
-	get_unique(d);
-	//get_unique_recursive(d);
+	get_unique_recursive(d);
 	find_best(d);
 }
 
+void	solve_flow(lem_data *d)
+{
+	init_data(d);
+	init_routes(d);
+	get_floors(d);
+	if (d->end->floor == -1)
+		print_error();
+	get_unique(d);
+	find_best(d);
+}
 
 
 // void	save_path(lem_data *d, t_room **route)

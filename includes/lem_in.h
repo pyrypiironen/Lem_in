@@ -210,4 +210,9 @@ void	fill_heat_map_recursive(lem_data *d);
 int		is_conflict_recursive(lem_data *d, int i);
 
 
+
+void	solve_flow(lem_data *d);
+void	copy_input(lem_data *d, lem_data *f);
+
+
 #endif
