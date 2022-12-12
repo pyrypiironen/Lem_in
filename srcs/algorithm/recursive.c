@@ -44,15 +44,15 @@ int	save_path_recursive(lem_data *d, t_room **route)
 	int	i;
 
 	i = 0;
-	d->rec_paths[d->path_index] = \
+	d->paths[d->path_index] = \
 		(t_room **)malloc(sizeof(t_room) * d->path_depth);
-	if (d->rec_paths[d->path_index] == NULL)
+	if (d->paths[d->path_index] == NULL)
 		exit(1);
 	if (d->path_index < 10000)
 		d->step_array[d->path_index] = d->path_depth;
 	while (i <= d->path_depth)
 	{
-		d->rec_paths[d->path_index][i] = route[i];
+		d->paths[d->path_index][i] = route[i];
 		i++;
 	}
 	d->path_index += 1;
@@ -93,12 +93,12 @@ int	is_conflict_recursive(lem_data *d, int i)
 	int	k;
 
 	j = 1;
-	while (d->rec_paths[d->heat_map_index][j] != d->end)
+	while (d->paths[d->heat_map_index][j] != d->end)
 	{
 		k = 1;
-		while (d->rec_paths[i][k] != d->end)
+		while (d->paths[i][k] != d->end)
 		{
-			if (d->rec_paths[d->heat_map_index][j] == d->rec_paths[i][k])
+			if (d->paths[d->heat_map_index][j] == d->paths[i][k])
 				return (1);
 			k++;
 		}

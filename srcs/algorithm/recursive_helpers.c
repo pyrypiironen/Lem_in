@@ -23,8 +23,8 @@ void	init_unique_recursive(lem_data *d)
 	d->best_moves = 2147483647;
 	while (i < 10000)
 		d->array[i++] = 2147483647;
-	d->rec_paths = (t_room ***)malloc(sizeof(t_room **) * d->path_mem);
-	if (d->rec_paths == NULL)
+	d->paths = (t_room ***)malloc(sizeof(t_room **) * d->path_mem);
+	if (d->paths == NULL)
 		exit(1);
 }
 
@@ -34,14 +34,14 @@ void	dynamic_path_mem_recursive(lem_data *d)
 	int		i;
 
 	i = d->path_index - 1;
-	tmp = d->rec_paths;
+	tmp = d->paths;
 	d->path_mem += d->path_mem;
-	d->rec_paths = (t_room ***)malloc(sizeof(t_room **) * d->path_mem);
-	if (d->rec_paths == NULL)
+	d->paths = (t_room ***)malloc(sizeof(t_room **) * d->path_mem);
+	if (d->paths == NULL)
 		exit(1);
 	while (i >= 0)
 	{
-		d->rec_paths[i] = tmp[i];
+		d->paths[i] = tmp[i];
 		i--;
 	}
 	free(tmp);

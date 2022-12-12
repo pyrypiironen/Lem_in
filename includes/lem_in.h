@@ -55,7 +55,6 @@ typedef struct lem_data
 	int					path_limit;
 	char				*line;
 	struct s_room		***paths;
-	struct s_room		***rec_paths;
 	struct s_room		***sorted_paths;
 	int					step_array[10000];
 	int					sorted_steps[10000];
@@ -161,7 +160,7 @@ void	arrows(lem_data *d, t_room *from, t_room *to, int flow);
 void	init_bfs(lem_data *d);
 void	copy_bfs(lem_data *d);
 //		backtracking.c
-void	save_path(lem_data *d, t_room **route); //here
+void	save_path(lem_data *d, t_room **route);
 void	backtrack(lem_data *d, t_room *room, int i);
 void	update_pipe_flow(lem_data *d);
 int		check_duplicate_path(lem_data *d, t_room **route);

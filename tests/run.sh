@@ -52,7 +52,7 @@ printf "\nTesting $1 big-superposition maps.\n\n"
 while [[ I -lt $1 ]]
 do
 	mkdir -p trace_maps/
-	./generator --flow-thousand > trace_maps/temp.map
+	./generator --big-superposition > trace_maps/temp.map
 	EXPECTED=( `grep "required: " trace_maps/temp.map | cut -f8 -d " " | head -1` )
 	(time ../lem-in $FLAG < trace_maps/temp.map) > trace_maps/temp_res.txt 2> trace_maps/temp_time.txt
 	RESULT=( `grep ">>>>" trace_maps/temp_res.txt | cut -f2 -d " "` )

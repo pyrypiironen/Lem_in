@@ -44,6 +44,7 @@ void	print_super_solution(lem_data *d)
 	int	i;
 
 	i = 1;
+	print_input(d);
 	while (i <= d->ants)
 	{
 		ft_printf("L%d-%s", i, d->end->name);

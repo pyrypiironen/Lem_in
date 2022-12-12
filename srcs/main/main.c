@@ -25,14 +25,14 @@ int	main(int argc, char **argv)
 	copy_input(flow, data);
 	solve_paths(data);
 	solve_flow(flow);
-	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0) // change to "-t"
-		t_flag(data, flow);
+	//if (argc == 2 && ft_strcmp(argv[1], "-t") == 0)
+	//	t_flag(data, flow);
 	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
 		m_flag(data, flow);
 	print_input(flow);
 	if (flow->best_moves < data->best_moves)
-		send_ants(flow); //toimii
+		send_ants(flow);
 	else
-		send_ants(data); //segfault
+		send_ants(data);
 	return (0); // change to exit
 }
