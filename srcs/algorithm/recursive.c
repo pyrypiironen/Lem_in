@@ -16,10 +16,10 @@ void	get_unique_recursive(lem_data *d)
 {
 	int		ret;
 
-	init_unique_recursive(d);
+	init_unique(d);
 	while (1)
 	{	
-		ret = solution_found_recursive(d);
+		ret = solution_found(d);
 		if (ret == 1)
 			if (compare_moves_recursive(d) == 1)
 				break ;
@@ -57,52 +57,18 @@ int	save_path_recursive(lem_data *d, t_room **route)
 	}
 	d->path_index += 1;
 	if (d->path_index == d->path_mem)
-		dynamic_path_mem_recursive(d);
+		dynamic_path_mem(d);
 	return (0);
 }
 
-int	solution_found_recursive(lem_data *d)
+int	compare_moves_recursive(lem_data *d)
 {
-	if (d->path_index == 0)
-		return (0);
-	fill_heat_map_recursive(d);
-	return (check_heat_map(d, 0, 0));
-}
-
-void	fill_heat_map_recursive(lem_data *d)
-{
-	int	i;
-
-	while (d->path_index >= d->map_size)
-		dynamic_heat_map(d);
-	while (d->heat_map_index < d->path_index)
-	{
-		i = 0;
-		while (i < d->heat_map_index)
-		{
-			d->heat_map[d->heat_map_index][i] = is_conflict_recursive(d, i);
-			i++;
-		}
-		d->heat_map_index += 1;
-	}
-}
-
-int	is_conflict_recursive(lem_data *d, int i)
-{
-	int	j;
-	int	k;
-
-	j = 1;
-	while (d->paths[d->heat_map_index][j] != d->end)
-	{
-		k = 1;
-		while (d->paths[i][k] != d->end)
-		{
-			if (d->paths[d->heat_map_index][j] == d->paths[i][k])
-				return (1);
-			k++;
-		}
-		j++;
-	}
+	get_move_counts(d);
+	if (d->routes_cur->move_count < d->best_moves)
+		d->best_moves = d->routes_cur->move_count;
+	if (d->routes_cur->route_count == d->path_limit)
+		return (1);
+	d->routes_cur = d->routes_cur->next;
+		d->rec_counter = 0;
 	return (0);
 }

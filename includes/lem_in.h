@@ -185,12 +185,6 @@ void	move_ant(lem_data *d, t_room ***best_paths, int i, int j);
 //		recursive.c
 void	get_unique_recursive(lem_data *d);
 int		save_path_recursive(lem_data *d, t_room **route);
-int		solution_found_recursive(lem_data *d);
-void	fill_heat_map_recursive(lem_data *d);
-int		is_conflict_recursive(lem_data *d, int i);
-//		recursive_helpers.c
-void	init_unique_recursive(lem_data *d);
-void	dynamic_path_mem_recursive(lem_data *d);
 int		compare_moves_recursive(lem_data *d);
 
 //		* * * * * * * * * * PRINTING * * * * * * * * * * 
