@@ -1,41 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   backtracking.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ppiirone <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/09 13:52:29 by ppiirone          #+#    #+#             */
+/*   Updated: 2022/12/09 13:52:31 by ppiirone         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/lem_in.h"
-
-
-
-int		check_duplicate_path(lem_data *d, t_room **route)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < d->path_index)
-	{
-		j = 1;
-		while (d->paths[i][j] != d->end || route[j] != d->end)
-		{
-			if (d->paths[i][j] != route[j])
-			{
-				break ;
-			}
-				
-			j++;
-		}
-		if (d->paths[i][j] == d->end && route[j] == d->end)
-		{
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
 
 void	save_path(lem_data *d, t_room **route)
 {
 	int	i;
 	int	j;
 
-
-	i = 0;
+	i = -1;
 	j = 0;
 	if (d->path_index != 0 && check_duplicate_path(d, route) == 1)
 		return ;
@@ -48,12 +30,10 @@ void	save_path(lem_data *d, t_room **route)
 		exit(1);
 	if (d->path_index < 10000)
 		d->step_array[d->path_index] = j - 1;
-	while (i < j)
+	while (i++ < j)
 	{
 		d->current = route[i];
-		
 		d->paths[d->path_index][i] = route[i];
-		i++;
 	}
 	update_pipe_flow(d);
 	d->path_index += 1;
@@ -75,7 +55,8 @@ void	backtrack(lem_data *d, t_room *room, int i)
 		(d->route[i] == d->end || d->route[i + 1] != room->pipes[pipe_index]))
 		{
 			i--;
-			if (room->pipe_flow[pipe_index] == 1 || room->pipe_flow[pipe_index] == 4)
+			if (room->pipe_flow[pipe_index] == 1 || \
+				room->pipe_flow[pipe_index] == 4)
 				backtrack(d, room->pipes[pipe_index], i);
 			i++;
 		}
@@ -91,7 +72,7 @@ void	update_pipe_flow(lem_data *d)
 
 	route = d->paths[d->path_index];
 	i = 1;
-	d->current = route[0]; 
+	d->current = route[0];
 	while (d->current != d->end)
 	{
 		j = 0;
@@ -107,3 +88,24 @@ void	update_pipe_flow(lem_data *d)
 	}
 }
 
+int	check_duplicate_path(lem_data *d, t_room **route)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < d->path_index)
+	{
+		j = 1;
+		while (d->paths[i][j] != d->end || route[j] != d->end)
+		{
+			if (d->paths[i][j] != route[j])
+				break ;
+			j++;
+		}
+		if (d->paths[i][j] == d->end && route[j] == d->end)
+			return (1);
+		i++;
+	}
+	return (0);
+}

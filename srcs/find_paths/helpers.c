@@ -95,3 +95,23 @@ void	init_unique(lem_data *d)
 	if (d->paths == NULL)
 		exit(1);
 }
+
+int	compare_moves(lem_data *d, int ret)
+{
+	if (ret == 1)
+	{
+		get_move_counts(d);
+		if (d->routes_cur->move_count < d->best_moves)
+			d->best_moves = d->routes_cur->move_count;
+		if (d->routes_cur->route_count == d->path_limit)
+			return (1);
+		d->routes_cur = d->routes_cur->next;
+		d->rec_counter = 0;
+	}
+	else if (ret == 3)
+	{
+		d->path_limit = d->routes_cur->route_count;
+		return (1);
+	}
+	return (0);
+}

@@ -14,12 +14,14 @@ LEMIN = lem-in
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 
-MAIN = 			main.c
+MAIN = 			main.c \
+				helpers.c
 
 ALGO_FILES =	compare_solutions.c \
 				heat_map.c \
 				send_ants.c \
-				recursive.c
+				recursive.c \
+				recursive_helpers.c
 
 PATH_FILES =	helpers.c \
 				pathfinder.c \
@@ -34,8 +36,10 @@ INPUT_FILES =	checking.c \
 				read_rooms_helpers.c
 
 FLOW_FILES =	flow.c \
+				bfs.c \
 				backtracking.c \
-				cleanup.c
+				cleanup.c \
+				helpers.c
 
 MAIN_SRCS = $(addprefix srcs/main/, $(MAIN))
 ALGO_SRCS = $(addprefix srcs/algorithm/, $(ALGO_FILES))

@@ -27,34 +27,6 @@ void	input(lem_data *d)
 	create_room_array(d);
 }
 
-void	create_room_array(lem_data *d)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	d->current = d->head;
-	d->hashmap = (t_room **)malloc(sizeof(t_room *) * d->room_count);
-	d->bfs_rooms = (int *)malloc(sizeof(int) * d->room_count);
-	d->bfs_copy = (int *)malloc(sizeof(int) * d->room_count);
-	if (d->hashmap == NULL || d->bfs_rooms == NULL || d->bfs_copy == NULL)
-		print_error();
-	
-	while (i < d->room_count)
-	{
-		j = 0;
-		d->current->pipe_flow = (int *)malloc(sizeof(int) * \
-			d->current->pipe_count);
-		if (d->current->pipe_flow == NULL)
-			print_error();
-		while (j < d->current->pipe_count)
-			d->current->pipe_flow[j++] = 0;
-		d->hashmap[i] = d->current;
-		d->current = d->current->next;
-		i++;
-	}
-}
-
 void	read_ants(lem_data *d)
 {
 	get_next_line(0, &d->line);
@@ -91,19 +63,6 @@ void	read_rooms(lem_data *d)
 		print_error();
 }
 
-void	read_pipes(lem_data *d)
-{
-	while (1)
-	{
-		lem_to_print(d);
-		free(d->line);
-		if (get_next_line(0, &d->line) == 0 || skip_comments(d) == -1)
-			break ;
-		if (!is_pipe(d))
-			print_error();
-	}
-}
-
 int	skip_comments(lem_data *d)
 {
 	int	ret;
@@ -112,12 +71,39 @@ int	skip_comments(lem_data *d)
 	while (ft_strncmp(d->line, "#", 1) == 0 && \
 		ft_strcmp(d->line, "##start") != 0 && ft_strcmp(d->line, "##end") != 0)
 	{
-		if (ft_strncmp(d->line, "#Here is the number", 19) == 0) //CHECKK
-			d->optimized = ft_strdup(d->line); // THIS
+		if (ft_strncmp(d->line, "#Here is the number", 19) == 0)
+			d->optimized = ft_atoi(d->line + 39);
 		free(d->line);
 		if (get_next_line(0, &d->line) == 0)
 			return (-1);
 		ret = 1;
 	}
 	return (ret);
+}
+
+void	create_room_array(lem_data *d)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	d->current = d->head;
+	d->hashmap = (t_room **)malloc(sizeof(t_room *) * d->room_count);
+	d->bfs_rooms = (int *)malloc(sizeof(int) * d->room_count);
+	d->bfs_copy = (int *)malloc(sizeof(int) * d->room_count);
+	if (d->hashmap == NULL || d->bfs_rooms == NULL || d->bfs_copy == NULL)
+		print_error();
+	while (i < d->room_count)
+	{
+		j = 0;
+		d->current->pipe_flow = (int *)malloc(sizeof(int) * \
+			d->current->pipe_count);
+		if (d->current->pipe_flow == NULL)
+			print_error();
+		while (j < d->current->pipe_count)
+			d->current->pipe_flow[j++] = 0;
+		d->hashmap[i] = d->current;
+		d->current = d->current->next;
+		i++;
+	}
 }

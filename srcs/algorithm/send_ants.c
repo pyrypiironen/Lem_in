@@ -27,12 +27,14 @@ void	send_ants(lem_data *d)
 	d->best_steps = (int *)malloc(sizeof(int) * d->routes_best->route_count);
 	if (best_paths == NULL || d->best_steps == NULL)
 		exit (1);
+	// toimii
 	while (i < d->routes_best->route_count)
 	{
-		best_paths[i] = d->paths[d->routes_best->arr[i]];
+		best_paths[i] = d->paths[d->routes_best->arr[i]]; // tämä rivi segfault, kun i = 0;
 		d->best_steps[i] = d->step_array[d->routes_best->arr[i]];
 		i++;
 	}
+	//seg fault
 	while (d->end->ant_nbr < ants)
 		move_ants(d, best_paths);
 	free(best_paths);

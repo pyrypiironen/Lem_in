@@ -20,6 +20,12 @@ time ./lem-in -m < maps/generator_maps/gen_big_3
 
 echo "BIG SUP"
 echo "START HERE"
+echo "BIG SUP"
+echo "START HERE"
+echo "BIG SUP"
+echo "START HERE"
+echo "BIG SUP"
+echo "START HERE"
 
 
 time ./lem-in -m < maps/generator_maps/map_big_sup_1
@@ -53,4 +59,15 @@ time ./lem-in -m < maps/generator_maps/map_big_sup_29
 time ./lem-in -m < maps/generator_maps/map_big_sup_30
 
 
-#time ./lem-in -m < mini_gauntlet/cases/augment_9.map
+# time ./lem-in  -m < mini_gauntlet/cases/augment_0.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_1.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_2.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_3.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_4.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_5.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_6.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_7.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_8.map
+# time ./lem-in -m < mini_gauntlet/cases/augment_9.map
+
+#time ./lem-in < mini_gauntlet/cases/augment_1.map

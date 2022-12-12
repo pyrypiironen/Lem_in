@@ -25,39 +25,14 @@ int	main(int argc, char **argv)
 	copy_input(flow, data);
 	solve_paths(data);
 	solve_flow(flow);
-	if (argc == 2 && ft_strcmp(argv[1], "-t") == 0)
-	{
-
-		ft_printf("{green}>>>> flow: %d, rec: %d <<<<\n", flow->best_moves, data->best_moves);
-		ft_printf("{yellow}%s\n", flow->optimized);
-
-		ft_printf("{purple}path_index: %d || used routes: %d\n", data->path_index, data->routes_best->route_count);
-		return (0);
-	}
+	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0) // change to "-t"
+		t_flag(data, flow);
 	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
-	{
-		if (flow->best_moves < data->best_moves)
-			ft_printf(">>>> %d <<<<\n", flow->best_moves);
-		else
-			ft_printf(">>>> %d <<<<\n", data->best_moves);
-		return (0);
-	}
+		m_flag(data, flow);
 	print_input(flow);
 	if (flow->best_moves < data->best_moves)
-		send_ants(flow);
+		send_ants(flow); //toimii
 	else
-		send_ants(data);
-	return (0);
-}
-
-void	copy_input(lem_data *d, lem_data *f)
-{
-	f->head = d->head;
-	f->current = d->current;
-	f->start = d->start;
-	f->end = d->end;
-	f->ants = d->ants;
-	f->path_limit = d->path_limit;
-	f->route = d->route;
-	f->room_count = d->room_count;
+		send_ants(data); //segfault
+	return (0); // change to exit
 }

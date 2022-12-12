@@ -12,6 +12,19 @@
 
 #include "../../includes/lem_in.h"
 
+void	read_pipes(lem_data *d)
+{
+	while (1)
+	{
+		lem_to_print(d);
+		free(d->line);
+		if (get_next_line(0, &d->line) == 0 || skip_comments(d) == -1)
+			break ;
+		if (!is_pipe(d))
+			print_error();
+	}
+}
+
 int	is_pipe(lem_data *d)
 {
 	char	first[200];

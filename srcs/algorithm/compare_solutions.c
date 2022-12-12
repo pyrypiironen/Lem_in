@@ -23,10 +23,8 @@ void	find_best(lem_data *d)
 			d->routes_best = d->routes_cur;
 		if (d->routes_cur->route_count >= d->path_limit)
 			break ;
-
 		d->routes_cur = d->routes_cur->next;
 	}
-	
 }
 
 void	get_move_counts(lem_data *d)
