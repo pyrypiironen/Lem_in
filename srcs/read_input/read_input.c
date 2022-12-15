@@ -37,7 +37,7 @@ void	read_ants(lem_data *d)
 	d->print_head = NULL;
 	lem_to_print(d);
 	free(d->line);
-	if (d->ants < 0)
+	if (d->ants <= 0)
 		print_error();
 }
 

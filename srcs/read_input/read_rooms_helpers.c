@@ -54,7 +54,7 @@ void	create_room(lem_data *d)
 	int	i;
 
 	i = 0;
-	if (d->line[0] == 'L')
+	if (d->line[0] == 'L' || ft_strchr(d->line, '-') != NULL)
 		print_error();
 	init_current(d);
 	while (d->line[i] != ' ')

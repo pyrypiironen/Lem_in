@@ -198,5 +198,6 @@ void	print_input(lem_data *d);
 void	copy_input(lem_data *d, lem_data *f);
 void	t_flag(lem_data *d, lem_data *f);
 void	m_flag(lem_data *d, lem_data *f);
+void	s_flag(lem_data *d, lem_data *f);
 
 #endif

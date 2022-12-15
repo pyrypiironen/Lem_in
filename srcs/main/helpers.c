@@ -47,3 +47,14 @@ void	m_flag(lem_data *d, lem_data *f)
 		ft_printf(">>>> %d <<<<\n", d->best_moves);
 	exit (0);
 }
+
+void	s_flag(lem_data *d, lem_data *f)
+{
+	ft_printf("{yellow}>>>> >>>> >>>> Test results: <<<< <<<< <<<<\n");
+	if (f->best_moves < d->best_moves)
+		d->best_moves = f->best_moves;
+	ft_printf("{green}Lem-in best result: %d", d->best_moves);
+	ft_printf("{red}     %+3d", d->best_moves - f->optimized);
+	ft_printf("{blue}\nRequired: %12d\n", f->optimized);
+	exit (0);
+}

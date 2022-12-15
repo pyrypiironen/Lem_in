@@ -64,7 +64,7 @@ int	get_floors_helper(lem_data *d, int level)
 	int	new;
 
 	new = 0;
-	while (d->current->next != NULL)
+	while (d->current != NULL)
 	{
 		if (d->current->floor == level)
 		{

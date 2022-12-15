@@ -29,6 +29,8 @@ int	main(int argc, char **argv)
 		t_flag(data, flow);
 	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
 		m_flag(data, flow);
+	if (argc == 2 && ft_strcmp(argv[1], "-s") == 0)
+		s_flag(data, flow);
 	print_input(flow);
 	if (flow->best_moves < data->best_moves)
 		send_ants(flow);
