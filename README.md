@@ -50,7 +50,14 @@ Requirements of text file:
 
 Example of valid input:
 
-<img width="615" alt="Screen Shot 2023-01-03 at 3 34 55 PM" src="https://user-images.githubusercontent.com/93189576/210367539-d8b2f49e-a050-4675-b4cb-683d09894f95.png">
+<img width="612" alt="Screen Shot 2023-01-03 at 3 40 04 PM" src="https://user-images.githubusercontent.com/93189576/210368438-67eeb36b-d9ab-4c0c-9f5c-ea343b0440dd.png">
+
+<details>
+<summary>Example of valid input executed on command line. Click to open.</summary>
+	<p>
+<img width="489" src="https://user-images.githubusercontent.com/93189576/210369527-717ea0cb-f6b3-4839-bef7-a8fbb2dc9485.png" alt="1">
+	</p>
+</details>
 
 
 
