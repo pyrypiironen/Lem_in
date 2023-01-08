@@ -64,4 +64,18 @@ Example of valid input:
 
 ## The algorithm
 
+To solve this problem, we wrote two different algorithms, which we run in parallel for each input file and then choose the better solution. 
+
+The first algorithm uses recursion to find all possible paths with a certain step count from start to end (with some optimisations). We start from the shortest distance and keep adding longer and longer paths until a solution is found. This approach works very well and is very accurate for most map types but falls short on some of the more complex and "weblike" maps. On these map types, the exhaustive nature of the algorithm causes it to be too slow, which is where the second algorithm comes in.
+
+The second algorithm is our implementation of the algorithm presented by Matthew Daws in his blog [here](https://matthewdaws.github.io/blog/2015-06-08-Paths.html) and [here](https://matthewdaws.github.io/blog/2015-06-15-Paths-Implementation.html). It uses some very clever ideas to modify the "flow" between rooms after each run, which makes it incredibly fast and ideal for the complex maps where our first algorithm fails to deliver.
+
+Below is a more detailed explanation of both of these algorithms.
+
+### The recursive algorithm
+
+### The flow algorithm
+
+
+
 ## Flags
