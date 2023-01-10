@@ -88,9 +88,9 @@ The flow algorithm collects the paths using a combination breadth-first search (
 
 The rules for the flow are as follows:
 - Each room can be visited only once per round of bfs (max six times in total)
-- If a room *is not* part of an already saved path
+- If a room **is not** part of an already saved path
 	- We will always go there
-- If a room *is* part of an already saved path
+- If a room **is** part of an already saved path
 	- We are not allowed to move forward _with_ the flow of this path
 	- We must move _against_ the flow of this path
 	- When we move against the flow of the path, the link between these rooms gets cut for the purposes of the backtracking
