@@ -74,6 +74,14 @@ Below is a more detailed explanation of both of these algorithms.
 
 ### The recursive algorithm
 
+The idea behind the recursive algorithm is to search for paths from start to end one "layer" at a time (meaning first adding the 3-step paths for example, then the 4-step paths etc.). Between each search we should check if a solution has been found and break the loop if it has. In this case, solution is considered to be found when there exists a combination of as many _unique_ paths through the map as there are pipes from start or to end (smaller of the two). This is because that is the highest number of paths we are able to use simultaneously. If this many unique paths don't exist, we use the highest number that can be found. The fact that we add paths in ascending order of length ensures that the first such solution we find will be close to optimal. 
+
+There are cases where the solution that uses the highest number of routes is not the best solution. For example, this often happens when the number of ants is small and that solution does not include the shortest route. Because of this, we calculate and keep track of the move counts needed for each combination of unique paths we find. This makes it easy for us to choose which combination to use at the end.
+
+In the example map below, there are two pipes leading to end which means we keep searching until we find a combination of two unique paths leading to end (marked in red). The best combination of _one_ unique path is obviously always the shortest path (marked in green). Which path combination is better in this map will depend on the nuber of ants.
+
+<img width="566" alt="Näyttökuva 2023-1-10 kello 18 49 28" src="https://user-images.githubusercontent.com/39819007/211612683-96e1eb57-191f-4714-b6b6-c16eb7745d70.png">
+
 ### The flow algorithm
 
 
