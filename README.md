@@ -78,12 +78,15 @@ The idea behind the recursive algorithm is to search for paths from start to end
 
 There are cases where the solution that uses the highest number of routes is not the best solution. For example, this often happens when the number of ants is small and that solution does not include the shortest route. Because of this, we calculate and keep track of the move counts needed for each combination of unique paths we find. This makes it easy for us to choose which combination to use at the end.
 
-In the example map below, there are two pipes leading to end which means we keep searching until we find a combination of two unique paths leading to end (marked in red). The best combination of _one_ unique path is obviously always the shortest path (marked in green). Which path combination is better in this map will depend on the nuber of ants.
+In the example map below, there are two pipes leading to end which means we keep searching until we find a combination of two unique paths leading to end (marked in red). The best combination of _one_ unique path is obviously always the shortest path (marked in green). Which path combination is better in this map will depend on the number of ants.
 
 <img width="566" alt="Näyttökuva 2023-1-10 kello 18 49 28" src="https://user-images.githubusercontent.com/39819007/211612683-96e1eb57-191f-4714-b6b6-c16eb7745d70.png">
 
 ### The flow algorithm
 
+The flow algorithm collects the paths using a combination breadth-first search (bfs) and updating the "flow" between rooms (this can also be thought of as arrows between rooms). Bfs is called in a loop until it is no longer possible to add paths. This happens when the flow has blocked all paths from start to end. After each round of bfs, the map is backtracked against the flow and all new paths are added. The flow of these paths are left on the map and all flo
+The rules for the flow are as follows:
+- Each room can be visited only once per round of 
 
 
 ## Flags
