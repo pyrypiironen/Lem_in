@@ -84,9 +84,19 @@ In the example map below, there are two pipes leading to end which means we keep
 
 ### The flow algorithm
 
-The flow algorithm collects the paths using a combination breadth-first search (bfs) and updating the "flow" between rooms (this can also be thought of as arrows between rooms). Bfs is called in a loop until it is no longer possible to add paths. This happens when the flow has blocked all paths from start to end. After each round of bfs, the map is backtracked against the flow and all new paths are added. The flow of these paths are left on the map and all flo
+The flow algorithm collects the paths using a combination breadth-first search (bfs) and updating the "flow" between rooms (this can also be thought of as arrows between rooms). Bfs is called in a loop until it is no longer possible to add paths. This happens when the flow has blocked all paths from start to end. After each round of bfs, the map is backtracked against the flow and all new paths are saved. Any arrows that are not part of some path at this point are cleared before the next round of bfs.
+
 The rules for the flow are as follows:
-- Each room can be visited only once per round of 
+- Each room can be visited only once per round of bfs (max six times in total)
+- If a room *is not* part of an already saved path
+	- We will always go there
+- If a room *is* part of an already saved path
+	- We are not allowed to move forward _with_ the flow of this path
+	- We must move _against_ the flow of this path
+	- When we move against the flow of the path, the link between these rooms gets cut for the purposes of the backtracking
+
+After this step is complete and no more paths can be added, we use the same algorithm from before for finding the best combination of paths for our ants to use.
+
 
 
 ## Flags
